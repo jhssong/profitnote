@@ -8,7 +8,9 @@ class ColorTheme {
   static var pointColor = const Color(0xff484376);
   static var pointText = const Color(0xffFFFFFF);
   static var cardLabelText = const Color(0xff9DA5B6);
-  static var backgroundOfBackground = const Color(0xff2B2E2F);
+  static var selected = const Color(0xffC9CEDC);
+  static var unselected = const Color(0xff242529);
+  // static var backgroundOfBackground = const Color(0xff2B2E2F);
 }
 
 ThemeData theme = ThemeData(
@@ -26,6 +28,16 @@ ThemeData theme = ThemeData(
       fontWeight: FontWeight.bold,
       color: ColorTheme.cardLabelText,
     ),
+  ),
+
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    type: BottomNavigationBarType.fixed,
+    backgroundColor: ColorTheme.cardBackground,
+    enableFeedback: false,
+    // selectedItemColor: const Color.fromRGBO(160, 165, 182, 1),  // #a0a5b6
+    // unselectedItemColor: const Color.fromRGBO(160, 165, 182, .7),
+    selectedItemColor: ColorTheme.cardText,
+    unselectedItemColor: ColorTheme.cardLabelText,
   ),
 
   // Scaffold Style

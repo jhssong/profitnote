@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 
 class TransactionItemWidget extends StatelessWidget {
-  const TransactionItemWidget({super.key});
+  const TransactionItemWidget({super.key, required this.onPressed});
+
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    return TextButton(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "21:12",
-            style: Theme.of(context).textTheme.labelMedium,
+          Column(
+            children: [
+              Text(
+                "21:47",
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+            ],
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -22,7 +31,7 @@ class TransactionItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "식비 - 주식",
+                    "식비 - 주식 | 토스뱅크",
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                   Text(

@@ -11,6 +11,8 @@ class CardWidget extends StatelessWidget {
   });
 
   final String title;
+
+  /// If widget doesn't need detail button, then keep this as null
   final Function()? onPressed;
   final Widget body;
 
@@ -33,6 +35,7 @@ class CardWidget extends StatelessWidget {
               if (onPressed != null) DetailBtn(onPressed: onPressed!),
             ],
           ),
+          const SizedBox(height: 8),
           // Body
           body,
         ],
