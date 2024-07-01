@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
+    Text("검색 화면"),
     Text("자산 화면"),
     Text("통계 화면"),
     Text("메뉴 화면"),
@@ -56,6 +57,10 @@ class _MyAppState extends State<MyApp> {
                   label: '홈',
                 ),
                 BottomNavigationBarItem(
+                  icon: Icon(Icons.search),
+                  label: '검색',
+                ),
+                BottomNavigationBarItem(
                   icon: Icon(Icons.credit_card),
                   label: '자산',
                 ),
@@ -72,6 +77,14 @@ class _MyAppState extends State<MyApp> {
               onTap: _onBottomNavTapped,
             ),
           ),
+          floatingActionButton: _currentBottomNavIndex == 0
+              ? FloatingActionButton(
+                  onPressed: () {},
+                  foregroundColor: ColorTheme.cardLabelText,
+                  backgroundColor: ColorTheme.backgroundOfBackground,
+                  child: const Icon(Icons.add),
+                )
+              : null,
           body: _widgetOptions.elementAt(_currentBottomNavIndex),
         ),
       ),
