@@ -44,10 +44,13 @@ class _HomeScreenState extends State<HomeScreen> {
           TypeSelectionBtn(
             callback: (int type) {},
           ),
-          InputWidget(callback: (value) {
-            print("String Input: $value");
-          }),
           InputWidget(
+              inputLabel: "Input Label 1",
+              callback: (value) {
+                print("String Input: $value");
+              }),
+          InputWidget(
+            inputLabel: "Input Label 2",
             callback: (value) {
               print("Dialog Input: $value");
             },
