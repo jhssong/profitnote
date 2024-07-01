@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:profitnote/screens/budget_screen.dart';
 import 'package:profitnote/screens/home_screen.dart';
 import 'package:profitnote/style/theme.dart';
 
@@ -22,7 +23,7 @@ class _MyAppState extends State<MyApp> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text("자산 화면"),
+    BudgetScreen(),
     Text("통계 화면"),
     Text("메뉴 화면"),
   ];
