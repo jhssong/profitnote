@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
-import 'package:profitnote/widgets/control_btn.dart';
-import 'package:profitnote/widgets/control_btn_group.dart';
-import 'package:profitnote/widgets/input_widget.dart';
 import 'package:profitnote/widgets/transaction_item_widget.dart';
-import 'package:profitnote/widgets/type_selection_btn.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,9 +27,28 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             CardWidget(
-              title: "Title Text",
+              title: "총 자산",
               onPressed: () {},
-              body: const Text("Child Text"),
+              body: Row(
+                children: [
+                  Text("3,849,752원",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: ColorTheme.cardText,
+                      )),
+                ],
+              ),
+            ),
+            CardWidget(
+              title: "예산",
+              onPressed: () {},
+              body: Row(
+                children: [
+                  Text("130,000원 / 400,000원",
+                      style: Theme.of(context).textTheme.titleMedium),
+                ],
+              ),
             ),
             CardWidget(
               title: "최근 결제 내역",
@@ -46,56 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            const CardWidget(
-              title: "Card Widget with no detail button",
-              body: Text('body child'),
-            ),
-            ControlBtn(onPressed: () {}),
-            TypeSelectionBtn(
-              callback: (int type) {},
-            ),
-            InputWidget(
-              inputLabel: "input label 2",
-              callback: (value) {
-                print("String Input: $value");
-              },
-            ),
-            InputWidget(
-              inputLabel: "input label 1",
-              callback: (value) {
-                print("Dialog Input: $value");
-              },
-              isReadonly: true,
-              dialogTitle: "Dialog Text",
-              dialogBodyList: const ['Item 1', 'Item 2', 'Item 3'],
-            ),
-            const CardWidget(
-              title: "Card Widget with no detail button",
-              body: Text('body child'),
-            ),
-            ControlBtn(onPressed: () {}),
-            TypeSelectionBtn(
-              callback: (int type) {},
-            ),
-            InputWidget(
-                inputLabel: "Input Label 1",
-                callback: (value) {
-                  print("String Input: $value");
-                }),
-            InputWidget(
-              inputLabel: "Input Label 2",
-              callback: (value) {
-                print("Dialog Input: $value");
-              },
-              isReadonly: true,
-              dialogTitle: "Dialog Text",
-              dialogBodyList: const ['Item 1', 'Item 2', 'Item 3'],
-            ),
-            ControlBtnGroup(
-                leftString: 'leftString',
-                rightString: 'rightString',
-                leftCallback: () {},
-                rightCallback: () {}),
           ],
         ),
       ),
