@@ -4,12 +4,14 @@ import 'package:profitnote/style/theme.dart';
 class InputWidget extends StatefulWidget {
   const InputWidget({
     super.key,
+    required this.inputLabel,
     required this.callback,
     this.initialValue,
     this.isReadonly,
     this.dialogTitle,
     this.dialogBodyList,
   });
+  final String inputLabel;
 
   /// Function that save the input data.
   final Function(String) callback;
@@ -115,7 +117,7 @@ class _InputWidgetState extends State<InputWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Input Label",
+            widget.inputLabel,
             style: Theme.of(context).textTheme.titleSmall,
           ),
           const SizedBox(height: 8),
