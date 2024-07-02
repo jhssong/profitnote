@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/screens/add_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
 import 'package:profitnote/widgets/control_btn.dart';
@@ -22,7 +23,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Profit Note"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const AddScreen(),
+            ),
+          );
+        },
         foregroundColor: ColorTheme.cardLabelText,
         backgroundColor: ColorTheme.backgroundOfBackground,
         child: const Icon(Icons.add),
@@ -65,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               callback: (value) {
                 print("Dialog Input: $value");
               },
-              isReadonly: true,
+              isUseDialog: true,
               dialogTitle: "Dialog Text",
               dialogBodyList: const ['Item 1', 'Item 2', 'Item 3'],
             ),
@@ -87,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
               callback: (value) {
                 print("Dialog Input: $value");
               },
-              isReadonly: true,
+              isUseDialog: true,
               dialogTitle: "Dialog Text",
               dialogBodyList: const ['Item 1', 'Item 2', 'Item 3'],
             ),
