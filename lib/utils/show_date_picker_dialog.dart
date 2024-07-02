@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/constants/constants.dart';
 import 'package:profitnote/style/theme.dart';
+import 'package:intl/intl.dart';
 
 void showDatePickerDialog({
   required context,
+  now,
   required dialogCallback,
 }) async {
+  now ??= DateTime.now();
   final res = await showDatePicker(
     context: context,
-    initialDate: DateTime.now(), // TODO Change to input datetime
+    initialDate: now,
     firstDate: DateTime(Constants.firstDate),
     lastDate: DateTime(Constants.lastDate),
     builder: (context, child) {
@@ -34,6 +37,7 @@ void showDatePickerDialog({
     confirmText: "확인",
   );
   if (res != null) {
-    dialogCallback(res.toString());
+    String formattedDate = DateFormat('yyyy-MM-dd').format(res);
+    dialogCallback(formattedDate);
   }
 }
