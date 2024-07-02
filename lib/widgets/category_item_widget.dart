@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
 
 class CategoryItemsWidget extends StatelessWidget {
-  const CategoryItemsWidget({super.key, required this.items});
+  const CategoryItemsWidget(
+      {super.key, required this.items, required this.onPressed});
   final List<Map<String, String>> items;
-
+  final Function(int index, String leftString) onPressed;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -12,7 +13,7 @@ class CategoryItemsWidget extends StatelessWidget {
       itemBuilder: (BuildContext ctx, int idx) {
         final data = items[idx];
         return ElevatedButton(
-          onPressed: () {},
+          onPressed: () => onPressed(idx, data['leftString']!),
           style: ElevatedButton.styleFrom(
             backgroundColor: ColorTheme.cardBackground,
             shape: const RoundedRectangleBorder(
