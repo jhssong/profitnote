@@ -10,7 +10,7 @@ class ColorTheme {
   static var cardLabelText = const Color(0xff9DA5B6);
   static var selected = const Color(0xffC9CEDC);
   static var unselected = const Color(0xff242529);
-  // static var backgroundOfBackground = const Color(0xff2B2E2F);
+  static var backgroundOfBackground = const Color(0xff2B2E2F);
 }
 
 ThemeData theme = ThemeData(
