@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/screens/split_screen.dart';
 import 'package:profitnote/utils/show_date_picker_dialog.dart';
 import 'package:profitnote/utils/show_time_picker_dialog.dart';
 import 'package:profitnote/widgets/control_btn.dart';
@@ -18,6 +19,16 @@ class _AddScreenState extends State<AddScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("내역 추가"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SplitScreen()),
+              );
+            },
+            icon: const Icon(Icons.people),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
