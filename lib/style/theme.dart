@@ -10,7 +10,7 @@ class ColorTheme {
   static var cardLabelText = const Color(0xff9DA5B6);
   static var selected = const Color(0xffC9CEDC);
   static var unselected = const Color(0xff242529);
-  // static var backgroundOfBackground = const Color(0xff2B2E2F);
+  static var backgroundOfBackground = const Color(0xff2B2E2F);
 }
 
 ThemeData theme = ThemeData(
@@ -48,38 +48,39 @@ ThemeData theme = ThemeData(
 
   // Text Style
   textTheme: TextTheme(
-      headlineMedium: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-      titleMedium: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: ColorTheme.cardText,
-      ),
-      titleSmall: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        color: ColorTheme.cardText,
-      ),
-      bodyLarge: TextStyle(
-        fontSize: 16,
-        color: ColorTheme.cardText,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        color: ColorTheme.cardText,
-      ),
-      bodySmall: TextStyle(
-        fontSize: 12,
-        color: ColorTheme.cardText,
-      ),
-      labelMedium: TextStyle(
-        fontSize: 12,
-        color: ColorTheme.cardLabelText,
-      ),
-      labelSmall: TextStyle(
-        fontSize: 10,
-        color: ColorTheme.cardLabelText,
-      )),
+    headlineMedium: const TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    titleMedium: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: ColorTheme.cardText,
+    ),
+    titleSmall: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+      color: ColorTheme.cardText,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 16,
+      color: ColorTheme.cardText,
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 14,
+      color: ColorTheme.cardText,
+    ),
+    bodySmall: TextStyle(
+      fontSize: 12,
+      color: ColorTheme.cardText,
+    ),
+    labelMedium: TextStyle(
+      fontSize: 12,
+      color: ColorTheme.cardLabelText,
+    ),
+    labelSmall: TextStyle(
+      fontSize: 10,
+      color: ColorTheme.cardLabelText,
+    ),
+  ),
 );

@@ -13,45 +13,56 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          CardWidget(
-            title: "총 자산",
-            onPressed: () {},
-            body: Row(
-              children: [
-                Text("3,849,752원",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: ColorTheme.cardText,
-                    )),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Profit Note"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        foregroundColor: ColorTheme.cardLabelText,
+        backgroundColor: ColorTheme.backgroundOfBackground,
+        child: const Icon(Icons.add),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CardWidget(
+              title: "총 자산",
+              onPressed: () {},
+              body: Row(
+                children: [
+                  Text("3,849,752원",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: ColorTheme.cardText,
+                      )),
+                ],
+              ),
             ),
-          ),
-          CardWidget(
-            title: "예산",
-            onPressed: () {},
-            body: Row(
-              children: [
-                Text("130,000원 / 400,000원",
-                    style: Theme.of(context).textTheme.titleMedium),
-              ],
+            CardWidget(
+              title: "예산",
+              onPressed: () {},
+              body: Row(
+                children: [
+                  Text("130,000원 / 400,000원",
+                      style: Theme.of(context).textTheme.titleMedium),
+                ],
+              ),
             ),
-          ),
-          CardWidget(
-            title: "최근 결제 내역",
-            onPressed: () {},
-            body: Column(
-              children: [
-                TransactionItemWidget(onPressed: () {}),
-                TransactionItemWidget(onPressed: () {}),
-                TransactionItemWidget(onPressed: () {}),
-              ],
+            CardWidget(
+              title: "최근 결제 내역",
+              onPressed: () {},
+              body: Column(
+                children: [
+                  TransactionItemWidget(onPressed: () {}),
+                  TransactionItemWidget(onPressed: () {}),
+                  TransactionItemWidget(onPressed: () {}),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

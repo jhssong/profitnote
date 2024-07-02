@@ -20,8 +20,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _currentBottomNavIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static const List<Widget> _screenList = <Widget>[
     HomeScreen(),
+    Text("검색 화면"),
     Text("자산 화면"),
     Text("통계 화면"),
     Text("메뉴 화면"),
@@ -40,9 +41,6 @@ class _MyAppState extends State<MyApp> {
       theme: theme,
       home: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Profit Note"),
-          ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               border: Border(
@@ -54,6 +52,10 @@ class _MyAppState extends State<MyApp> {
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
                   label: '홈',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search),
+                  label: '검색',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.credit_card),
@@ -72,7 +74,7 @@ class _MyAppState extends State<MyApp> {
               onTap: _onBottomNavTapped,
             ),
           ),
-          body: _widgetOptions.elementAt(_currentBottomNavIndex),
+          body: _screenList.elementAt(_currentBottomNavIndex),
         ),
       ),
     );
