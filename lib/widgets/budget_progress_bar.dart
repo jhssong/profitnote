@@ -1,11 +1,8 @@
 import 'package:profitnote/style/theme.dart';
 import 'package:intl/intl.dart';
-import 'card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:profitnote/widgets/monthly_budget.dart';
-import 'package:percent_indicator/percent_indicator.dart'; // indicator package
 
+// ignore: must_be_immutable
 class BudgetProgressBar extends StatelessWidget {
   int budget = 400000;
   int used = 270000;
@@ -42,7 +39,9 @@ class BudgetProgressBar extends StatelessWidget {
               backgroundColor: ColorTheme.cardText,
               valueColor:
                   AlwaysStoppedAnimation<Color>(ColorTheme.expenseColor),
-              minHeight: 25, // height of the progress bar
+              //minHeight: 23, // height of the progress bar
+              // set minHeight as dynamic value
+              minHeight: 23 * MediaQuery.of(context).textScaler.scale(1),
             ),
             Text("  ${ratio * 100}%",
                 style: Theme.of(context).textTheme.titleSmall),

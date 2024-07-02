@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/date_widget.dart';
-import 'package:profitnote/widgets/detail_btn.dart';
-import 'package:profitnote/widgets/month_selector.dart';
 
 class PayHistoryWidget extends StatelessWidget {
   const PayHistoryWidget({

@@ -23,18 +23,18 @@ class MonthSelector extends StatelessWidget {
                 height: 24,
                 child: IconButton(
                   padding: const EdgeInsets.all(0),
-                  icon: const Icon(Icons.arrow_back, size: 12),
+                  icon: const Icon(Icons.arrow_back, size: 14),
                   color: ColorTheme.cardText,
                   onPressed: () {},
                 ),
               ),
-              Text('2024.05', style: Theme.of(context).textTheme.labelSmall),
+              Text('2024.05', style: Theme.of(context).textTheme.labelMedium),
               SizedBox(
                 width: 25,
                 height: 24,
                 child: IconButton(
                     padding: const EdgeInsets.all(0),
-                    icon: const Icon(Icons.arrow_forward, size: 12),
+                    icon: const Icon(Icons.arrow_forward, size: 14),
                     color: ColorTheme.cardText,
                     onPressed: () {}),
               ),

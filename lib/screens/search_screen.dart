@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/screens/home_screen.dart';
 import 'package:profitnote/screens/search_result_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/search_history_widget.dart';
 import 'package:profitnote/widgets/card_widget.dart';
-import 'package:profitnote/main.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -56,46 +54,36 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Stack(
         children: [
-          Container(
-            child: ListView(
-              children: [
-                CardWidget(
-                  // title: "최근 검색어",
-                  title: "최근 검색어",
-                  body: Column(children: [
-                    SizedBox(
-                      height: 40,
-                      child: SearchHistoryWidget(
-                        label: "맛있나",
-                        onTapped: () {},
-                      ),
+          ListView(
+            children: [
+              CardWidget(
+                // title: "최근 검색어",
+                title: "최근 검색어",
+                body: Column(children: [
+                  SizedBox(
+                    height: 40,
+                    child: SearchHistoryWidget(
+                      label: "맛있나",
+                      onTapped: () {},
                     ),
-                    SizedBox(
-                      height: 40,
-                      child: SearchHistoryWidget(
-                        label: "맛없나",
-                        onTapped: () {},
-                      ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                    child: SearchHistoryWidget(
+                      label: "맛없나",
+                      onTapped: () {},
                     ),
-                    SizedBox(
-                      height: 40,
-                      child: SearchHistoryWidget(
-                        label: "맛나",
-                        onTapped: () {},
-                      ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                    child: SearchHistoryWidget(
+                      label: "맛나",
+                      onTapped: () {},
                     ),
-                    // SearchHistoryWidget(
-                    //   label: "맛있나",
-                    //   onTapped: () {},
-                    // ),
-                    // SearchHistoryWidget(
-                    //   label: "맛없나",
-                    //   onTapped: () {},
-                    // ),
-                  ]),
-                ),
-              ],
-            ),
+                  ),
+                ]),
+              ),
+            ],
           ),
         ],
       ),

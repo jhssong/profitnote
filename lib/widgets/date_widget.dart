@@ -10,6 +10,7 @@ class DateWidget extends StatelessWidget {
     return Container(
       width: 100,
       // height: 50,
+      padding: const EdgeInsets.all(2.0),
       decoration: BoxDecoration(
         color: ColorTheme.backgroundOfBackground,
         borderRadius: BorderRadius.circular(20),

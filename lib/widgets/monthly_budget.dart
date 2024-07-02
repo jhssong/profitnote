@@ -6,15 +6,10 @@ import 'package:profitnote/widgets/month_selector.dart';
 class MonthlyBudget extends StatelessWidget {
   const MonthlyBudget({
     super.key,
-    required this.title1,
-    required this.title2,
     required this.body,
-    this.header,
     this.onPressed,
+    this.header,
   });
-
-  final String title1;
-  final String title2;
 
   /// If widget doesn't need detail button, then keep this as null
   final Function()? onPressed;
@@ -35,15 +30,16 @@ class MonthlyBudget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              header ?? MonthSelector(),
+              const MonthSelector(),
               if (onPressed != null) DetailBtn(onPressed: onPressed!),
             ],
           ),
           // Header
+          const SizedBox(height: 8),
           Row(
             children: [
-              Text(title1, style: Theme.of(context).textTheme.titleMedium),
-              Text(title2, style: Theme.of(context).textTheme.titleSmall),
+              Text("남은 예산", style: Theme.of(context).textTheme.titleMedium),
+              Text("(월별)", style: Theme.of(context).textTheme.titleSmall),
             ],
           ),
           const SizedBox(height: 16),
