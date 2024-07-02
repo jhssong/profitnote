@@ -12,11 +12,11 @@ class AnalysisScreen extends StatefulWidget {
 
 class _AnalysisScreenState extends State<AnalysisScreen> {
   final items = [
-    {'leftString': 'Item 1', 'rightString': 'Details 1'},
-    {'leftString': 'Item 2', 'rightString': 'Details 2'},
-    {'leftString': 'Item 3', 'rightString': 'Details 3'},
-    {'leftString': 'Item 4', 'rightString': 'Details 4'},
-    {'leftString': 'Item 5', 'rightString': 'Details 5'},
+    {'leftString': 'Item 1', 'rightString': '₩ 1000'},
+    {'leftString': 'Item 2', 'rightString': '₩ 1000'},
+    {'leftString': 'Item 3', 'rightString': '₩ 1000'},
+    {'leftString': 'Item 4', 'rightString': '₩ 1000'},
+    {'leftString': 'Item 5', 'rightString': '₩ 1000'},
   ];
 
   @override
@@ -49,7 +49,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                   ),
                   child: Text(
                     "수입",
-                    style: TextStyle(color: ColorTheme.cardText),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ),
@@ -64,14 +64,14 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
                   ),
                   child: Text(
                     "지출",
-                    style: TextStyle(color: ColorTheme.cardText),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ),
             ],
           ),
           Expanded(
-            child: CategoryitemWidget(items: items),
+            child: CategoryItemsWidget(items: items),
           ),
         ],
       ),

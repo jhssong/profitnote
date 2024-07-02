@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
 
-class CategoryitemWidget extends StatelessWidget {
-  const CategoryitemWidget({super.key, required this.items});
+class CategoryItemsWidget extends StatelessWidget {
+  const CategoryItemsWidget({super.key, required this.items});
   final List<Map<String, String>> items;
 
   @override
@@ -22,17 +22,15 @@ class CategoryitemWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(width: 8),
               Text(
                 data['leftString']!,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(width: 32),
               Text(
                 data['rightString']!,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(width: 8),
             ],
           ),
         );
