@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:profitnote/screens/detail_budget_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
 import 'package:profitnote/widgets/control_btn.dart';
@@ -50,8 +51,15 @@ class _BudgetScreenState extends State<BudgetScreen>
       body: Column(
         children: [
           MonthlyBudget(
-            header: MonthSelector(),
-            onPressed: () {},
+            header: const MonthSelector(),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DetailBudgetScreen(),
+                ),
+              );
+            },
             title1: "남은 예산",
             title2: "(월별)",
             body: BudgetProgressBar(),
@@ -76,6 +84,21 @@ class _BudgetScreenState extends State<BudgetScreen>
                 Container(
                     child: ListView(children: <Widget>[
                   CategoryTile(
+                    icon: Icons.payment,
+                    label: '월급',
+                    spent: '0원',
+                    onTapped: () {},
+                  ),
+                  CategoryTile(
+                    icon: Icons.line_axis,
+                    label: '투자',
+                    spent: '0원',
+                    onTapped: () {},
+                  ),
+                ])),
+                Container(
+                    child: ListView(children: <Widget>[
+                  CategoryTile(
                     icon: Icons.food_bank,
                     label: '식비',
                     spent: '0원',
@@ -90,21 +113,6 @@ class _BudgetScreenState extends State<BudgetScreen>
                   CategoryTile(
                     icon: Icons.money,
                     label: '고정비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                ])),
-                Container(
-                    child: ListView(children: <Widget>[
-                  CategoryTile(
-                    icon: Icons.payment,
-                    label: '월급',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon: Icons.money_off_csred_outlined,
-                    label: 'Shopping',
                     spent: '0원',
                     onTapped: () {},
                   ),

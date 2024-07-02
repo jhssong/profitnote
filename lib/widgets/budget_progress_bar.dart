@@ -12,6 +12,8 @@ class BudgetProgressBar extends StatelessWidget {
   double ratio = 0;
   var f = NumberFormat('###,###,###,###');
 
+  BudgetProgressBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     ratio = used / budget;
@@ -20,18 +22,18 @@ class BudgetProgressBar extends StatelessWidget {
       children: <Widget>[
         Row(
           children: [
-            Text(f.format(used).toString() + '원',
+            Text('${f.format(used)}원',
                 style: TextStyle(
                     color: ColorTheme.expenseColor,
                     fontSize: 16,
                     fontWeight: FontWeight.bold)),
             Text(
-              ' / ' + f.format(budget).toString() + '원',
+              ' / ${f.format(budget)}원',
               style: Theme.of(context).textTheme.labelMedium,
             ),
           ],
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Stack(
           children: [
             LinearProgressIndicator(
