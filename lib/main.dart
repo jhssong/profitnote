@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _currentBottomNavIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static const List<Widget> _screenList = <Widget>[
     HomeScreen(),
     Text("검색 화면"),
     Text("자산 화면"),
@@ -41,9 +41,6 @@ class _MyAppState extends State<MyApp> {
       theme: theme,
       home: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Profit Note"),
-          ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               border: Border(
@@ -77,15 +74,7 @@ class _MyAppState extends State<MyApp> {
               onTap: _onBottomNavTapped,
             ),
           ),
-          floatingActionButton: _currentBottomNavIndex == 0
-              ? FloatingActionButton(
-                  onPressed: () {},
-                  foregroundColor: ColorTheme.cardLabelText,
-                  backgroundColor: ColorTheme.backgroundOfBackground,
-                  child: const Icon(Icons.add),
-                )
-              : null,
-          body: _widgetOptions.elementAt(_currentBottomNavIndex),
+          body: _screenList.elementAt(_currentBottomNavIndex),
         ),
       ),
     );
