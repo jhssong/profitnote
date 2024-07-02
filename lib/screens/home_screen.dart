@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
 import 'package:profitnote/widgets/control_btn.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
@@ -22,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        foregroundColor: ColorTheme.cardLabelText,
+        backgroundColor: ColorTheme.backgroundOfBackground,
         child: const Icon(Icons.add),
       ),
       body: SingleChildScrollView(
@@ -51,10 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
             TypeSelectionBtn(
               callback: (int type) {},
             ),
-            InputWidget(callback: (value) {
-              print("String Input: $value");
-            }),
             InputWidget(
+              inputLabel: "input label 2",
+              callback: (value) {
+                print("String Input: $value");
+              },
+            ),
+            InputWidget(
+              inputLabel: "input label 1",
               callback: (value) {
                 print("Dialog Input: $value");
               },
@@ -62,35 +69,35 @@ class _HomeScreenState extends State<HomeScreen> {
               dialogTitle: "Dialog Text",
               dialogBodyList: const ['Item 1', 'Item 2', 'Item 3'],
             ),
-          ),
-          const CardWidget(
-            title: "Card Widget with no detail button",
-            body: Text('body child'),
-          ),
-          ControlBtn(onPressed: () {}),
-          TypeSelectionBtn(
-            callback: (int type) {},
-          ),
-          InputWidget(
-              inputLabel: "Input Label 1",
+            const CardWidget(
+              title: "Card Widget with no detail button",
+              body: Text('body child'),
+            ),
+            ControlBtn(onPressed: () {}),
+            TypeSelectionBtn(
+              callback: (int type) {},
+            ),
+            InputWidget(
+                inputLabel: "Input Label 1",
+                callback: (value) {
+                  print("String Input: $value");
+                }),
+            InputWidget(
+              inputLabel: "Input Label 2",
               callback: (value) {
-                print("String Input: $value");
-              }),
-          InputWidget(
-            inputLabel: "Input Label 2",
-            callback: (value) {
-              print("Dialog Input: $value");
-            },
-            isReadonly: true,
-            dialogTitle: "Dialog Text",
-            dialogBodyList: const ['Item 1', 'Item 2', 'Item 3'],
-          ),
-          ControlBtnGroup(
-              leftString: 'leftString',
-              rightString: 'rightString',
-              leftCallback: () {},
-              rightCallback: () {}),
-        ],
+                print("Dialog Input: $value");
+              },
+              isReadonly: true,
+              dialogTitle: "Dialog Text",
+              dialogBodyList: const ['Item 1', 'Item 2', 'Item 3'],
+            ),
+            ControlBtnGroup(
+                leftString: 'leftString',
+                rightString: 'rightString',
+                leftCallback: () {},
+                rightCallback: () {}),
+          ],
+        ),
       ),
     );
   }
