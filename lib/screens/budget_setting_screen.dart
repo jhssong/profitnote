@@ -6,7 +6,7 @@ import 'package:profitnote/widgets/control_btn_group.dart';
 import 'package:intl/intl.dart';
 
 class DetailBudgetScreen extends StatefulWidget {
-  const DetailBudgetScreen({Key? key}) : super(key: key);
+  const DetailBudgetScreen({super.key});
 
   @override
   State<DetailBudgetScreen> createState() => _DetailBudgetScreenState();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:profitnote/screens/detail_budget_screen.dart';
+import 'package:profitnote/screens/budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
 import 'package:profitnote/widgets/control_btn.dart';
@@ -45,9 +45,9 @@ class _BudgetScreenState extends State<BudgetScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("예산"),
-      // ),
+      appBar: AppBar(
+        title: const Text("예산"),
+      ),
       body: Column(
         children: [
           MonthlyBudget(
