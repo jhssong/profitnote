@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/screens/budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/detail_btn.dart';
 import 'package:profitnote/widgets/month_selector.dart';
@@ -31,7 +32,15 @@ class MonthlyBudget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const MonthSelector(),
-              if (onPressed != null) DetailBtn(onPressed: onPressed!),
+              DetailBtn(onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const BudgetSettingScreen(),
+                  ),
+                );
+              }),
+
+              // when onPressed, call
             ],
           ),
           // Header

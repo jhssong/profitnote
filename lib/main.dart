@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   static const List<Widget> _screenList = <Widget>[
     HomeScreen(),
     SearchScreen(),
-    BudgetScreen(),
+    Text("자산 화면"),
     Text("통계 화면"),
     Text("메뉴 화면"),
   ];

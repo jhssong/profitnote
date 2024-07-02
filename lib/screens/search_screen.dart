@@ -29,16 +29,6 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             hintText: "검색어를 입력해주세요",
             hintStyle: TextStyle(color: ColorTheme.cardLabelText, fontSize: 16),
-            // prefixIcon: IconButton(
-            //   icon: const Icon(Icons.arrow_back),
-            //   onPressed: () {
-            //     Navigator.of(context).push(
-            //       MaterialPageRoute(
-            //         builder: (context) => const HomeScreen(),
-            //       ),
-            //     );
-            //   },
-            // ),
             suffixIcon: IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {
@@ -57,7 +47,6 @@ class _SearchScreenState extends State<SearchScreen> {
           ListView(
             children: [
               CardWidget(
-                // title: "최근 검색어",
                 title: "최근 검색어",
                 body: Column(children: [
                   SizedBox(

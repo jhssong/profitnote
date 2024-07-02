@@ -4,14 +4,14 @@ import 'package:profitnote/widgets/category_tile.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
 import 'package:intl/intl.dart';
 
-class DetailBudgetScreen extends StatefulWidget {
-  const DetailBudgetScreen({super.key});
+class BudgetSettingScreen extends StatefulWidget {
+  const BudgetSettingScreen({super.key});
 
   @override
-  State<DetailBudgetScreen> createState() => _DetailBudgetScreenState();
+  State<BudgetSettingScreen> createState() => _DetailBudgetScreenState();
 }
 
-class _DetailBudgetScreenState extends State<DetailBudgetScreen> {
+class _DetailBudgetScreenState extends State<BudgetSettingScreen> {
   var f = NumberFormat('###,###,###,###');
 
   @override
