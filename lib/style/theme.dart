@@ -11,6 +11,7 @@ class ColorTheme {
   static var selected = const Color(0xffC9CEDC);
   static var unselected = const Color(0xff242529);
   static var backgroundOfBackground = const Color(0xff2B2E2F);
+  static var expenseColor = const Color(0xffCD5C5C);
 }
 
 ThemeData theme = ThemeData(

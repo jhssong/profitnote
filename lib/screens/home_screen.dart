@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/screens/add_screen.dart';
+import 'package:profitnote/screens/budget_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
 import 'package:profitnote/widgets/transaction_item_widget.dart';
@@ -49,7 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CardWidget(
               title: "예산",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const BudgetScreen(),
+                  ),
+                );
+              },
               body: Row(
                 children: [
                   Text("130,000원 / 400,000원",
