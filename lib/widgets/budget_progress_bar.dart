@@ -39,8 +39,6 @@ class BudgetProgressBar extends StatelessWidget {
               backgroundColor: ColorTheme.cardText,
               valueColor:
                   AlwaysStoppedAnimation<Color>(ColorTheme.expenseColor),
-              //minHeight: 23, // height of the progress bar
-              // set minHeight as dynamic value
               minHeight: 23 * MediaQuery.of(context).textScaler.scale(1),
             ),
             Text("  ${ratio * 100}%",

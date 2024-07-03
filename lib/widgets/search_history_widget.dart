@@ -12,7 +12,7 @@ class SearchHistoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       // make edge padding
-      contentPadding: const EdgeInsets.symmetric(horizontal: 6),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
 
       title: TextButton(
         onPressed: onTapped,

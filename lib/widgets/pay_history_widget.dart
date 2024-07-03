@@ -29,8 +29,8 @@ class PayHistoryWidget extends StatelessWidget {
               header,
             ],
           ),
-          //header,
           // Header
+          const SizedBox(height: 8),
           body,
           // Body
         ],

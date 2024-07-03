@@ -23,7 +23,7 @@ class MonthSelector extends StatelessWidget {
                 height: 24,
                 child: IconButton(
                   padding: const EdgeInsets.all(0),
-                  icon: const Icon(Icons.arrow_back, size: 14),
+                  icon: const Icon(Icons.chevron_left_rounded, size: 16),
                   color: ColorTheme.cardText,
                   onPressed: () {},
                 ),
@@ -34,7 +34,7 @@ class MonthSelector extends StatelessWidget {
                 height: 24,
                 child: IconButton(
                     padding: const EdgeInsets.all(0),
-                    icon: const Icon(Icons.arrow_forward, size: 14),
+                    icon: const Icon(Icons.chevron_right_rounded, size: 16),
                     color: ColorTheme.cardText,
                     onPressed: () {}),
               ),

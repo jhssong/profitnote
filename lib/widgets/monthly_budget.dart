@@ -8,12 +8,10 @@ class MonthlyBudget extends StatelessWidget {
   const MonthlyBudget({
     super.key,
     required this.body,
-    this.onPressed,
     this.header,
   });
 
   /// If widget doesn't need detail button, then keep this as null
-  final Function()? onPressed;
   final Widget body;
   final Widget? header;
 
@@ -39,8 +37,6 @@ class MonthlyBudget extends StatelessWidget {
                   ),
                 );
               }),
-
-              // when onPressed, call
             ],
           ),
           // Header
