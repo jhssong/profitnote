@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:profitnote/screens/home_screen.dart';
+import 'package:profitnote/screens/search_screen.dart';
 import 'package:profitnote/style/theme.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class _MyAppState extends State<MyApp> {
 
   static const List<Widget> _screenList = <Widget>[
     HomeScreen(),
-    Text("검색 화면"),
+    SearchScreen(),
     Text("자산 화면"),
     Text("통계 화면"),
     Text("메뉴 화면"),
