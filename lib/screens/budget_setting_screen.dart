@@ -14,6 +14,10 @@ class BudgetSettingScreen extends StatefulWidget {
 class _DetailBudgetScreenState extends State<BudgetSettingScreen> {
   var f = NumberFormat('###,###,###,###');
 
+  void _pop() {
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,14 +30,8 @@ class _DetailBudgetScreenState extends State<BudgetSettingScreen> {
       body: Column(
         children: [
           ControlBtnGroup(
-            leftString: '완료',
-            rightString: '취소',
-            leftCallback: () {
-              Navigator.pop(context);
-            },
-            rightCallback: () {
-              Navigator.pop(context);
-            },
+            titleList: const ['완료', '취소'],
+            callbackList: [_pop, _pop],
           ),
           Expanded(
               child: ListView(

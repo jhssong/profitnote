@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/widgets/control_btn.dart';
+import 'package:profitnote/widgets/control_btn_group.dart';
 import 'package:profitnote/widgets/input_widget.dart';
 import 'package:profitnote/widgets/split_person.dart';
 
@@ -48,11 +48,13 @@ class _SplitScreenState extends State<SplitScreen> {
                   SplitPerson(),
                   SizedBox(height: 16),
                   SplitPerson(),
-                  SizedBox(height: 16),
                 ],
               ),
             ),
-            ControlBtn(onPressed: () {}),
+            ControlBtnGroup(
+              titleList: const ["인원 삭제", "인원 추가", "저장"],
+              callbackList: [() {}, () {}, () {}],
+            ),
           ],
         ),
       ),
