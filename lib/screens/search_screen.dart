@@ -47,64 +47,69 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: [
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 50,
-              child: SearchBar(
-                controller: textController,
-                elevation: const WidgetStatePropertyAll(15),
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+        appBar: AppBar(
+          title: Column(
+            children: [
+              const SizedBox(height: 8),
+              SizedBox(
+                height: 50,
+                child: SearchBar(
+                  controller: textController,
+                  elevation: const WidgetStatePropertyAll(15),
+                  shape: WidgetStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
+                  backgroundColor:
+                      WidgetStatePropertyAll(ColorTheme.cardBackground),
+                  textStyle: WidgetStatePropertyAll(
+                      TextStyle(color: ColorTheme.cardText, fontSize: 16)),
+                  hintText: "검색어를 입력해주세요",
+                  hintStyle: WidgetStatePropertyAll(TextStyle(
+                      color: ColorTheme.backgroundOfBackground, fontSize: 16)),
+                  trailing: [
+                    IconButton(
+                      icon: Icon(Icons.search, color: ColorTheme.cardText),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const SearchResultScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      filteredList = list
+                          .where((element) =>
+                              element
+                                  .toLowerCase()
+                                  .contains(value.toLowerCase()) &&
+                              (value.isNotEmpty))
+                          .toList();
+
+                      if (value.isEmpty) {
+                        // when search field is empty, show recent search history
+                      }
+                    });
+                  },
                 ),
-                backgroundColor:
-                    WidgetStatePropertyAll(ColorTheme.cardBackground),
-                textStyle: WidgetStatePropertyAll(
-                    TextStyle(color: ColorTheme.cardText, fontSize: 16)),
-                hintText: "검색어를 입력해주세요",
-                hintStyle: WidgetStatePropertyAll(TextStyle(
-                    color: ColorTheme.backgroundOfBackground, fontSize: 16)),
-                trailing: [
-                  IconButton(
-                    icon: Icon(Icons.search, color: ColorTheme.cardText),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const SearchResultScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    filteredList = list
-                        .where((element) =>
-                            element
-                                .toLowerCase()
-                                .contains(value.toLowerCase()) &&
-                            (value.isNotEmpty))
-                        .toList();
-                  });
-                },
+              ), // add padding to top of search field (10px)
+              Container(
+                decoration: BoxDecoration(
+                  color: ColorTheme.backgroundOfBackground,
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
-            ), // add padding to top of search field (10px)
-            Container(
-              decoration: BoxDecoration(
-                color: ColorTheme.backgroundOfBackground,
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      body: Container(
-        child: filteredList.map((e) => null).toList().isEmpty
-            ? CardWidget(
+        body: Container(
+          child: (() {
+            if (textController.text.isEmpty) {
+              return CardWidget(
                 title: "최근 검색어",
                 body: Column(children: [
                   SizedBox(
@@ -129,21 +134,33 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ]),
-              )
-            : ListView.builder(
-                itemCount: filteredList.length,
-                itemBuilder: (context, index) {
-                  return PayHistoryWidget(
-                    header: const DateWidget(label: "2024.03.27"),
-                    body: Column(
-                      children: [
-                        TransactionItemWidget(onPressed: () {}),
-                        TransactionItemWidget(onPressed: () {}),
-                      ],
-                    ),
-                  );
-                }),
-      ),
-    );
+              );
+            } else if (filteredList.map((e) => null).toList().isEmpty) {
+              return Card(
+                color: ColorTheme.cardBackground,
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: ListTile(
+                  contentPadding: EdgeInsets,
+                  title: Text("검색 결과가 없습니다.",
+                      style: TextStyle(color: ColorTheme.cardLabelText)),
+                ),
+              );
+            } else {
+              return ListView.builder(
+                  itemCount: filteredList.length,
+                  itemBuilder: (context, index) {
+                    return PayHistoryWidget(
+                      header: const DateWidget(label: "2024.03.27"),
+                      body: Column(
+                        children: [
+                          TransactionItemWidget(onPressed: () {}),
+                          TransactionItemWidget(onPressed: () {}),
+                        ],
+                      ),
+                    );
+                  });
+            }
+          }()),
+        ));
   }
 }
