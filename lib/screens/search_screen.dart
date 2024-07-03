@@ -24,7 +24,8 @@ class _SearchScreenState extends State<SearchScreen> {
             filled: true,
             fillColor: ColorTheme.cardBackground,
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorTheme.background, width: 1),
+              borderSide:
+                  BorderSide(color: ColorTheme.cardBackground, width: 1),
               borderRadius: BorderRadius.circular(20),
             ),
             hintText: "검색어를 입력해주세요",

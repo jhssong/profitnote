@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:profitnote/screens/budget_screen.dart';
 import 'package:profitnote/screens/home_screen.dart';
 import 'package:profitnote/screens/search_screen.dart';
 import 'package:profitnote/style/theme.dart';
