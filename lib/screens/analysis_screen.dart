@@ -12,20 +12,16 @@ class AnalysisScreen extends StatefulWidget {
 
 class _AnalysisScreenState extends State<AnalysisScreen> {
   final items = [
-    {'leftString': 'Item 1', 'rightString': '₩ 1000'},
-    {'leftString': 'Item 2', 'rightString': '₩ 1000'},
-    {'leftString': 'Item 3', 'rightString': '₩ 1000'},
-    {'leftString': 'Item 4', 'rightString': '₩ 1000'},
-    {'leftString': 'Item 5', 'rightString': '₩ 1000'},
+    {'leftString': '주식', 'rightString': '0원'},
+    {'leftString': '생활', 'rightString': '0원'},
+    {'leftString': '고정', 'rightString': '0원'},
   ];
 
   final belowItems = {
-    'Item 1': [
-      {'leftString': 'Item 1 of 1', 'rightString': '₩ 100'},
-      {'leftString': 'Item 1 of 2', 'rightString': '₩ 100'},
-      {'leftString': 'Item 1 of 3', 'rightString': '₩ 100'},
-      {'leftString': 'Item 1 of 4', 'rightString': '₩ 100'},
-      {'leftString': 'Item 1 of 5', 'rightString': '₩ 100'},
+    '주식': [
+      {'leftString': '버거킹', 'rightString': '10,000원'},
+      {'leftString': '푸행크버거', 'rightString': '10,000원'},
+      {'leftString': '벙커', 'rightString': '10,000원'},
     ]
   };
   int _pressedIndex = -1;
@@ -71,16 +67,47 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
         ],
       );
     } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildToggleButton("Back", () {
-            setState(() {
-              _pressedIndex = -1;
-            });
-          }),
-          _buildToggleButton(_pressedString, () {}),
-        ],
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            _pressedIndex = -1;
+          });
+        },
+        child: Container(
+          color: ColorTheme.cardBackground,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(width: 8),
+              Expanded(
+                child: Row(
+                  children: [
+                    const Icon(Icons.chevron_left),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _pressedIndex = -1;
+                        });
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: ColorTheme.cardBackground,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: Text(
+                        _pressedString,
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       );
     }
   }
@@ -94,10 +121,11 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
           ),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
         child: Text(
           text,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
     );

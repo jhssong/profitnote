@@ -19,18 +19,19 @@ class CategoryItemsWidget extends StatelessWidget {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.zero,
             ),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 data['leftString']!,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(width: 32),
               Text(
                 data['rightString']!,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ],
           ),
