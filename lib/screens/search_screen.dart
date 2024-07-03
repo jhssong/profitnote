@@ -140,7 +140,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 color: ColorTheme.cardBackground,
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: ListTile(
-                  contentPadding: EdgeInsets,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                   title: Text("검색 결과가 없습니다.",
                       style: TextStyle(color: ColorTheme.cardLabelText)),
                 ),
