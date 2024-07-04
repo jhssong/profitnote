@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:profitnote/style/theme.dart';
+import 'package:profitnote/widgets/animated_toggle_button.dart';
 import 'package:profitnote/widgets/category_item_widget.dart';
 import 'package:profitnote/widgets/graph_widget.dart';
 
@@ -24,9 +26,20 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
       {'leftString': '벙커', 'rightString': '10,000원'},
     ]
   };
+
+  late DateTime _selectedDateTime;
+  late String _selectedMonth;
   int _selectedTypeIndex = 0;
   int _pressedIndex = -1;
   String _pressedString = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDateTime = DateTime.now();
+    _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
+  }
+
   void _handlePressed(int index, String leftString) {
     setState(() {
       _pressedIndex = index;
@@ -35,12 +48,19 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
     print('Index: $index, Left String: $leftString');
   }
 
+  void _handleToggle(int index) {
+    setState(() {
+      _selectedTypeIndex = index;
+    });
+    print('Index: $index');
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = [
       SalesData('주식', 10000, "10%"),
       SalesData('생활', 10000, "10%"),
-      SalesData('고정', 30000, "80%"),
+      SalesData('고정', 80000, "80%"),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -48,6 +68,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
       ),
       body: Column(
         children: [
+          _buildMonthRow(),
           GraphWidget(data: data),
           _buildToggleRow(),
           _buildCategoryItems(),
@@ -56,15 +77,53 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
     );
   }
 
+  Widget _buildMonthRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        TextButton(
+          onPressed: () {
+            DateTime nextMonth = DateTime(_selectedDateTime.year,
+                _selectedDateTime.month - 1, _selectedDateTime.day);
+
+            if (nextMonth.month > 12) {
+              nextMonth = DateTime(
+                  nextMonth.year - 1, nextMonth.month + 12, nextMonth.day);
+            }
+            setState(() {
+              _selectedDateTime = nextMonth;
+              _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
+            });
+          },
+          child: const Icon(Icons.chevron_left),
+        ),
+        Text(
+          _selectedMonth,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        TextButton(
+          onPressed: () {
+            DateTime nextMonth = DateTime(_selectedDateTime.year,
+                _selectedDateTime.month + 1, _selectedDateTime.day);
+
+            if (nextMonth.month > 12) {
+              nextMonth = DateTime(
+                  nextMonth.year + 1, nextMonth.month - 12, nextMonth.day);
+            }
+            setState(() {
+              _selectedDateTime = nextMonth;
+              _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
+            });
+          },
+          child: const Icon(Icons.chevron_right),
+        ),
+      ],
+    );
+  }
+
   Widget _buildToggleRow() {
     if (_pressedIndex < 0) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildToggleButton("수입", 0),
-          _buildToggleButton("지출", 1),
-        ],
-      );
+      return ToggleButtonsWithSlidingBorder(onPressed: _handleToggle);
     } else {
       return GestureDetector(
         onTap: () {
@@ -113,7 +172,8 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
 
   Widget _buildToggleButton(String text, int index) {
     return Expanded(
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
