@@ -4,16 +4,12 @@ import 'package:profitnote/style/theme.dart';
 class ControlBtnGroup extends StatelessWidget {
   const ControlBtnGroup({
     super.key,
-    required this.leftString,
-    required this.rightString,
-    required this.leftCallback,
-    required this.rightCallback,
+    required this.titleList,
+    required this.callbackList,
   });
 
-  final String leftString;
-  final String rightString;
-  final Function() leftCallback;
-  final Function() rightCallback;
+  final List<String> titleList;
+  final List<Function()> callbackList;
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +22,21 @@ class ControlBtnGroup extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
-            child: TextButton(
-              onPressed: leftCallback,
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.all(0),
-                foregroundColor: ColorTheme.pointText,
-                textStyle: Theme.of(context).textTheme.titleMedium,
+          for (int index = 0; index < titleList.length; index++) ...[
+            Expanded(
+              child: TextButton(
+                onPressed: callbackList[index],
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(0),
+                  foregroundColor: ColorTheme.pointText,
+                  textStyle: Theme.of(context).textTheme.titleMedium,
+                ),
+                child: Text(titleList[index]),
               ),
-              child: Text(leftString),
             ),
-          ),
-          Container(width: 2, height: 32, color: ColorTheme.stroke),
-          Expanded(
-            child: TextButton(
-              onPressed: rightCallback,
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.all(0),
-                foregroundColor: ColorTheme.pointText,
-                textStyle: Theme.of(context).textTheme.titleMedium,
-              ),
-              child: Text(rightString),
-            ),
-          ),
+            if (index < titleList.length - 1)
+              Container(width: 2, height: 32, color: ColorTheme.stroke),
+          ],
         ],
       ),
     );
