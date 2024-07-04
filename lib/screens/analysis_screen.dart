@@ -24,6 +24,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
       {'leftString': '벙커', 'rightString': '10,000원'},
     ]
   };
+  int _selectedTypeIndex = 0;
   int _pressedIndex = -1;
   String _pressedString = "";
   void _handlePressed(int index, String leftString) {
@@ -37,11 +38,9 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
   @override
   Widget build(BuildContext context) {
     final data = [
-      SalesData('Jan', 35),
-      SalesData('Feb', 28),
-      SalesData('Mar', 34),
-      SalesData('Apr', 32),
-      SalesData('May', 40),
+      SalesData('주식', 10000, "10%"),
+      SalesData('생활', 10000, "10%"),
+      SalesData('고정', 30000, "80%"),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -62,8 +61,8 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildToggleButton("수입", () {}),
-          _buildToggleButton("지출", () {}),
+          _buildToggleButton("수입", 0),
+          _buildToggleButton("지출", 1),
         ],
       );
     } else {
@@ -112,20 +111,35 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
     }
   }
 
-  Widget _buildToggleButton(String text, VoidCallback onPressed) {
+  Widget _buildToggleButton(String text, int index) {
     return Expanded(
-      child: TextButton(
-        onPressed: onPressed,
-        style: TextButton.styleFrom(
-          backgroundColor: ColorTheme.cardBackground,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color:
+                  _selectedTypeIndex == index ? Colors.red : Colors.transparent,
+              width: 1.0,
+            ),
           ),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.titleMedium,
+        child: TextButton(
+          onPressed: () {
+            setState(() {
+              _selectedTypeIndex = index;
+            });
+          },
+          style: TextButton.styleFrom(
+            backgroundColor: ColorTheme.cardBackground,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         ),
       ),
     );

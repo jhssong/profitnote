@@ -4,9 +4,10 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 // 임시 데이터
 class SalesData {
-  SalesData(this.year, this.sales);
+  SalesData(this.year, this.sales, this.text);
   final String year;
   final double sales;
+  final String text;
 }
 
 class GraphWidget extends StatelessWidget {
@@ -17,15 +18,12 @@ class GraphWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SfCircularChart(
-      onDataLabelRender: (DataLabelRenderArgs args) {
-        double value = double.parse(args.text!);
-        args.text = value.toStringAsFixed(0);
-      },
       series: <CircularSeries>[
         DoughnutSeries<SalesData, String>(
           dataSource: data,
           xValueMapper: (SalesData data, _) => data.year,
           yValueMapper: (SalesData data, _) => data.sales,
+          dataLabelMapper: (SalesData data, _) => "${data.year} ${data.text}",
           dataLabelSettings: DataLabelSettings(
             margin: EdgeInsets.zero,
             isVisible: true,
