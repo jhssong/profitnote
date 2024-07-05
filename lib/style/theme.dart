@@ -29,6 +29,7 @@ ThemeData theme = ThemeData(
       fontWeight: FontWeight.bold,
       color: ColorTheme.cardLabelText,
     ),
+    foregroundColor: ColorTheme.cardLabelText,
   ),
 
   bottomNavigationBarTheme: BottomNavigationBarThemeData(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/screens/add_screen.dart';
 import 'package:profitnote/screens/budget_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
@@ -19,7 +20,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Profit Note"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const AddScreen(),
+            ),
+          );
+        },
         foregroundColor: ColorTheme.cardLabelText,
         backgroundColor: ColorTheme.backgroundOfBackground,
         child: const Icon(Icons.add),
