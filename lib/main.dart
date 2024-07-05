@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:profitnote/screens/asset_screen.dart';
+import 'package:profitnote/screens/analysis_screen.dart';
 import 'package:profitnote/screens/home_screen.dart';
 import 'package:profitnote/screens/search_screen.dart';
 import 'package:profitnote/style/theme.dart';
@@ -26,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     HomeScreen(),
     SearchScreen(),
     AssetScreen(),
-    Text("통계 화면"),
+    AnalysisScreen(),
     Text("메뉴 화면"),
   ];
 
