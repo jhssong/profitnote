@@ -17,6 +17,7 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      tileColor: ColorTheme.cardBackground,
       onTap: () {
         if (onTapped != null) {
           onTapped!();
