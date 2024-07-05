@@ -134,7 +134,7 @@ class _InputWidgetState extends State<InputWidget> {
                   widget.inputLabel,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 16),
                 Expanded(
                   child: TextField(
                     controller: _controller,

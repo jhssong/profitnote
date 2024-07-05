@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:profitnote/screens/asset_screen.dart';
 import 'package:profitnote/screens/analysis_screen.dart';
 import 'package:profitnote/screens/home_screen.dart';
 import 'package:profitnote/screens/search_screen.dart';
@@ -25,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   static const List<Widget> _screenList = <Widget>[
     HomeScreen(),
     SearchScreen(),
-    Text("자산 화면"),
+    AssetScreen(),
     AnalysisScreen(),
     Text("메뉴 화면"),
   ];
