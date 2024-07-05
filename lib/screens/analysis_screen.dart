@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/animated_toggle_button.dart';
+import 'package:profitnote/utils/datetime_month_operation.dart';
 import 'package:profitnote/widgets/category_item_widget.dart';
 import 'package:profitnote/widgets/graph_widget.dart';
 
@@ -9,28 +9,33 @@ class AnalysisScreen extends StatefulWidget {
   const AnalysisScreen({super.key});
 
   @override
-  State<AnalysisScreen> createState() => _AnalysisScreenState();
+  _AnalysisScreenState createState() => _AnalysisScreenState();
 }
 
-class _AnalysisScreenState extends State<AnalysisScreen> {
-  final items = [
-    {'leftString': '주식', 'rightString': '0원'},
-    {'leftString': '생활', 'rightString': '0원'},
-    {'leftString': '고정', 'rightString': '0원'},
+class _AnalysisScreenState extends State<AnalysisScreen>
+    with SingleTickerProviderStateMixin {
+  final ValueNotifier<int> _pressedIndexNotifier = ValueNotifier<int>(-1);
+  final ValueNotifier<int> _typeNotifier = ValueNotifier(0);
+  final List<CategoryItem> incomeList = [
+    CategoryItem(description: '월급', amount: '0원'),
+    CategoryItem(description: '고정', amount: '0원'),
   ];
 
-  final belowItems = {
-    '주식': [
-      {'leftString': '버거킹', 'rightString': '10,000원'},
-      {'leftString': '푸행크버거', 'rightString': '10,000원'},
-      {'leftString': '벙커', 'rightString': '10,000원'},
-    ]
-  };
+  final List<CategoryItem> expenseList = [
+    CategoryItem(description: '식비', amount: '0원'),
+    CategoryItem(description: '생활', amount: '0원'),
+    CategoryItem(description: '고정', amount: '0원'),
+  ];
+
+  final List<CategoryItem> expenseList_1 = [
+    CategoryItem(description: '프랭크버거', amount: '10000원'),
+    CategoryItem(description: '푸행쿠버거', amount: '10000원'),
+    CategoryItem(description: '마마터치', amount: '10000원'),
+  ];
 
   late DateTime _selectedDateTime;
   late String _selectedMonth;
-  int _selectedTypeIndex = 0;
-  int _pressedIndex = -1;
+  late TabController _tabController;
   String _pressedString = "";
 
   @override
@@ -38,20 +43,25 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
     super.initState();
     _selectedDateTime = DateTime.now();
     _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   void _handlePressed(int index, String leftString) {
+    _pressedIndexNotifier.value = index;
     setState(() {
-      _pressedIndex = index;
       _pressedString = leftString;
     });
     print('Index: $index, Left String: $leftString');
   }
 
   void _handleToggle(int index) {
-    setState(() {
-      _selectedTypeIndex = index;
-    });
+    _typeNotifier.value = index;
     print('Index: $index');
   }
 
@@ -83,13 +93,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
       children: [
         TextButton(
           onPressed: () {
-            DateTime nextMonth = DateTime(_selectedDateTime.year,
-                _selectedDateTime.month - 1, _selectedDateTime.day);
-
-            if (nextMonth.month > 12) {
-              nextMonth = DateTime(
-                  nextMonth.year - 1, nextMonth.month + 12, nextMonth.day);
-            }
+            DateTime nextMonth = getPreviousMonthDate(_selectedDateTime);
             setState(() {
               _selectedDateTime = nextMonth;
               _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
@@ -103,13 +107,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
         ),
         TextButton(
           onPressed: () {
-            DateTime nextMonth = DateTime(_selectedDateTime.year,
-                _selectedDateTime.month + 1, _selectedDateTime.day);
-
-            if (nextMonth.month > 12) {
-              nextMonth = DateTime(
-                  nextMonth.year + 1, nextMonth.month - 12, nextMonth.day);
-            }
+            DateTime nextMonth = getNextMonthDate(_selectedDateTime);
             setState(() {
               _selectedDateTime = nextMonth;
               _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
@@ -122,104 +120,129 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
   }
 
   Widget _buildToggleRow() {
-    if (_pressedIndex < 0) {
-      return ToggleButtonsWithSlidingBorder(onPressed: _handleToggle);
-    } else {
-      return GestureDetector(
-        onTap: () {
-          setState(() {
-            _pressedIndex = -1;
-          });
-        },
-        child: Container(
-          color: ColorTheme.cardBackground,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 8),
-              Expanded(
-                child: Row(
-                  children: [
-                    const Icon(Icons.chevron_left),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _pressedIndex = -1;
-                        });
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor: ColorTheme.cardBackground,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
+    return ValueListenableBuilder<int>(
+      valueListenable: _pressedIndexNotifier,
+      builder: (context, pressedIndex, child) {
+        if (pressedIndex < 0) {
+          return ValueListenableBuilder<int>(
+            valueListenable: _typeNotifier,
+            builder: (context, typeIndex, child) {
+              return Container(
+                color: ColorTheme.cardBackground,
+                height: 42,
+                child: TabBar(
+                  tabs: [
+                    Tab(
                       child: Text(
-                        _pressedString,
-                        textAlign: TextAlign.left,
+                        "수입",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        "지출",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                   ],
+                  controller: _tabController,
+                  indicator: UnderlineTabIndicator(
+                    borderSide: BorderSide(
+                      width: 2,
+                      color: ColorTheme.expenseColor,
+                    ),
+                  ),
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  labelColor: ColorTheme.cardText,
+                  unselectedLabelColor: ColorTheme.cardLabelText,
                 ),
-              )
-            ],
-          ),
-        ),
-      );
-    }
-  }
-
-  Widget _buildToggleButton(String text, int index) {
-    return Expanded(
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color:
-                  _selectedTypeIndex == index ? Colors.red : Colors.transparent,
-              width: 1.0,
+              );
+            },
+          );
+        } else {
+          return GestureDetector(
+            onTap: () {
+              _pressedIndexNotifier.value = -1;
+            },
+            child: Container(
+              color: ColorTheme.cardBackground,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(Icons.chevron_left),
+                            TextButton(
+                              onPressed: () {
+                                _pressedIndexNotifier.value = -1;
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor: ColorTheme.cardBackground,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              child: Text(
+                                _pressedString,
+                                textAlign: TextAlign.left,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(height: 2, color: ColorTheme.cardLabelText),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
-        child: TextButton(
-          onPressed: () {
-            setState(() {
-              _selectedTypeIndex = index;
-            });
-          },
-          style: TextButton.styleFrom(
-            backgroundColor: ColorTheme.cardBackground,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.zero,
-            ),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 
   Widget _buildCategoryItems() {
-    if (_pressedIndex < 0) {
-      return Expanded(
-        child: CategoryItemsWidget(
-          items: items,
-          onPressed: _handlePressed,
-        ),
-      );
-    } else {
-      return Expanded(
-        child: CategoryItemsWidget(
-          items: belowItems[_pressedString]!,
-          onPressed: (int index, String leftString) {},
-        ),
-      );
-    }
+    return ValueListenableBuilder<int>(
+      valueListenable: _pressedIndexNotifier,
+      builder: (context, pressedIndex, _) {
+        if (pressedIndex < 0) {
+          return ValueListenableBuilder<int>(
+            valueListenable: _typeNotifier,
+            builder: (context, type, _) {
+              return Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    CategoryItemsWidget(
+                      key: const ValueKey<int>(0),
+                      items: incomeList,
+                      onPressed: _handlePressed,
+                    ),
+                    CategoryItemsWidget(
+                      key: const ValueKey<int>(1),
+                      items: expenseList,
+                      onPressed: _handlePressed,
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        } else {
+          return Expanded(
+            child: CategoryItemsWidget(
+              items: expenseList_1,
+              onPressed: (int index, String leftString) {},
+            ),
+          );
+        }
+      },
+    );
   }
 }
