@@ -16,6 +16,10 @@ class _DetailedBudgetSettingScreenState
     extends State<DetailedBudgetSettingScreen> {
   var f = NumberFormat('###,###,###,###');
 
+  void _pop() {
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +32,8 @@ class _DetailedBudgetSettingScreenState
       body: Column(
         children: [
           ControlBtnGroup(
-            leftString: '추가',
-            rightString: '삭제',
-            leftCallback: () {
-              Navigator.pop(context);
-            },
-            rightCallback: () {
-              Navigator.pop(context);
-            },
+            titleList: const ['추가', '삭제'],
+            callbackList: [_pop, _pop],
           ),
           Expanded(
               child: ListView(

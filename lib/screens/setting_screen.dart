@@ -12,6 +12,10 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  void _pop() {
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +29,9 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Column(
           children: [
             ControlBtnGroup(
-                leftString: "로그인/회원가입",
-                rightString: "프리미엄 가입",
-                leftCallback: () {},
-                rightCallback: () {}),
+              titleList: const ['로그인/회원가입', '프리미엄 가입'],
+              callbackList: [_pop, _pop],
+            ),
             const GeneralSettingWidget(
               title: "일반",
               items: ["홈 화면", "알림", "보안"],
