@@ -11,15 +11,17 @@ class TypeSelectionBtn extends StatefulWidget {
 }
 
 class _TypeSelectionBtnState extends State<TypeSelectionBtn> {
-  final List<bool> _selectedType = [true, false, false];
+  int _currentIndex = 1;
   final List<String> _typeList = ["수입", "지출", "이체"];
+  final List<Color> _colorList = [
+    const Color(0xff4169E1),
+    const Color(0xffCD5C5C),
+    const Color(0xff5DBB63),
+  ];
 
   void _updateSelection(int index) {
-    setState(() {
-      for (int i = 0; i < _selectedType.length; i++) {
-        _selectedType[i] = i == index;
-      }
-    });
+    if (index == _currentIndex) return;
+    setState(() => _currentIndex = index);
     widget.callback(index);
   }
 
@@ -35,9 +37,13 @@ class _TypeSelectionBtnState extends State<TypeSelectionBtn> {
               onPressed: () => _updateSelection(index),
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.all(0),
-                shape: const RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: index == _currentIndex
+                        ? _colorList[index]
+                        : ColorTheme.cardLabelText,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 foregroundColor: ColorTheme.pointText,
                 textStyle: Theme.of(context).textTheme.bodyMedium,
