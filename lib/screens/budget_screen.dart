@@ -12,7 +12,7 @@ class BudgetScreen extends StatefulWidget {
 
 class _BudgetScreenState extends State<BudgetScreen>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  late final TabController _tabController;
 
   final List<Widget> _tabs = [
     const Tab(text: "사용 금액"),
@@ -72,8 +72,8 @@ class _BudgetScreenState extends State<BudgetScreen>
                     onTapped: () {},
                   ),
                   CategoryTile(
-                    icon:
-                        Icons.category, // Replace null with an appropriate icon
+                    icon: Icons
+                        .category, // TODO Replace null with an appropriate icon
                     label: '고정비',
                     spent: '0원',
                     onTapped: () {},
@@ -93,8 +93,8 @@ class _BudgetScreenState extends State<BudgetScreen>
                     onTapped: () {},
                   ),
                   CategoryTile(
-                    icon:
-                        Icons.category, // Replace null with an appropriate icon
+                    icon: Icons
+                        .category, // TODO Replace null with an appropriate icon
                     label: '고정비',
                     spent: '0원',
                     onTapped: () {},

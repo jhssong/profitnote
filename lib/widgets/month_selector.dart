@@ -7,8 +7,6 @@ class MonthSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: 140,
-      // height: 50,
       decoration: BoxDecoration(
         color: ColorTheme.backgroundOfBackground,
         borderRadius: BorderRadius.circular(20),
@@ -19,7 +17,7 @@ class MonthSelector extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               SizedBox(
-                width: 25,
+                width: 24,
                 height: 24,
                 child: IconButton(
                   padding: const EdgeInsets.all(0),
@@ -30,13 +28,14 @@ class MonthSelector extends StatelessWidget {
               ),
               Text('2024.05', style: Theme.of(context).textTheme.labelMedium),
               SizedBox(
-                width: 25,
+                width: 24,
                 height: 24,
                 child: IconButton(
-                    padding: const EdgeInsets.all(0),
-                    icon: const Icon(Icons.chevron_right_rounded, size: 16),
-                    color: ColorTheme.cardText,
-                    onPressed: () {}),
+                  padding: const EdgeInsets.all(0),
+                  icon: const Icon(Icons.chevron_right_rounded, size: 16),
+                  color: ColorTheme.cardText,
+                  onPressed: () {},
+                ),
               ),
             ],
           ),
