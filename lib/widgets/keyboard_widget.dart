@@ -43,7 +43,7 @@ class _KeyboardKeyState extends State<KeyboardKey> {
         widget.onTap(widget.value);
       },
       child: AspectRatio(
-        aspectRatio: 2,
+        aspectRatio: 1.5,
         child: Center(
           child: renderLabel(),
         ),
