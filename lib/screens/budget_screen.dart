@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/monthly_budget.dart';
-import 'package:profitnote/widgets/budget_progress_bar.dart';
 import 'package:profitnote/widgets/category_tile.dart';
 
 class BudgetScreen extends StatefulWidget {
@@ -13,11 +12,11 @@ class BudgetScreen extends StatefulWidget {
 
 class _BudgetScreenState extends State<BudgetScreen>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  late final TabController _tabController;
 
   final List<Widget> _tabs = [
-    const Tab(text: "수입"),
-    const Tab(text: "지출"),
+    const Tab(text: "사용 금액"),
+    const Tab(text: "남은 금액"),
   ];
   @override
   void initState() {
@@ -39,21 +38,21 @@ class _BudgetScreenState extends State<BudgetScreen>
       ),
       body: Column(
         children: [
-          MonthlyBudget(
-            body: BudgetProgressBar(),
-          ),
-          TabBar(
-            tabs: _tabs,
-            controller: _tabController,
-            indicator: UnderlineTabIndicator(
-              borderSide: BorderSide(
-                width: 2,
-                color: ColorTheme.expenseColor,
+          const MonthlyBudget(),
+          Container(
+            color: ColorTheme.cardBackground,
+            child: TabBar(
+              tabs: _tabs,
+              controller: _tabController,
+              indicator: UnderlineTabIndicator(
+                borderSide: BorderSide(
+                  color: ColorTheme.expenseColor,
+                ),
               ),
+              indicatorSize: TabBarIndicatorSize.tab,
+              labelColor: ColorTheme.cardText,
+              unselectedLabelColor: ColorTheme.cardLabelText,
             ),
-            indicatorSize: TabBarIndicatorSize.tab,
-            labelColor: ColorTheme.cardText,
-            unselectedLabelColor: ColorTheme.cardLabelText,
           ),
           Expanded(
             child: TabBarView(
@@ -61,14 +60,21 @@ class _BudgetScreenState extends State<BudgetScreen>
               children: [
                 ListView(children: <Widget>[
                   CategoryTile(
-                    icon: Icons.payment,
-                    label: '월급',
+                    icon: Icons.food_bank,
+                    label: '식비',
                     spent: '0원',
                     onTapped: () {},
                   ),
                   CategoryTile(
-                    icon: Icons.line_axis,
-                    label: '투자',
+                    icon: Icons.living,
+                    label: '생활',
+                    spent: '0원',
+                    onTapped: () {},
+                  ),
+                  CategoryTile(
+                    icon: Icons
+                        .category, // TODO Replace null with an appropriate icon
+                    label: '고정비',
                     spent: '0원',
                     onTapped: () {},
                   ),
@@ -87,7 +93,8 @@ class _BudgetScreenState extends State<BudgetScreen>
                     onTapped: () {},
                   ),
                   CategoryTile(
-                    icon: Icons.money,
+                    icon: Icons
+                        .category, // TODO Replace null with an appropriate icon
                     label: '고정비',
                     spent: '0원',
                     onTapped: () {},

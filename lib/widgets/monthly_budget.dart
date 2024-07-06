@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/screens/budget_setting_screen.dart';
+import 'package:profitnote/screens/detailed_budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
+import 'package:profitnote/widgets/budget_progress_bar.dart';
 import 'package:profitnote/widgets/detail_btn.dart';
 import 'package:profitnote/widgets/month_selector.dart';
 
 class MonthlyBudget extends StatelessWidget {
   const MonthlyBudget({
     super.key,
-    required this.body,
-    this.header,
   });
-
-  /// If widget doesn't need detail button, then keep this as null
-  final Widget body;
-  final Widget? header;
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +25,17 @@ class MonthlyBudget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const MonthSelector(),
-              DetailBtn(onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const BudgetSettingScreen(),
-                  ),
-                );
-              }),
+              DetailBtn(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const DetailedBudgetSettingScreen(),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
-          // Header
           const SizedBox(height: 8),
           Row(
             children: [
@@ -48,8 +44,7 @@ class MonthlyBudget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          // Body
-          body,
+          const BudgetProgressBar(),
         ],
       ),
     );

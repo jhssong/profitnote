@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:profitnote/screens/detailed_budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/category_tile.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
-import 'package:intl/intl.dart';
 
 class BudgetSettingScreen extends StatefulWidget {
   const BudgetSettingScreen({super.key});
 
   @override
-  State<BudgetSettingScreen> createState() => _DetailBudgetScreenState();
+  State<BudgetSettingScreen> createState() => _BudgetSettingScreenState();
 }
 
-class _DetailBudgetScreenState extends State<BudgetSettingScreen> {
+class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
   var f = NumberFormat('###,###,###,###');
 
   void _pop() {
@@ -22,7 +23,7 @@ class _DetailBudgetScreenState extends State<BudgetSettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("예산 상세", style: TextStyle(color: ColorTheme.cardLabelText)),
+        title: Text("예산 설정", style: TextStyle(color: ColorTheme.cardLabelText)),
         iconTheme: IconThemeData(
           color: ColorTheme.cardLabelText,
         ),
@@ -34,28 +35,41 @@ class _DetailBudgetScreenState extends State<BudgetSettingScreen> {
             callbackList: [_pop, _pop],
           ),
           Expanded(
-              child: ListView(
-            children: <Widget>[
-              CategoryTile(
-                icon: Icons.holiday_village,
-                label: "주식",
-                spent: '${f.format(200000)}원',
-                onTapped: () {},
-              ),
-              CategoryTile(
-                icon: Icons.home,
-                label: "생활",
-                spent: '${f.format(150000)}원',
-                onTapped: () {},
-              ),
-              CategoryTile(
-                icon: Icons.home,
-                label: "고정",
-                spent: '${f.format(50000)}원',
-                onTapped: () {},
-              ),
-            ],
-          ))
+            child: ListView(
+              children: <Widget>[
+                CategoryTile(
+                  icon: Icons.money_rounded,
+                  label: "2024.03",
+                  spent: '${f.format(400000)}원',
+                  onTapped: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const DetailedBudgetSettingScreen()));
+                  },
+                ),
+                CategoryTile(
+                  icon: Icons.money_rounded,
+                  label: "2024.04",
+                  spent: '${f.format(400000)}원',
+                  onTapped: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const DetailedBudgetSettingScreen()));
+                  },
+                ),
+                CategoryTile(
+                  icon: Icons.money_rounded,
+                  label: "2024.05",
+                  spent: '${f.format(400000)}원',
+                  onTapped: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const DetailedBudgetSettingScreen()));
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

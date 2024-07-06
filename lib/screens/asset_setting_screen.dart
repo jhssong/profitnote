@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/widgets/asset_screen/asset_add_modal.dart';
-import 'package:profitnote/widgets/asset_screen/asset_card.dart';
+import 'package:profitnote/widgets/asset_add_modal.dart';
+import 'package:profitnote/widgets/asset_card.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
 
 class AssetSettingScreen extends StatelessWidget {

@@ -4,6 +4,7 @@ import 'package:profitnote/screens/asset_screen.dart';
 import 'package:profitnote/screens/analysis_screen.dart';
 import 'package:profitnote/screens/home_screen.dart';
 import 'package:profitnote/screens/search_screen.dart';
+import 'package:profitnote/screens/setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 
 void main() {
@@ -28,13 +29,11 @@ class _MyAppState extends State<MyApp> {
     SearchScreen(),
     AssetScreen(),
     AnalysisScreen(),
-    Text("메뉴 화면"),
+    SettingScreen(),
   ];
 
   void _onBottomNavTapped(int index) {
-    setState(() {
-      _currentBottomNavIndex = index;
-    });
+    setState(() => _currentBottomNavIndex = index);
   }
 
   @override

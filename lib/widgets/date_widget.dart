@@ -17,11 +17,14 @@ class DateWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(label,
-              style: TextStyle(
-                  color: ColorTheme.cardText,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold)),
+          Text(
+            label,
+            style: TextStyle(
+              color: ColorTheme.cardText,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );

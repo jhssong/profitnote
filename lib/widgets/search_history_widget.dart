@@ -13,15 +13,20 @@ class SearchHistoryWidget extends StatelessWidget {
     return ListTile(
       // make edge padding
       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+      minVerticalPadding: 0,
+      minTileHeight: 0,
 
       title: TextButton(
-        onPressed: onTapped,
+        onPressed: () {
+          if (onTapped != null) {
+            onTapped!();
+          }
+        },
         child: Align(
           alignment: Alignment.centerLeft,
           child: Text(
             label,
             style: Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.left,
           ),
         ),
       ),
@@ -30,7 +35,9 @@ class SearchHistoryWidget extends StatelessWidget {
         icon: const Icon(Icons.cancel_outlined),
         iconSize: 16,
         color: ColorTheme.cardText,
-        onPressed: () {},
+        onPressed: () {
+          // remove widget
+        },
       ),
     );
   }

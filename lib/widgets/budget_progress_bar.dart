@@ -2,28 +2,38 @@ import 'package:profitnote/style/theme.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
-class BudgetProgressBar extends StatelessWidget {
-  int budget = 400000;
-  int used = 270000;
-  double ratio = 0;
+class BudgetProgressBar extends StatefulWidget {
+  const BudgetProgressBar({super.key});
+
+  @override
+  State<BudgetProgressBar> createState() => _BudgetProgressBarState();
+}
+
+class _BudgetProgressBarState extends State<BudgetProgressBar> {
+  final int budget = 400000;
+  final int used = 270000;
+  late double ratio;
   var f = NumberFormat('###,###,###,###');
 
-  BudgetProgressBar({super.key});
+  @override
+  void initState() {
+    ratio = used / budget;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    ratio = used / budget;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
           children: [
-            Text('${f.format(used)}원',
-                style: TextStyle(
+            Text(
+              '${f.format(used)}원',
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: ColorTheme.expenseColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold)),
+                  ),
+            ),
             Text(
               ' / ${f.format(budget)}원',
               style: Theme.of(context).textTheme.labelMedium,
@@ -41,8 +51,11 @@ class BudgetProgressBar extends StatelessWidget {
                   AlwaysStoppedAnimation<Color>(ColorTheme.expenseColor),
               minHeight: 23 * MediaQuery.of(context).textScaler.scale(1),
             ),
-            Text("  ${ratio * 100}%",
-                style: Theme.of(context).textTheme.titleSmall),
+            Container(
+              padding: const EdgeInsets.only(left: 8),
+              child: Text("${ratio * 100}%",
+                  style: Theme.of(context).textTheme.titleSmall),
+            ),
           ],
         ),
       ],
