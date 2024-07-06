@@ -32,6 +32,7 @@ class AssetSettingScreen extends StatelessWidget {
                 {},
                 {},
               ],
+              isEditMode: true,
             ),
             const AssetCard(
               title: "카드",
@@ -39,6 +40,7 @@ class AssetSettingScreen extends StatelessWidget {
                 {},
                 {},
               ],
+              isEditMode: true,
             ),
           ],
         ),

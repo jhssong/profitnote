@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/screens/asset_setting_screen.dart';
 import 'package:profitnote/screens/budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
@@ -44,6 +45,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   if (index == 0) {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const BudgetSettingScreen()));
+                  } else if (index == 1) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AssetSettingScreen()));
                   }
                 }),
           ],
