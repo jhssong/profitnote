@@ -48,72 +48,69 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Column(
-            children: [
-              SizedBox(
-                height: 50,
-                child: SearchBar(
-                  controller: textController,
-                  elevation: const WidgetStatePropertyAll(15),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  backgroundColor:
-                      WidgetStatePropertyAll(ColorTheme.cardBackground),
-                  textStyle: WidgetStatePropertyAll(
-                      TextStyle(color: ColorTheme.cardText, fontSize: 16)),
-                  hintText: "검색어를 입력해주세요",
-                  hintStyle: WidgetStatePropertyAll(TextStyle(
-                      color: ColorTheme.backgroundOfBackground, fontSize: 16)),
-                  leading: Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.search,
-                          color: ColorTheme.cardText,
-                          size: 20,
-                        ),
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                        },
-                      ),
-                    ],
-                  ),
-                  trailing: [
-                    textController.text.isNotEmpty
-                        ? IconButton(
-                            icon: Icon(
-                              Icons.cancel,
-                              color: ColorTheme.cardText,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              //textController.clear();
-                              setState(() {
-                                filteredList = [];
-                                textController.text = "";
-                                focusNode.unfocus();
-                              });
-                            },
-                          )
-                        : Expanded(flex: 0, child: Container()),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      filteredList = list
-                          .where((element) =>
-                              element
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()) &&
-                              (value.isNotEmpty))
-                          .toList();
-                    });
-                  },
+          title: SizedBox(
+            height: 50,
+            child: SearchBar(
+              controller: textController,
+              elevation: const WidgetStatePropertyAll(15),
+              shape: WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
-            ],
+              backgroundColor:
+                  WidgetStatePropertyAll(ColorTheme.cardBackground),
+              textStyle: WidgetStatePropertyAll(
+                Theme.of(context).textTheme.bodyLarge,
+              ),
+              hintText: "검색어를 입력해주세요",
+              hintStyle: WidgetStatePropertyAll(
+                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: ColorTheme.backgroundOfBackground,
+                    ),
+              ),
+              leading: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      color: ColorTheme.cardText,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                    },
+                  ),
+                ],
+              ),
+              trailing: [
+                if (textController.text.isNotEmpty)
+                  IconButton(
+                    icon: Icon(
+                      Icons.cancel,
+                      color: ColorTheme.cardText,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      //textController.clear();
+                      setState(() {
+                        filteredList = [];
+                        textController.text = "";
+                        focusNode.unfocus();
+                      });
+                    },
+                  ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  filteredList = list
+                      .where((element) =>
+                          element.toLowerCase().contains(value.toLowerCase()) &&
+                          (value.isNotEmpty))
+                      .toList();
+                });
+              },
+            ),
           ),
         ),
         body: Container(

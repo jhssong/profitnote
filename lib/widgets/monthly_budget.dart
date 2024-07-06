@@ -25,13 +25,15 @@ class MonthlyBudget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const MonthSelector(),
-              DetailBtn(onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const DetailedBudgetSettingScreen(),
-                  ),
-                );
-              }),
+              DetailBtn(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const DetailedBudgetSettingScreen(),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
           const SizedBox(height: 8),
@@ -42,7 +44,7 @@ class MonthlyBudget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          BudgetProgressBar(),
+          const BudgetProgressBar(),
         ],
       ),
     );

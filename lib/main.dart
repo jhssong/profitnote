@@ -33,9 +33,7 @@ class _MyAppState extends State<MyApp> {
   ];
 
   void _onBottomNavTapped(int index) {
-    setState(() {
-      _currentBottomNavIndex = index;
-    });
+    setState(() => _currentBottomNavIndex = index);
   }
 
   @override
