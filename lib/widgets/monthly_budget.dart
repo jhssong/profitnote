@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/screens/detailed_budget_setting_screen.dart';
+import 'package:profitnote/screens/budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/budget_progress_bar.dart';
 import 'package:profitnote/widgets/detail_btn.dart';
@@ -28,7 +28,7 @@ class MonthlyBudget extends StatelessWidget {
               DetailBtn(onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const DetailedBudgetSettingScreen(),
+                    builder: (context) => const BudgetSettingScreen(),
                   ),
                 );
               }),

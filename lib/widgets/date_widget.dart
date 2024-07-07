@@ -8,20 +8,17 @@ class DateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      // height: 50,
-      padding: const EdgeInsets.all(2.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
       decoration: BoxDecoration(
         color: ColorTheme.backgroundOfBackground,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         children: [
-          Text(label,
-              style: TextStyle(
-                  color: ColorTheme.cardText,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold)),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
         ],
       ),
     );

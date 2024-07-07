@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/date_widget.dart';
 import 'package:profitnote/widgets/pay_history_widget.dart';
 import 'package:profitnote/widgets/search_history_widget.dart';
 import 'package:profitnote/widgets/card_widget.dart';
@@ -54,7 +53,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 height: 50,
                 child: SearchBar(
                   controller: textController,
-                  elevation: const WidgetStatePropertyAll(15),
                   shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -69,15 +67,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       color: ColorTheme.backgroundOfBackground, fontSize: 16)),
                   leading: Row(
                     children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.search,
-                          color: ColorTheme.cardText,
-                          size: 20,
-                        ),
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                        },
+                      const Padding(padding: EdgeInsets.only(left: 8)),
+                      Icon(
+                        Icons.search,
+                        color: ColorTheme.cardText,
+                        size: 20,
                       ),
                     ],
                   ),
@@ -90,7 +84,6 @@ class _SearchScreenState extends State<SearchScreen> {
                               size: 20,
                             ),
                             onPressed: () {
-                              //textController.clear();
                               setState(() {
                                 filteredList = [];
                                 textController.text = "";
@@ -101,104 +94,93 @@ class _SearchScreenState extends State<SearchScreen> {
                         : Expanded(flex: 0, child: Container()),
                   ],
                   onChanged: (value) {
-                    setState(() {
-                      filteredList = list
-                          .where((element) =>
-                              element
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase()) &&
-                              (value.isNotEmpty))
-                          .toList();
-                    });
+                    _onSearch(value);
                   },
                 ),
               ),
             ],
           ),
         ),
-        body: Container(
-          child: (() {
-            if (textController.text.isEmpty) {
-              return Column(children: [
-                CardWidget(
-                  title: "최근 검색어",
-                  body: Column(children: [
-                    SearchHistoryWidget(
-                        label: "맛있나1",
-                        onTapped: () {
-                          textController.text = "맛있나1";
-                          // simulate enter key press
-                          setState(() {
-                            filteredList = list
-                                .where((element) =>
-                                    element.toLowerCase().contains(
-                                        textController.text.toLowerCase()) &&
-                                    (textController.text.isNotEmpty))
-                                .toList();
-                          });
-                          FocusScope.of(context).unfocus();
-                        }),
-                    SearchHistoryWidget(
-                      label: "맛없나1",
-                      onTapped: () {
-                        textController.text = "맛없나1";
-                        setState(() {
-                          filteredList = list
-                              .where((element) =>
-                                  element.toLowerCase().contains(
-                                      textController.text.toLowerCase()) &&
-                                  (textController.text.isNotEmpty))
-                              .toList();
-                        });
-                        FocusScope.of(context).unfocus();
-                      },
-                    ),
-                    SearchHistoryWidget(
-                      label: "맛나",
-                      onTapped: () {
-                        textController.text = "맛나";
-                        setState(() {
-                          filteredList = list
-                              .where((element) =>
-                                  element.toLowerCase().contains(
-                                      textController.text.toLowerCase()) &&
-                                  (textController.text.isNotEmpty))
-                              .toList();
-                        });
-                        FocusScope.of(context).unfocus();
-                      },
-                    ),
-                  ]),
-                ),
-              ]);
-            } else if (filteredList.map((e) => null).toList().isEmpty) {
-              return Card(
-                color: ColorTheme.cardBackground,
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: ListTile(
-                  title: Text("검색 결과가 없습니다.",
-                      style: TextStyle(color: ColorTheme.cardLabelText)),
-                ),
-              );
-            } else {
-              return ListView.builder(
-                  itemCount: filteredList.length,
-                  itemBuilder: (context, index) {
-                    return PayHistoryWidget(
-                      header: const DateWidget(label: "2024.03.27"),
-                      body: Column(
-                        children: [
-                          TransactionItemWidget(onPressed: () {}),
-                          TransactionItemWidget(onPressed: () {}),
-                        ],
-                      ),
-                    );
-                  });
-            }
-          }()),
-        ));
+        body: _buildSearchResult());
+  }
+
+  void _onSearch(String value) {
+    setState(() {
+      filteredList = list
+          .where((element) =>
+              element.toLowerCase().contains(value.toLowerCase()) &&
+              (value.isNotEmpty))
+          .toList();
+    });
+  }
+
+  Widget _buildSearchHistory() {
+    return Column(children: [
+      CardWidget(
+        title: "최근 검색어",
+        body: Column(children: [
+          SearchHistoryWidget(
+              label: "맛있나1",
+              onTapped: () {
+                textController.text = "맛있나1";
+                // simulate enter key press
+                _onSearch(textController.text);
+                FocusScope.of(context).unfocus();
+              }),
+          SearchHistoryWidget(
+            label: "맛없나1",
+            onTapped: () {
+              textController.text = "맛없나1";
+              _onSearch(textController.text);
+              FocusScope.of(context).unfocus();
+            },
+          ),
+          SearchHistoryWidget(
+            label: "맛나",
+            onTapped: () {
+              textController.text = "맛나";
+              _onSearch(textController.text);
+              FocusScope.of(context).unfocus();
+            },
+          ),
+        ]),
+      ),
+    ]);
+  }
+
+  Widget _buildSearchResult() {
+    return Container(
+      child: (() {
+        if (textController.text.isEmpty) {
+          return _buildSearchHistory();
+        } else if (filteredList.map((e) => null).toList().isEmpty) {
+          return Card(
+            color: ColorTheme.cardBackground,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: ListTile(
+              title: Text("검색 결과가 없습니다.",
+                  style: TextStyle(color: ColorTheme.cardLabelText)),
+            ),
+          );
+        } else {
+          return ListView.builder(
+              itemCount: filteredList.length,
+              itemBuilder: (context, index) {
+                return PayHistoryWidget(
+                  date: "2024.03.27",
+                  body: Column(
+                    children: [
+                      TransactionItemWidget(onPressed: () {}),
+                      TransactionItemWidget(onPressed: () {}),
+                    ],
+                  ),
+                );
+              });
+        }
+      }()),
+    );
   }
 }

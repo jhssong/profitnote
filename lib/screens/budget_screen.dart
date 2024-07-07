@@ -12,7 +12,7 @@ class BudgetScreen extends StatefulWidget {
 
 class _BudgetScreenState extends State<BudgetScreen>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  late final TabController _tabController;
 
   final List<Widget> _tabs = [
     const Tab(text: "사용 금액"),
@@ -41,17 +41,24 @@ class _BudgetScreenState extends State<BudgetScreen>
           const MonthlyBudget(),
           Container(
             color: ColorTheme.cardBackground,
-            child: TabBar(
-              tabs: _tabs,
-              controller: _tabController,
-              indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(
-                  color: ColorTheme.expenseColor,
-                ),
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                border:
+                    Border(bottom: BorderSide(color: Colors.white, width: 2)),
               ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: ColorTheme.cardText,
-              unselectedLabelColor: ColorTheme.cardLabelText,
+              child: TabBar(
+                tabs: _tabs,
+                controller: _tabController,
+                indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: ColorTheme.expenseColor,
+                  ),
+                ),
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: ColorTheme.cardText,
+                unselectedLabelColor: ColorTheme.cardLabelText,
+              ),
             ),
           ),
           Expanded(
@@ -59,46 +66,242 @@ class _BudgetScreenState extends State<BudgetScreen>
               controller: _tabController,
               children: [
                 ListView(children: <Widget>[
-                  CategoryTile(
-                    icon: Icons.food_bank,
-                    label: '식비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon: Icons.living,
-                    label: '생활',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon:
-                        Icons.category, // Replace null with an appropriate icon
-                    label: '고정비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
+                  ExpansionTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      leading: const Icon(Icons.money_rounded),
+                      iconColor: ColorTheme.cardText,
+                      collapsedIconColor: ColorTheme.cardLabelText,
+                      backgroundColor: ColorTheme.backgroundOfBackground,
+                      collapsedBackgroundColor: ColorTheme.cardBackground,
+                      title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("대분류1",
+                                style: TextStyle(color: ColorTheme.cardText)),
+                            Text("0원",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ]),
+                      children: <Widget>[
+                        CategoryTile(
+                          icon: Icons.food_bank,
+                          label: '소분류1',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons.living,
+                          label: '소분류2',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons
+                              .category, // TODO Replace null with an appropriate icon
+                          label: '소분류3',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                      ]),
+                  ExpansionTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      leading: const Icon(Icons.money_rounded),
+                      iconColor: ColorTheme.cardText,
+                      collapsedIconColor: ColorTheme.cardLabelText,
+                      backgroundColor: ColorTheme.backgroundOfBackground,
+                      collapsedBackgroundColor: ColorTheme.cardBackground,
+                      title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("대분류2",
+                                style: TextStyle(color: ColorTheme.cardText)),
+                            Text("0원",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ]),
+                      children: <Widget>[
+                        CategoryTile(
+                          icon: Icons.food_bank,
+                          label: '소분류1',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons.living,
+                          label: '소분류2',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons
+                              .category, // TODO Replace null with an appropriate icon
+                          label: '소분류3',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                      ]),
+                  ExpansionTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      leading: const Icon(Icons.money_rounded),
+                      iconColor: ColorTheme.cardText,
+                      collapsedIconColor: ColorTheme.cardLabelText,
+                      backgroundColor: ColorTheme.backgroundOfBackground,
+                      collapsedBackgroundColor: ColorTheme.cardBackground,
+                      title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("대분류3",
+                                style: TextStyle(color: ColorTheme.cardText)),
+                            Text("0원",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ]),
+                      children: <Widget>[
+                        CategoryTile(
+                          icon: Icons.food_bank,
+                          label: '소분류1',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons.living,
+                          label: '소분류2',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons
+                              .category, // TODO Replace null with an appropriate icon
+                          label: '소분류3',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                      ]),
                 ]),
                 ListView(children: <Widget>[
-                  CategoryTile(
-                    icon: Icons.food_bank,
-                    label: '식비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon: Icons.living,
-                    label: '생활',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon:
-                        Icons.category, // Replace null with an appropriate icon
-                    label: '고정비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
+                  ExpansionTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      leading: const Icon(Icons.money_rounded),
+                      iconColor: ColorTheme.cardText,
+                      collapsedIconColor: ColorTheme.cardLabelText,
+                      backgroundColor: ColorTheme.backgroundOfBackground,
+                      collapsedBackgroundColor: ColorTheme.cardBackground,
+                      title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("대분류1",
+                                style: TextStyle(color: ColorTheme.cardText)),
+                            Text("0원",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ]),
+                      children: <Widget>[
+                        CategoryTile(
+                          icon: Icons.food_bank,
+                          label: '소분류1',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons.living,
+                          label: '소분류2',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons
+                              .category, // TODO Replace null with an appropriate icon
+                          label: '소분류3',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                      ]),
+                  ExpansionTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      leading: const Icon(Icons.money_rounded),
+                      iconColor: ColorTheme.cardText,
+                      collapsedIconColor: ColorTheme.cardLabelText,
+                      backgroundColor: ColorTheme.backgroundOfBackground,
+                      collapsedBackgroundColor: ColorTheme.cardBackground,
+                      title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("대분류2",
+                                style: TextStyle(color: ColorTheme.cardText)),
+                            Text("0원",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ]),
+                      children: <Widget>[
+                        CategoryTile(
+                          icon: Icons.food_bank,
+                          label: '소분류1',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons.living,
+                          label: '소분류2',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons
+                              .category, // TODO Replace null with an appropriate icon
+                          label: '소분류3',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                      ]),
+                  ExpansionTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      leading: const Icon(Icons.money_rounded),
+                      iconColor: ColorTheme.cardText,
+                      collapsedIconColor: ColorTheme.cardLabelText,
+                      backgroundColor: ColorTheme.backgroundOfBackground,
+                      collapsedBackgroundColor: ColorTheme.cardBackground,
+                      title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("대분류3",
+                                style: TextStyle(color: ColorTheme.cardText)),
+                            Text("0원",
+                                style: Theme.of(context).textTheme.bodyLarge),
+                          ]),
+                      children: <Widget>[
+                        CategoryTile(
+                          icon: Icons.food_bank,
+                          label: '소분류1',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons.living,
+                          label: '소분류2',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                        CategoryTile(
+                          icon: Icons
+                              .category, // TODO Replace null with an appropriate icon
+                          label: '소분류3',
+                          spent: '0원',
+                          onTapped: () {},
+                          onLongPressed: null,
+                        ),
+                      ]),
                 ]),
               ],
             ),

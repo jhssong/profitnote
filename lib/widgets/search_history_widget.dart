@@ -11,11 +11,9 @@ class SearchHistoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      // make edge padding
       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
       minVerticalPadding: 0,
       minTileHeight: 0,
-
       title: TextButton(
         onPressed: () {
           if (onTapped != null) {
@@ -31,7 +29,6 @@ class SearchHistoryWidget extends StatelessWidget {
           ),
         ),
       ),
-
       trailing: IconButton(
         icon: const Icon(Icons.cancel_outlined),
         iconSize: 16,

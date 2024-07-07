@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
+import 'package:profitnote/widgets/date_widget.dart';
 
 class PayHistoryWidget extends StatelessWidget {
   const PayHistoryWidget({
     super.key,
-    required this.header,
+    required this.date,
     required this.body,
   });
 
   /// If widget doesn't need detail button, then keep this as null
   final Widget body;
-  final Widget header;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class PayHistoryWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              header,
+              DateWidget(label: date),
             ],
           ),
           // Header

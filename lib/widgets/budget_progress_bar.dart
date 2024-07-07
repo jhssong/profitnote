@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 class BudgetProgressBar extends StatelessWidget {
   int budget = 400000;
   int used = 270000;
-  double ratio = 0;
+  double barPercentage = 0;
   var f = NumberFormat('###,###,###,###');
 
   BudgetProgressBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ratio = used / budget;
+    barPercentage = used / budget;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -35,13 +35,13 @@ class BudgetProgressBar extends StatelessWidget {
           children: [
             LinearProgressIndicator(
               borderRadius: BorderRadius.circular(20),
-              value: ratio, // pergentage of the progress bar
+              value: barPercentage, // pergentage of the progress bar
               backgroundColor: ColorTheme.cardText,
               valueColor:
                   AlwaysStoppedAnimation<Color>(ColorTheme.expenseColor),
               minHeight: 23 * MediaQuery.of(context).textScaler.scale(1),
             ),
-            Text("  ${ratio * 100}%",
+            Text("  ${barPercentage * 100}%",
                 style: Theme.of(context).textTheme.titleSmall),
           ],
         ),
