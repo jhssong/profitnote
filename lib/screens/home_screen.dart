@@ -40,7 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
               body: Row(
                 children: [
                   Text("3,849,752원",
-                      style: Theme.of(context).textTheme.headlineLarge),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: ColorTheme.cardText,
+                      )),
                 ],
               ),
             ),
