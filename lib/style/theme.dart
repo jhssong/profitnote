@@ -50,9 +50,15 @@ ThemeData theme = ThemeData(
 
   // Text Style
   textTheme: TextTheme(
-    headlineMedium: const TextStyle(
+    headlineLarge: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: ColorTheme.cardText,
+    ),
+    headlineMedium: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
+      color: ColorTheme.cardText,
     ),
     titleMedium: TextStyle(
       fontSize: 16,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/screens/asset_setting_screen.dart';
-import 'package:profitnote/widgets/asset_screen/asset_card.dart';
+import 'package:profitnote/widgets/asset_card.dart';
 
 class AssetScreen extends StatelessWidget {
   const AssetScreen({super.key});

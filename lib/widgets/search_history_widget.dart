@@ -25,7 +25,6 @@ class SearchHistoryWidget extends StatelessWidget {
           child: Text(
             label,
             style: Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.left,
           ),
         ),
       ),
