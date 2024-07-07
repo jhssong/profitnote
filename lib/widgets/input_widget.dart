@@ -7,7 +7,9 @@ class InputWidget extends StatefulWidget {
     required this.inputLabel,
     required this.callback,
     this.initialValue,
+    this.isUseWidget = false,
     this.isUseDialog = false,
+    this.showCustomWidget,
     this.showCustomDialog,
     this.dialogTitle,
     this.dialogBodyList,
@@ -21,8 +23,14 @@ class InputWidget extends StatefulWidget {
 
   final String? initialValue;
 
+  /// If this is true, when user tap the widget navigate to custom widget.
+  final bool isUseWidget;
+
   /// If TextField is controlled by custom dialog, this should be true.
   final bool isUseDialog;
+
+  /// When use custom widget, set this parameter
+  final Function? showCustomWidget;
 
   /// When use custom dialog, set this parameter
   final Function? showCustomDialog;
@@ -40,6 +48,7 @@ class InputWidget extends StatefulWidget {
 
 class _InputWidgetState extends State<InputWidget> {
   final _controller = TextEditingController();
+  late final bool _isUseWidget = widget.isUseWidget;
   late final bool _isUseDialog = widget.isUseDialog;
   late final bool _isHorizontal = widget.isHorizontal;
 
@@ -64,6 +73,9 @@ class _InputWidgetState extends State<InputWidget> {
           dialogCallback: _dialogCallback,
         );
       }
+    }
+    if (_isUseWidget == true) {
+      widget.showCustomWidget!(context, _controller);
     }
   }
 

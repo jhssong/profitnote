@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/screens/split_screen.dart';
+import 'package:profitnote/utils/show_custom_keyboard.dart';
 import 'package:profitnote/utils/show_date_picker_dialog.dart';
 import 'package:profitnote/utils/show_time_picker_dialog.dart';
 import 'package:profitnote/widgets/control_btn.dart';
@@ -69,6 +70,8 @@ class _AddScreenState extends State<AddScreen> {
             InputWidget(
               inputLabel: "금액",
               callback: (value) {},
+              isUseWidget: true,
+              showCustomWidget: showKeyboard,
             ),
             Row(
               children: [
