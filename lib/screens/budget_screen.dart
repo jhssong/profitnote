@@ -1,32 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:profitnote/screens/detailed_budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/monthly_budget.dart';
 import 'package:profitnote/widgets/category_tile.dart';
+import 'package:profitnote/widgets/control_btn_group.dart';
 
-class BudgetScreen extends StatefulWidget {
-  const BudgetScreen({super.key});
+class BudgetSettingScreen extends StatefulWidget {
+  const BudgetSettingScreen({super.key});
 
   @override
-  State<BudgetScreen> createState() => _BudgetScreenState();
+  State<BudgetSettingScreen> createState() => _BudgetSettingScreenState();
 }
 
-class _BudgetScreenState extends State<BudgetScreen>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
+class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
+  final _controller = TextEditingController();
+  var f = NumberFormat('###,###,###,###');
 
-  final List<Widget> _tabs = [
-    const Tab(text: "사용 금액"),
-    const Tab(text: "남은 금액"),
-  ];
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: _tabs.length, vsync: this);
+  void _onTap(String title, List<String> bodyList, Function dialogCallback) {
+    _showSelectionDialog(
+      context,
+      title: title,
+      bodyList: bodyList,
+      dialogCallback: dialogCallback,
+    );
+  }
+
+  Future<void> _showSelectionDialog(
+    BuildContext context, {
+    required title,
+    required bodyList,
+    required dialogCallback,
+  }) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: ColorTheme.cardBackground,
+          title: Center(child: Text('$title')),
+          titleTextStyle: Theme.of(context).textTheme.titleMedium,
+          contentTextStyle: Theme.of(context).textTheme.bodyMedium,
+          content: Wrap(
+            children: List.generate(bodyList.length, (index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        dialogCallback(bodyList[index]);
+                        Navigator.of(context).pop();
+                      },
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(0),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        foregroundColor: ColorTheme.pointText,
+                        textStyle: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      child: Text("${bodyList[index]}"),
+                    ),
+                  ),
+                ],
+              );
+            }),
+          ),
+        );
+      },
+    );
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -34,72 +80,69 @@ class _BudgetScreenState extends State<BudgetScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("예산"),
+        title: Text("예산 설정", style: TextStyle(color: ColorTheme.cardLabelText)),
+        iconTheme: IconThemeData(
+          color: ColorTheme.cardLabelText,
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              // TODO: Add new CategoryTile
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
-          const MonthlyBudget(),
-          Container(
-            color: ColorTheme.cardBackground,
-            child: TabBar(
-              tabs: _tabs,
-              controller: _tabController,
-              indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(
-                  color: ColorTheme.expenseColor,
-                ),
-              ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: ColorTheme.cardText,
-              unselectedLabelColor: ColorTheme.cardLabelText,
-            ),
-          ),
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                ListView(children: <Widget>[
-                  CategoryTile(
-                    icon: Icons.food_bank,
-                    label: '식비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon: Icons.living,
-                    label: '생활',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon: Icons
-                        .category, // TODO Replace null with an appropriate icon
-                    label: '고정비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                ]),
-                ListView(children: <Widget>[
-                  CategoryTile(
-                    icon: Icons.food_bank,
-                    label: '식비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon: Icons.living,
-                    label: '생활',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                  CategoryTile(
-                    icon: Icons
-                        .category, // TODO Replace null with an appropriate icon
-                    label: '고정비',
-                    spent: '0원',
-                    onTapped: () {},
-                  ),
-                ]),
+            child: ListView(
+              children: <Widget>[
+                CategoryTile(
+                  icon: Icons.money_rounded,
+                  label: "2024.03",
+                  spent: '${f.format(400000)}원',
+                  onTapped: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const DetailedBudgetSettingScreen()));
+                  },
+                  onLongPressed: () {
+                    _onTap("2024.03", ["수정", "삭제"], (value) {
+                      setState(() => _controller.text = value);
+                    });
+                  },
+                ),
+                CategoryTile(
+                  icon: Icons.money_rounded,
+                  label: "2024.04",
+                  spent: '${f.format(400000)}원',
+                  onTapped: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const DetailedBudgetSettingScreen()));
+                  },
+                  onLongPressed: () {
+                    _onTap("2024.04", ["수정", "삭제"], (value) {
+                      setState(() => _controller.text = value);
+                    });
+                  },
+                ),
+                CategoryTile(
+                  icon: Icons.money_rounded,
+                  label: "2024.05",
+                  spent: '${f.format(400000)}원',
+                  onTapped: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const DetailedBudgetSettingScreen()));
+                  },
+                  onLongPressed: () {
+                    _onTap("2024.05", ["수정", "삭제"], (value) {
+                      setState(() => _controller.text = value);
+                    });
+                  },
+                ),
               ],
             ),
           ),

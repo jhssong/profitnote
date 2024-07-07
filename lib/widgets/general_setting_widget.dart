@@ -19,16 +19,19 @@ class GeneralSettingWidget extends StatelessWidget {
         children: [
           Row(
             children: [
+              const Padding(padding: EdgeInsets.symmetric(vertical: 16)),
               Text(title, style: Theme.of(context).textTheme.titleMedium),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
           ListView(
             shrinkWrap: true,
             children: items
                 .map((e) => ListTile(
+                      minTileHeight: 0,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 8,
+                        vertical: 8,
                       ),
                       title: Text(
                         e,
