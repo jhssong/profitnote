@@ -5,6 +5,8 @@ import 'package:profitnote/widgets/input_widget.dart';
 class AssetAddModal extends StatefulWidget {
   const AssetAddModal({super.key});
 
+  // TODO Asset Model 완성 후, EditMode로 접근 시 inital value로 초기화하는 코드 추가
+
   @override
   State<AssetAddModal> createState() => _AssetAddModalState();
 }
@@ -19,6 +21,14 @@ class _AssetAddModalState extends State<AssetAddModal> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            InputWidget(
+              inputLabel: "그룹",
+              callback: (value) {},
+              isHorizontal: true,
+              isUseDialog: true,
+              dialogTitle: "자산 그룹 선택",
+              dialogBodyList: const ["현금", "카드"],
+            ),
             InputWidget(
               inputLabel: "내용",
               callback: (value) {},
