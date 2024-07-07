@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/input_widget.dart';
 
 class CategoryTile extends StatelessWidget {
   final IconData icon;
