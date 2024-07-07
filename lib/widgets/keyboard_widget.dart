@@ -23,15 +23,12 @@ class _KeyboardKeyState extends State<KeyboardKey> {
       return widget.label;
     }
 
-    return TextButton(
-      onPressed: () {},
-      child: Text(
-        widget.label,
-        style: TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold,
-          color: ColorTheme.cardText,
-        ),
+    return Text(
+      widget.label,
+      style: TextStyle(
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+        color: ColorTheme.cardText,
       ),
     );
   }
@@ -97,6 +94,7 @@ class CustomKeyboard extends StatelessWidget {
                       if (val is Widget) {
                         onBackspacePress();
                       } else {
+                        print(val);
                         onKeyTap(val);
                       }
                     },
