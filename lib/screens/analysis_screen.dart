@@ -99,7 +99,10 @@ class _AnalysisScreenState extends State<AnalysisScreen>
               _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
             });
           },
-          child: const Icon(Icons.chevron_left),
+          child: Icon(
+            Icons.chevron_left,
+            color: ColorTheme.cardLabelText,
+          ),
         ),
         Text(
           _selectedMonth,
@@ -113,7 +116,10 @@ class _AnalysisScreenState extends State<AnalysisScreen>
               _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
             });
           },
-          child: const Icon(Icons.chevron_right),
+          child: Icon(
+            Icons.chevron_right,
+            color: ColorTheme.cardLabelText,
+          ),
         ),
       ],
     );
@@ -148,7 +154,6 @@ class _AnalysisScreenState extends State<AnalysisScreen>
                   controller: _tabController,
                   indicator: UnderlineTabIndicator(
                     borderSide: BorderSide(
-                      width: 2,
                       color: ColorTheme.expenseColor,
                     ),
                   ),
@@ -194,7 +199,7 @@ class _AnalysisScreenState extends State<AnalysisScreen>
                             ),
                           ],
                         ),
-                        Container(height: 2, color: ColorTheme.cardLabelText),
+                        Container(height: 1, color: ColorTheme.cardLabelText),
                       ],
                     ),
                   ),
