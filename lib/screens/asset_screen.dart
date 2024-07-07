@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/screens/asset_setting_screen.dart';
 import 'package:profitnote/widgets/asset_card.dart';
 
 class AssetScreen extends StatelessWidget {
   const AssetScreen({super.key});
+
+  // TODO Asset Model 완성 후 특정 자산 클릭 시 해당 자산의 결재 내역을 보여주는 modal로 이동하는 기능 추가
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("자산"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => const AssetSettingScreen()),
-              );
-            },
-            icon: const Icon(Icons.more_vert),
-          )
-        ],
       ),
       body: const SingleChildScrollView(
         child: Column(

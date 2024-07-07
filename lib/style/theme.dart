@@ -20,6 +20,8 @@ ThemeData theme = ThemeData(
     cursorColor: ColorTheme.cardText, // Set cursor color to white
   ),
 
+  canvasColor: Colors.transparent,
+
   // Appbar Style
   appBarTheme: AppBarTheme(
     backgroundColor: ColorTheme.background,

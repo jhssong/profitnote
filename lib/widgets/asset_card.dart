@@ -6,10 +6,12 @@ class AssetCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.assetListInGroup,
+    this.isEditMode = false,
   });
 
   final String title;
   final List<Map<String, double>> assetListInGroup;
+  final bool isEditMode;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +39,20 @@ class AssetCard extends StatelessWidget {
           ),
           for (int index = 0; index < assetListInGroup.length; index++) ...[
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("KRW", style: Theme.of(context).textTheme.bodyLarge),
-                Text("10,000원", style: Theme.of(context).textTheme.bodyLarge),
-              ],
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: ColorTheme.cardBackground,
+                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              onPressed: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("KRW", style: Theme.of(context).textTheme.bodyLarge),
+                  Text("10,000원", style: Theme.of(context).textTheme.bodyLarge),
+                ],
+              ),
             ),
           ],
         ],
