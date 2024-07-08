@@ -47,56 +47,57 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 80,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(0),
+            child: Container(),
+          ),
           title: Column(
             children: [
-              SizedBox(
-                height: 50,
-                child: SearchBar(
-                  controller: textController,
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+              SearchBar(
+                controller: textController,
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  backgroundColor:
-                      WidgetStatePropertyAll(ColorTheme.cardBackground),
-                  textStyle: WidgetStatePropertyAll(
-                      TextStyle(color: ColorTheme.cardText, fontSize: 16)),
-                  hintText: "검색어를 입력해주세요",
-                  hintStyle: WidgetStatePropertyAll(TextStyle(
-                      color: ColorTheme.backgroundOfBackground, fontSize: 16)),
-                  leading: Row(
-                    children: [
-                      const Padding(padding: EdgeInsets.only(left: 8)),
-                      Icon(
-                        Icons.search,
+                ),
+                backgroundColor:
+                    WidgetStatePropertyAll(ColorTheme.cardBackground),
+                textStyle: WidgetStatePropertyAll(
+                    TextStyle(color: ColorTheme.cardText, fontSize: 16)),
+                hintText: "검색어를 입력해주세요",
+                hintStyle: WidgetStatePropertyAll(TextStyle(
+                    color: ColorTheme.backgroundOfBackground, fontSize: 16)),
+                leading: Row(
+                  children: [
+                    const Padding(padding: EdgeInsets.only(left: 8)),
+                    Icon(
+                      Icons.search,
+                      color: ColorTheme.cardText,
+                      size: 20,
+                    ),
+                  ],
+                ),
+                trailing: [
+                  if (textController.text.isNotEmpty)
+                    IconButton(
+                      icon: Icon(
+                        Icons.cancel,
                         color: ColorTheme.cardText,
                         size: 20,
                       ),
-                    ],
-                  ),
-                  trailing: [
-                    textController.text.isNotEmpty
-                        ? IconButton(
-                            icon: Icon(
-                              Icons.cancel,
-                              color: ColorTheme.cardText,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                filteredList = [];
-                                textController.text = "";
-                                focusNode.unfocus();
-                              });
-                            },
-                          )
-                        : Expanded(flex: 0, child: Container()),
-                  ],
-                  onChanged: (value) {
-                    _onSearch(value);
-                  },
-                ),
+                      onPressed: () {
+                        setState(() {
+                          filteredList = [];
+                          textController.text = "";
+                          focusNode.unfocus();
+                        });
+                      },
+                    ),
+                ],
+                onChanged: (value) {
+                  _onSearch(value);
+                },
               ),
             ],
           ),
@@ -149,38 +150,34 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildSearchResult() {
-    return Container(
-      child: (() {
-        if (textController.text.isEmpty) {
-          return _buildSearchHistory();
-        } else if (filteredList.map((e) => null).toList().isEmpty) {
-          return Card(
-            color: ColorTheme.cardBackground,
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: ListTile(
-              title: Text("검색 결과가 없습니다.",
-                  style: TextStyle(color: ColorTheme.cardLabelText)),
-            ),
-          );
-        } else {
-          return ListView.builder(
-              itemCount: filteredList.length,
-              itemBuilder: (context, index) {
-                return PayHistoryWidget(
-                  date: "2024.03.27",
-                  body: Column(
-                    children: [
-                      TransactionItemWidget(onPressed: () {}),
-                      TransactionItemWidget(onPressed: () {}),
-                    ],
-                  ),
-                );
-              });
-        }
-      }()),
-    );
+    if (textController.text.isEmpty) {
+      return _buildSearchHistory();
+    } else if (filteredList.map((e) => null).toList().isEmpty) {
+      return Card(
+        color: ColorTheme.cardBackground,
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: ListTile(
+          title: Text("검색 결과가 없습니다.",
+              style: TextStyle(color: ColorTheme.cardLabelText)),
+        ),
+      );
+    } else {
+      return ListView.builder(
+          itemCount: filteredList.length,
+          itemBuilder: (context, index) {
+            return PayHistoryWidget(
+              date: "2024.03.27",
+              body: Column(
+                children: [
+                  TransactionItemWidget(onPressed: () {}),
+                  TransactionItemWidget(onPressed: () {}),
+                ],
+              ),
+            );
+          });
+    }
   }
 }
