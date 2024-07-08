@@ -11,7 +11,7 @@ class GeneralSettingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
       decoration: BoxDecoration(
         color: ColorTheme.cardBackground,
       ),
@@ -23,7 +23,6 @@ class GeneralSettingWidget extends StatelessWidget {
               Text(title, style: Theme.of(context).textTheme.titleMedium),
             ],
           ),
-          const SizedBox(height: 8),
           ListView(
             shrinkWrap: true,
             children: items
