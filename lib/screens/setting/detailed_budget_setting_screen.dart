@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/category_tile.dart';
+import 'package:profitnote/screens/setting/widgets/category_tile.dart';
 import 'package:intl/intl.dart';
 
 class DetailedBudgetSettingScreen extends StatefulWidget {

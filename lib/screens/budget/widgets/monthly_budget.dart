@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:profitnote/screens/budget_setting_screen.dart';
+import 'package:profitnote/screens/setting/budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/detail_btn.dart';
-import 'package:profitnote/widgets/month_selector.dart';
+import 'package:profitnote/screens/budget/widgets/month_selector.dart';
 
 // ignore: must_be_immutable
 class MonthlyBudget extends StatelessWidget {

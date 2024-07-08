@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/asset_add_modal.dart';
+import 'package:profitnote/screens/asset/widgets/asset_add_modal.dart';
 
 class AssetSettingScreen extends StatefulWidget {
   const AssetSettingScreen({super.key});
