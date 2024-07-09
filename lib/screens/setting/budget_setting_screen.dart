@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:profitnote/screens/detailed_budget_setting_screen.dart';
+import 'package:profitnote/screens/setting/detailed_budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/category_tile.dart';
+import 'package:profitnote/screens/setting/widgets/category_tile.dart';
 
 class BudgetSettingScreen extends StatefulWidget {
   const BudgetSettingScreen({super.key});

@@ -125,6 +125,23 @@ class _InputWidgetState extends State<InputWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var textField = TextField(
+      controller: _controller,
+      readOnly: _isUseDialog,
+      onTap: _onTap,
+      onChanged: (value) => widget.callback(value),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: ColorTheme.cardBackground,
+        border: const OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
+      ),
+      style: Theme.of(context).textTheme.bodyMedium,
+      textAlign: TextAlign.center,
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: _isHorizontal
@@ -136,21 +153,7 @@ class _InputWidgetState extends State<InputWidget> {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    readOnly: _isUseDialog,
-                    onTap: _onTap,
-                    onChanged: (value) => widget.callback(value),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: ColorTheme.cardBackground,
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                    ),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                  child: textField,
                 )
               ],
             )
@@ -162,21 +165,7 @@ class _InputWidgetState extends State<InputWidget> {
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const SizedBox(height: 8),
-                TextField(
-                  controller: _controller,
-                  readOnly: _isUseDialog,
-                  onTap: _onTap,
-                  onChanged: (value) => widget.callback(value),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: ColorTheme.cardBackground,
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                  ),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                )
+                textField,
               ],
             ),
     );

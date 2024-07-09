@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:profitnote/screens/asset_screen.dart';
-import 'package:profitnote/screens/analysis_screen.dart';
-import 'package:profitnote/screens/home_screen.dart';
-import 'package:profitnote/screens/search_screen.dart';
-import 'package:profitnote/screens/setting_screen.dart';
+import 'package:profitnote/screens/asset/asset_screen.dart';
+import 'package:profitnote/screens/analysis/analysis_screen.dart';
+import 'package:profitnote/screens/home/home_screen.dart';
+import 'package:profitnote/screens/search/search_screen.dart';
+import 'package:profitnote/screens/setting/setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 
 void main() {

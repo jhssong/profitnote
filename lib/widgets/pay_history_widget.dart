@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/date_widget.dart';
 
 class PayHistoryWidget extends StatelessWidget {
   const PayHistoryWidget({
@@ -27,13 +26,26 @@ class PayHistoryWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DateWidget(label: date),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                decoration: BoxDecoration(
+                  color: ColorTheme.backgroundOfBackground,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      date,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-          // Header
           const SizedBox(height: 8),
           body,
-          // Body
         ],
       ),
     );

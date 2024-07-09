@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/category_item_widget.dart';
+import 'package:profitnote/screens/setting/widgets/category_item_widget.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
 
 class CategorySettingScreen extends StatefulWidget {
