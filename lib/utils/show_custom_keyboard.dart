@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/widgets/keyboard_widget.dart';
+import 'package:profitnote/widgets/custom_keyboard_widget.dart';
 
 void showKeyboard(BuildContext context, TextEditingController controller) {
   showModalBottomSheet(
