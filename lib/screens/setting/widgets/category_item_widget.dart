@@ -23,11 +23,13 @@ class CategoryItemsWidget extends StatelessWidget {
         return ElevatedButton(
           onPressed: () => onPressed(idx, data.description),
           style: ElevatedButton.styleFrom(
+            fixedSize: const Size.fromHeight(45),
             backgroundColor: ColorTheme.cardBackground,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.zero,
             ),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            alignment: Alignment.center,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
