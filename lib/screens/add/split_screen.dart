@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
 import 'package:profitnote/widgets/input_widget.dart';
-import 'package:profitnote/widgets/split_person.dart';
+import 'package:profitnote/screens/add/widgets/split_person.dart';
 
 class SplitScreen extends StatefulWidget {
   const SplitScreen({super.key});
@@ -52,8 +52,8 @@ class _SplitScreenState extends State<SplitScreen> {
               ),
             ),
             ControlBtnGroup(
-              titleList: const ["인원 삭제", "인원 추가", "저장"],
-              callbackList: [() {}, () {}, () {}],
+              titleList: const ["인원 삭제", "인원 추가"],
+              callbackList: [() {}, () {}],
             ),
           ],
         ),

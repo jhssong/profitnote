@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/monthly_budget.dart';
-import 'package:profitnote/widgets/category_tile.dart';
+import 'package:profitnote/screens/budget/widgets/monthly_budget.dart';
+import 'package:profitnote/screens/setting/widgets/category_tile.dart';
 
 class BudgetScreen extends StatefulWidget {
   const BudgetScreen({super.key});
@@ -16,7 +16,7 @@ class _BudgetScreenState extends State<BudgetScreen>
 
   final List<Widget> _tabs = [
     const Tab(text: "사용 금액"),
-    const Tab(text: "남은 금액"),
+    const Tab(text: "전체 금액"),
   ];
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _BudgetScreenState extends State<BudgetScreen>
       ),
       body: Column(
         children: [
-          const MonthlyBudget(),
+          MonthlyBudget(),
           Container(
             color: ColorTheme.cardBackground,
             child: DecoratedBox(

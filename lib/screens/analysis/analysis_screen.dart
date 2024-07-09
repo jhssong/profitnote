@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/utils/datetime_month_operation.dart';
-import 'package:profitnote/widgets/category_item_widget.dart';
-import 'package:profitnote/widgets/graph_widget.dart';
+import 'package:profitnote/screens/setting/widgets/category_item_widget.dart';
+import 'package:profitnote/screens/analysis/widgets/graph_widget.dart';
 
 class AnalysisScreen extends StatefulWidget {
   const AnalysisScreen({super.key});
