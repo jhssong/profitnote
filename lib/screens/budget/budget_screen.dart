@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/screens/budget/widgets/monthly_budget.dart';
-import 'package:profitnote/screens/setting/widgets/category_tile.dart';
+import 'package:profitnote/style/theme.dart';
+import 'package:profitnote/widgets/category_tile.dart';
 
 class BudgetScreen extends StatefulWidget {
   const BudgetScreen({super.key});
@@ -56,7 +56,7 @@ class _BudgetScreenState extends State<BudgetScreen>
                   ),
                 ),
                 indicatorSize: TabBarIndicatorSize.tab,
-                labelColor: ColorTheme.cardText,
+                labelStyle: Theme.of(context).textTheme.titleMedium,
                 unselectedLabelColor: ColorTheme.cardLabelText,
               ),
             ),
@@ -77,7 +77,7 @@ class _BudgetScreenState extends State<BudgetScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("대분류1",
-                                style: TextStyle(color: ColorTheme.cardText)),
+                                style: Theme.of(context).textTheme.bodyLarge),
                             Text("0원",
                                 style: Theme.of(context).textTheme.bodyLarge),
                           ]),
@@ -116,7 +116,7 @@ class _BudgetScreenState extends State<BudgetScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("대분류2",
-                                style: TextStyle(color: ColorTheme.cardText)),
+                                style: Theme.of(context).textTheme.bodyLarge),
                             Text("0원",
                                 style: Theme.of(context).textTheme.bodyLarge),
                           ]),
@@ -155,7 +155,7 @@ class _BudgetScreenState extends State<BudgetScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("대분류3",
-                                style: TextStyle(color: ColorTheme.cardText)),
+                                style: Theme.of(context).textTheme.bodyLarge),
                             Text("0원",
                                 style: Theme.of(context).textTheme.bodyLarge),
                           ]),
