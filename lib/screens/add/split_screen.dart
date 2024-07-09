@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
 import 'package:profitnote/widgets/input_widget.dart';
-import 'package:profitnote/widgets/split_person.dart';
+import 'package:profitnote/screens/add/widgets/split_person.dart';
 
 class SplitScreen extends StatefulWidget {
   const SplitScreen({super.key});

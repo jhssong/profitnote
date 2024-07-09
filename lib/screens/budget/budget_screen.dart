@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/widgets/monthly_budget.dart';
-import 'package:profitnote/widgets/category_tile.dart';
+import 'package:profitnote/screens/budget/widgets/monthly_budget.dart';
+import 'package:profitnote/screens/setting/widgets/category_tile.dart';
 
 class BudgetScreen extends StatefulWidget {
   const BudgetScreen({super.key});

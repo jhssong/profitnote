@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/pay_history_widget.dart';
-import 'package:profitnote/widgets/search_history_widget.dart';
+import 'package:profitnote/screens/search/widgets/search_history_widget.dart';
 import 'package:profitnote/widgets/card_widget.dart';
 import 'package:profitnote/widgets/transaction_item_widget.dart';
 

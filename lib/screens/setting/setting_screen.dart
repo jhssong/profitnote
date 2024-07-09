@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/screens/asset_setting_screen.dart';
-import 'package:profitnote/screens/budget_setting_screen.dart';
+import 'package:profitnote/screens/setting/asset_setting_screen.dart';
+import 'package:profitnote/screens/setting/budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
-import 'package:profitnote/widgets/general_setting_widget.dart';
+import 'package:profitnote/screens/setting/widgets/general_setting_widget.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
