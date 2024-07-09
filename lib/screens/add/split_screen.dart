@@ -52,8 +52,8 @@ class _SplitScreenState extends State<SplitScreen> {
               ),
             ),
             ControlBtnGroup(
-              titleList: const ["인원 삭제", "인원 추가", "저장"],
-              callbackList: [() {}, () {}, () {}],
+              titleList: const ["인원 삭제", "인원 추가"],
+              callbackList: [() {}, () {}],
             ),
           ],
         ),
