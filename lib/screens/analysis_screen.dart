@@ -9,7 +9,7 @@ class AnalysisScreen extends StatefulWidget {
   const AnalysisScreen({super.key});
 
   @override
-  _AnalysisScreenState createState() => _AnalysisScreenState();
+  State<AnalysisScreen> createState() => _AnalysisScreenState();
 }
 
 class _AnalysisScreenState extends State<AnalysisScreen>
@@ -136,30 +136,37 @@ class _AnalysisScreenState extends State<AnalysisScreen>
               return Container(
                 color: ColorTheme.cardBackground,
                 height: 42,
-                child: TabBar(
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        "수입",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        "지출",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                  ],
-                  controller: _tabController,
-                  indicator: UnderlineTabIndicator(
-                    borderSide: BorderSide(
-                      color: ColorTheme.expenseColor,
-                    ),
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(color: Colors.white, width: 2)),
                   ),
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  labelColor: ColorTheme.cardText,
-                  unselectedLabelColor: ColorTheme.cardLabelText,
+                  child: TabBar(
+                    tabs: [
+                      Tab(
+                        child: Text(
+                          "수입",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                      Tab(
+                        child: Text(
+                          "지출",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                    ],
+                    controller: _tabController,
+                    indicator: UnderlineTabIndicator(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: ColorTheme.expenseColor,
+                      ),
+                    ),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    labelColor: ColorTheme.cardText,
+                    unselectedLabelColor: ColorTheme.cardLabelText,
+                  ),
                 ),
               );
             },
@@ -199,7 +206,7 @@ class _AnalysisScreenState extends State<AnalysisScreen>
                             ),
                           ],
                         ),
-                        Container(height: 1, color: ColorTheme.cardLabelText),
+                        Container(height: 2, color: ColorTheme.cardLabelText),
                       ],
                     ),
                   ),
