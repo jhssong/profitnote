@@ -87,19 +87,17 @@ class CategoryList extends StatelessWidget {
             Table(
               columnWidths: const {
                 0: FlexColumnWidth(1),
-                1: FlexColumnWidth(5),
-                2: FlexColumnWidth(3),
+                1: FlexColumnWidth(1),
               },
               children: [
                 TableRow(
                   children: [
-                    const SizedBox(width: 1),
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 16,
+                        left: 28,
                         right: 16,
-                        top: 6,
-                        bottom: 6,
+                        top: 16,
+                        bottom: 8,
                       ),
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -117,8 +115,8 @@ class CategoryList extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         left: 16,
                         right: 8,
-                        top: 6,
-                        bottom: 6,
+                        top: 16,
+                        bottom: 8,
                       ),
                       child: Align(
                         alignment: Alignment.centerRight,
@@ -138,19 +136,17 @@ class CategoryList extends StatelessWidget {
             Table(
               columnWidths: const {
                 0: FlexColumnWidth(1),
-                1: FlexColumnWidth(2),
-                2: FlexColumnWidth(3),
+                1: FlexColumnWidth(1),
               },
               children: category.items.map((item) {
                 return TableRow(
                   children: [
-                    const SizedBox(width: 1),
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 16,
+                        left: 46,
                         right: 8,
-                        top: 6,
-                        bottom: 6,
+                        top: 8,
+                        bottom: 8,
                       ),
                       child: Align(
                         alignment: Alignment.center,
@@ -168,8 +164,8 @@ class CategoryList extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         left: 16,
                         right: 8,
-                        top: 6,
-                        bottom: 6,
+                        top: 8,
+                        bottom: 8,
                       ),
                       child: Align(
                         alignment: Alignment.centerRight,
