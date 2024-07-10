@@ -15,15 +15,6 @@ class TransactionItemWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            children: [
-              Text(
-                "21:47",
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-            ],
-          ),
-          const SizedBox(width: 16),
           Expanded(
               child: Row(
             children: [
@@ -36,7 +27,7 @@ class TransactionItemWidget extends StatelessWidget {
                   ),
                   Text(
                     "맛나분식",
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),
@@ -45,7 +36,7 @@ class TransactionItemWidget extends StatelessWidget {
           const SizedBox(width: 16),
           Text(
             "-5,000원",
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],
       ),

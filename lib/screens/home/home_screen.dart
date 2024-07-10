@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/screens/add/add_screen.dart';
 import 'package:profitnote/screens/budget/budget_screen.dart';
+import 'package:profitnote/screens/home/recent_pay_history_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
 import 'package:profitnote/widgets/transaction_item_widget.dart';
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 8),
             CardWidget(
               title: "총 자산",
               onPressed: () {},
@@ -66,7 +68,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CardWidget(
               title: "최근 결제 내역",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const RecentPayHistoryScreen(),
+                  ),
+                );
+              },
               body: Column(
                 children: [
                   TransactionItemWidget(onPressed: () {}),
