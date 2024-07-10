@@ -20,6 +20,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         displayText = '0';
         _operator = '';
       } else if (value == '완료') {
+        _calculate();
         Navigator.pop(context, displayText);
       } else if (value == '+/-') {
         displayText = (double.parse(displayText) * -1).toString();
@@ -104,6 +105,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorTheme.cardBackground,
+      appBar: AppBar(
+        backgroundColor: ColorTheme.cardBackground,
+        leading: IconButton(
+          icon: const Icon(Icons.close, size: 24.0),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
