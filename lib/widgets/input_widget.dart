@@ -149,7 +149,10 @@ class _InputWidgetState extends State<InputWidget> {
               children: [
                 Text(
                   widget.inputLabel,
-                  style: Theme.of(context).textTheme.titleSmall,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: ColorTheme.cardLabelText),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -162,7 +165,10 @@ class _InputWidgetState extends State<InputWidget> {
               children: [
                 Text(
                   widget.inputLabel,
-                  style: Theme.of(context).textTheme.titleSmall,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: ColorTheme.cardLabelText),
                 ),
                 const SizedBox(height: 8),
                 textField,
