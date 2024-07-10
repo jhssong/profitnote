@@ -94,7 +94,6 @@ class CustomKeyboard extends StatelessWidget {
                       if (val is Widget) {
                         onBackspacePress();
                       } else {
-                        print(val);
                         onKeyTap(val);
                       }
                     },

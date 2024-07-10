@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
+import 'package:profitnote/widgets/calculator.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -75,7 +76,19 @@ class _InputWidgetState extends State<InputWidget> {
       }
     }
     if (_isUseWidget == true) {
-      widget.showCustomWidget!(context, _controller);
+      // 새로운 페이지로 들어가서 값을 받아와야함.
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CalculatorScreen(),
+        ),
+      ).then((value) {
+        if (value != null) {
+          setState(() {
+            _controller.text = value;
+          });
+        }
+      });
     }
   }
 
