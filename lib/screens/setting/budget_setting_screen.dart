@@ -14,6 +14,11 @@ class BudgetSettingScreen extends StatefulWidget {
 class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
   final _controller = TextEditingController();
   var f = NumberFormat('###,###,###,###');
+  final Map<String, int> _budgets = {
+    "2024.03": 0,
+    "2024.04": 0,
+    "2024.05": 0,
+  };
 
   void _onTap(String title, List<String> bodyList, Function dialogCallback) {
     _showSelectionDialog(
@@ -83,6 +88,7 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
         iconTheme: IconThemeData(
           color: ColorTheme.cardLabelText,
         ),
+        titleSpacing: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -100,11 +106,17 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
                 CategoryTile(
                   icon: Icons.money_rounded,
                   label: "2024.03",
-                  spent: '${f.format(400000)}원',
+                  spent: '${f.format(_budgets["2024.03"])}원',
                   onTapped: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            const DetailedBudgetSettingScreen()));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(
+                            builder: (context) =>
+                                const DetailedBudgetSettingScreen()))
+                        .then((value) {
+                      setState(() {
+                        _budgets["2024.03"] = value;
+                      });
+                    });
                   },
                   onLongPressed: () {
                     _onTap("2024.03", ["수정", "삭제"], (value) {
@@ -115,11 +127,17 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
                 CategoryTile(
                   icon: Icons.money_rounded,
                   label: "2024.04",
-                  spent: '${f.format(400000)}원',
+                  spent: '${f.format(_budgets["2024.04"])}원',
                   onTapped: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            const DetailedBudgetSettingScreen()));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(
+                            builder: (context) =>
+                                const DetailedBudgetSettingScreen()))
+                        .then((value) {
+                      setState(() {
+                        _budgets["2024.04"] = value;
+                      });
+                    });
                   },
                   onLongPressed: () {
                     _onTap("2024.04", ["수정", "삭제"], (value) {
@@ -130,11 +148,17 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
                 CategoryTile(
                   icon: Icons.money_rounded,
                   label: "2024.05",
-                  spent: '${f.format(400000)}원',
+                  spent: '${f.format(_budgets["2024.05"])}원',
                   onTapped: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            const DetailedBudgetSettingScreen()));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(
+                            builder: (context) =>
+                                const DetailedBudgetSettingScreen()))
+                        .then((value) {
+                      setState(() {
+                        _budgets["2024.05"] = value;
+                      });
+                    });
                   },
                   onLongPressed: () {
                     _onTap("2024.05", ["수정", "삭제"], (value) {
