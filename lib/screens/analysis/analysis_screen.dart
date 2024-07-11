@@ -57,12 +57,10 @@ class _AnalysisScreenState extends State<AnalysisScreen>
     setState(() {
       _pressedString = leftString;
     });
-    print('Index: $index, Left String: $leftString');
   }
 
   void _handleToggle(int index) {
     _typeNotifier.value = index;
-    print('Index: $index');
   }
 
   @override
@@ -141,9 +139,10 @@ class _AnalysisScreenState extends State<AnalysisScreen>
                 color: ColorTheme.cardBackground,
                 // height: 42,
                 child: DecoratedBox(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     border: Border(
-                        bottom: BorderSide(color: Colors.white, width: 2)),
+                        bottom: BorderSide(
+                            color: ColorTheme.cardLabelText, width: 2)),
                   ),
                   child: TabBar(
                     tabs: tabs,
@@ -176,8 +175,9 @@ class _AnalysisScreenState extends State<AnalysisScreen>
               ),
               decoration: BoxDecoration(
                 color: ColorTheme.cardBackground,
-                border: const Border(
-                    bottom: BorderSide(color: Colors.white, width: 2)),
+                border: Border(
+                    bottom:
+                        BorderSide(color: ColorTheme.cardLabelText, width: 2)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
