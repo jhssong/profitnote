@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/screens/setting/widgets/category_add_widget.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/screens/setting/widgets/category_item_widget.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
@@ -73,7 +74,20 @@ class _CategorySettingScreenState extends State<CategorySettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("분류 수정")),
+      appBar: AppBar(
+        title: const Text("분류 수정"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) => const CategoryAddWidget()),
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -102,7 +116,6 @@ class _CategorySettingScreenState extends State<CategorySettingScreen> {
                         ListTile(
                           title: Row(
                             children: [
-                              const SizedBox(width: 8),
                               Expanded(
                                 child: TextField(
                                   controller: TextEditingController(
@@ -118,8 +131,7 @@ class _CategorySettingScreenState extends State<CategorySettingScreen> {
                             ],
                           ),
                           trailing: IconButton(
-                            icon: const Icon(Icons.delete,
-                                color: Colors.redAccent),
+                            icon: const Icon(Icons.delete, size: 20),
                             onPressed: () {
                               if (expenseCategories[categoryIndex]
                                   .items
@@ -152,7 +164,8 @@ class _CategorySettingScreenState extends State<CategorySettingScreen> {
                               ListTile(
                                 key: Key('item_${categoryIndex}_$itemIndex'),
                                 title: Padding(
-                                  padding: const EdgeInsets.only(left: 46),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(16, 0, 0, 0),
                                   child: TextField(
                                     controller: TextEditingController(
                                         text: expenseCategories[categoryIndex]
@@ -166,8 +179,7 @@ class _CategorySettingScreenState extends State<CategorySettingScreen> {
                                   ),
                                 ),
                                 trailing: IconButton(
-                                  icon: const Icon(Icons.delete,
-                                      color: Colors.redAccent),
+                                  icon: const Icon(Icons.delete, size: 20),
                                   onPressed: () {
                                     _deleteItem(categoryIndex, itemIndex);
                                   },
