@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/screens/asset/widgets/asset_add_modal.dart';
+import 'package:profitnote/screens/setting/widgets/asset_add_modal.dart';
 
 class AssetSettingScreen extends StatefulWidget {
   const AssetSettingScreen({super.key});
@@ -35,6 +35,7 @@ class _AssetSettingScreenState extends State<AssetSettingScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("자산 설정"),
+        titleSpacing: 0,
         actions: [
           IconButton(
             onPressed: () {
@@ -60,6 +61,7 @@ class _AssetSettingScreenState extends State<AssetSettingScreen> {
           for (int groupIndex = 0; groupIndex < _groups.length; groupIndex += 1)
             Container(
               key: Key('group_$groupIndex'),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: ColorTheme.cardBackground,
                 border: Border(
@@ -68,56 +70,19 @@ class _AssetSettingScreenState extends State<AssetSettingScreen> {
               ),
               child: Column(
                 children: [
-                  ListTile(
-                    onTap: () {},
-                    title: Row(
-                      children: [
-                        const Icon(Icons.money),
-                        const SizedBox(width: 8),
-                        Text(_groups[groupIndex]),
-                      ],
-                    ),
-                    titleTextStyle:
-                        Theme.of(context).textTheme.titleMedium!.copyWith(
-                              color: ColorTheme.cardLabelText,
-                            ),
-                    iconColor: ColorTheme.cardLabelText,
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete, size: 20),
-                      onPressed: () {
-                        if (_items[_groups[groupIndex]]!.isEmpty) {
-                          _deleteGroup(groupIndex);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              duration: Duration(milliseconds: 1000),
-                              content: Text('Cannot delete group with items'),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ),
+                  AssetGroupCard(title: _groups[groupIndex]),
                   ReorderableListView(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
                     children: [
                       for (int index = 0;
                           index < _items[_groups[groupIndex]]!.length;
                           index += 1)
-                        ListTile(
-                          key: Key('item_${_groups[groupIndex]}_$index'),
-                          title: Text(_items[_groups[groupIndex]]![index]),
-                          titleTextStyle:
-                              Theme.of(context).textTheme.bodyMedium,
-                          iconColor: ColorTheme.cardLabelText,
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete, size: 20),
-                            onPressed: () {
-                              _deleteItem(_groups[groupIndex], index);
-                            },
-                          ),
+                        AssetItemCard(
+                          key: Key('item_$index'),
+                          onPressed: () {
+                            _deleteItem(_groups[groupIndex], index);
+                          },
                         ),
                     ],
                     onReorder: (int oldIndex, int newIndex) {
@@ -136,6 +101,81 @@ class _AssetSettingScreenState extends State<AssetSettingScreen> {
             ),
         ],
       ),
+    );
+  }
+}
+
+class AssetGroupCard extends StatelessWidget {
+  const AssetGroupCard({super.key, required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: ColorTheme.cardBackground,
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.money),
+          const SizedBox(width: 8),
+          Text(
+            title,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: ColorTheme.cardLabelText),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AssetItemCard extends StatelessWidget {
+  const AssetItemCard({super.key, required this.onPressed});
+
+  final Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: ColorTheme.cardBackground,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 0,
+                    vertical: 8,
+                  ),
+                  alignment: Alignment.centerLeft,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {},
+                child: Text(
+                  "KRW",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: IconButton(
+                icon: const Icon(Icons.delete, size: 20),
+                onPressed: onPressed,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
