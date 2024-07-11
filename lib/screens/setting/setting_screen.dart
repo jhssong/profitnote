@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/screens/setting/asset_setting_screen.dart';
 import 'package:profitnote/screens/setting/budget_setting_screen.dart';
+import 'package:profitnote/screens/setting/category_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
 import 'package:profitnote/screens/setting/widgets/general_setting_widget.dart';
@@ -50,6 +51,15 @@ class _SettingScreenState extends State<SettingScreen> {
                         builder: (context) => const AssetSettingScreen()));
                   }
                 }),
+            GeneralSettingWidget(
+              title: "분류 관리",
+              items: const ["분류 설정"],
+              onTapped: (index) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CategorySettingScreen(),
+                ));
+              },
+            ),
           ],
         ),
       ),
