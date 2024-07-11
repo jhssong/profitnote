@@ -86,7 +86,7 @@ class _DetailedBudgetSettingScreenState
     int sum;
     return Scaffold(
       appBar: AppBar(
-        title: Text("예산 상세", style: TextStyle(color: ColorTheme.cardLabelText)),
+        title: const Text("예산 상세"),
         iconTheme: IconThemeData(
           color: ColorTheme.cardLabelText,
         ),
