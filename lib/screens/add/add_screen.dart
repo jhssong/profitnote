@@ -69,6 +69,7 @@ class _AddScreenState extends State<AddScreen> {
             InputWidget(
               inputLabel: "금액",
               callback: (value) {},
+              isUseWidget: true,
             ),
             Row(
               children: [

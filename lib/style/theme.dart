@@ -34,6 +34,7 @@ ThemeData theme = ThemeData(
       color: ColorTheme.cardLabelText,
     ),
     foregroundColor: ColorTheme.cardLabelText,
+    centerTitle: false,
   ),
 
   bottomNavigationBarTheme: BottomNavigationBarThemeData(

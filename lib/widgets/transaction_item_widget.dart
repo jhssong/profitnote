@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/screens/home/pay_detail_screen.dart';
 
 class TransactionItemWidget extends StatelessWidget {
-  const TransactionItemWidget({super.key, required this.onPressed});
-
-  final Function() onPressed;
+  const TransactionItemWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPressed,
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const PayDetailScreen(),
+          ),
+        );
+      },
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
