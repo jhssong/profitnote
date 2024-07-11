@@ -70,7 +70,6 @@ class _AddScreenState extends State<AddScreen> {
               inputLabel: "금액",
               callback: (value) {},
               isUseWidget: true,
-              // showCustomWidget: showKeyboard,
             ),
             Row(
               children: [

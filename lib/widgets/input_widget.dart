@@ -76,7 +76,6 @@ class _InputWidgetState extends State<InputWidget> {
       }
     }
     if (_isUseWidget == true) {
-      // 새로운 페이지로 들어가서 값을 받아와야함.
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -152,7 +151,7 @@ class _InputWidgetState extends State<InputWidget> {
   Widget build(BuildContext context) {
     var textField = TextField(
       controller: _controller,
-      readOnly: _isUseDialog,
+      readOnly: _isUseDialog || _isUseWidget,
       onTap: _onTap,
       onChanged: (value) => widget.callback(value),
       decoration: InputDecoration(
