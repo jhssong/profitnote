@@ -36,31 +36,153 @@ class _CategorySettingScreenState extends State<CategorySettingScreen> {
     ),
   ];
 
+  void _reorderCategories(int oldIndex, int newIndex) {
+    setState(() {
+      if (newIndex > oldIndex) {
+        newIndex -= 1;
+      }
+      final ExpenseCategory movedCategory =
+          expenseCategories.removeAt(oldIndex);
+      expenseCategories.insert(newIndex, movedCategory);
+    });
+  }
+
+  void _reorderItems(int categoryIndex, int oldIndex, int newIndex) {
+    setState(() {
+      if (newIndex > oldIndex) {
+        newIndex -= 1;
+      }
+      final CategoryItem movedItem =
+          expenseCategories[categoryIndex].items.removeAt(oldIndex);
+      expenseCategories[categoryIndex].items.insert(newIndex, movedItem);
+    });
+  }
+
+  void _deleteCategory(int index) {
+    setState(() {
+      expenseCategories.removeAt(index);
+    });
+  }
+
+  void _deleteItem(int categoryIndex, int itemIndex) {
+    setState(() {
+      expenseCategories[categoryIndex].items.removeAt(itemIndex);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Profit Note")),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        foregroundColor: ColorTheme.cardLabelText,
-        backgroundColor: ColorTheme.backgroundOfBackground,
-        child: const Icon(Icons.add),
-      ),
-      body: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ControlBtnGroup(
-              titleList: const ["수입", "지출"],
-              callbackList: [() {}, () {}],
+      appBar: AppBar(title: const Text("분류 수정")),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ControlBtnGroup(
+            titleList: const ["수입", "지출"],
+            callbackList: [() {}, () {}],
+          ),
+          Expanded(
+            child: ReorderableListView(
+              onReorder: _reorderCategories,
+              children: [
+                for (int categoryIndex = 0;
+                    categoryIndex < expenseCategories.length;
+                    categoryIndex += 1)
+                  Container(
+                    key: Key('category_$categoryIndex'),
+                    decoration: BoxDecoration(
+                      color: ColorTheme.cardBackground,
+                      border: Border(
+                        bottom:
+                            BorderSide(width: 1.5, color: ColorTheme.stroke),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Row(
+                            children: [
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: TextField(
+                                  controller: TextEditingController(
+                                      text: expenseCategories[categoryIndex]
+                                          .category),
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                  textAlign: TextAlign.left,
+                                  decoration: const InputDecoration(
+                                      border: InputBorder.none),
+                                ),
+                              ),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete,
+                                color: Colors.redAccent),
+                            onPressed: () {
+                              if (expenseCategories[categoryIndex]
+                                  .items
+                                  .isEmpty) {
+                                _deleteCategory(categoryIndex);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    duration: Duration(milliseconds: 1000),
+                                    content: Text(
+                                        'Cannot delete category with items'),
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                        ReorderableListView(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          onReorder: (oldIndex, newIndex) =>
+                              _reorderItems(categoryIndex, oldIndex, newIndex),
+                          children: [
+                            for (int itemIndex = 0;
+                                itemIndex <
+                                    expenseCategories[categoryIndex]
+                                        .items
+                                        .length;
+                                itemIndex += 1)
+                              ListTile(
+                                key: Key('item_${categoryIndex}_$itemIndex'),
+                                title: Padding(
+                                  padding: const EdgeInsets.only(left: 46),
+                                  child: TextField(
+                                    controller: TextEditingController(
+                                        text: expenseCategories[categoryIndex]
+                                            .items[itemIndex]
+                                            .description),
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                    textAlign: TextAlign.left,
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none),
+                                  ),
+                                ),
+                                trailing: IconButton(
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.redAccent),
+                                  onPressed: () {
+                                    _deleteItem(categoryIndex, itemIndex);
+                                  },
+                                ),
+                              ),
+                          ],
+                        ),
+                        const Divider(),
+                      ],
+                    ),
+                  ),
+              ],
             ),
-            Expanded(
-              child: CategoryList(
-                expenseCategories: expenseCategories,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -71,121 +193,4 @@ class ExpenseCategory {
   final List<CategoryItem> items;
 
   ExpenseCategory({required this.category, required this.items});
-}
-
-class CategoryList extends StatelessWidget {
-  final List<ExpenseCategory> expenseCategories;
-
-  const CategoryList({super.key, required this.expenseCategories});
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: expenseCategories.map((category) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Table(
-              columnWidths: const {
-                0: FlexColumnWidth(1),
-                1: FlexColumnWidth(1),
-              },
-              children: [
-                TableRow(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 28,
-                        right: 16,
-                        top: 16,
-                        bottom: 8,
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: TextField(
-                          controller:
-                              TextEditingController(text: category.category),
-                          style: Theme.of(context).textTheme.titleMedium,
-                          textAlign: TextAlign.left,
-                          decoration:
-                              const InputDecoration(border: InputBorder.none),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 16,
-                        right: 8,
-                        top: 16,
-                        bottom: 8,
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.redAccent,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            Table(
-              columnWidths: const {
-                0: FlexColumnWidth(1),
-                1: FlexColumnWidth(1),
-              },
-              children: category.items.map((item) {
-                return TableRow(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 46,
-                        right: 8,
-                        top: 8,
-                        bottom: 8,
-                      ),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: TextField(
-                          controller:
-                              TextEditingController(text: item.description),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          textAlign: TextAlign.left,
-                          decoration:
-                              const InputDecoration(border: InputBorder.none),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 16,
-                        right: 8,
-                        top: 8,
-                        bottom: 8,
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.redAccent,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              }).toList(),
-            ),
-            const Divider(),
-          ],
-        );
-      }).toList(),
-    );
-  }
 }
