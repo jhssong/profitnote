@@ -21,7 +21,7 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("설정", style: TextStyle(color: ColorTheme.cardLabelText)),
+        title: const Text("설정"),
         iconTheme: IconThemeData(
           color: ColorTheme.cardLabelText,
         ),

@@ -41,7 +41,7 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("예산 설정", style: TextStyle(color: ColorTheme.cardLabelText)),
+        title: const Text("예산 설정"),
         iconTheme: IconThemeData(
           color: ColorTheme.cardLabelText,
         ),
