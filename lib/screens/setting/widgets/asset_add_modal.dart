@@ -17,6 +17,7 @@ class _AssetAddModalState extends State<AssetAddModal> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("자산 추가"),
+        titleSpacing: 0,
       ),
       body: SingleChildScrollView(
         child: Column(
