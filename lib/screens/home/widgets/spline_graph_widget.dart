@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/style/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class AssetData {
@@ -18,7 +17,14 @@ class SplineGraphWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
-      primaryXAxis: const DateTimeAxis(),
+      legend: const Legend(
+        isVisible: true,
+        position: LegendPosition.bottom,
+        toggleSeriesVisibility: false,
+      ),
+      primaryXAxis: const DateTimeAxis(
+        majorGridLines: MajorGridLines(width: 0),
+      ),
       series: _getSeries(),
     );
   }
@@ -31,8 +37,7 @@ class SplineGraphWidget extends StatelessWidget {
         dataSource: assetData,
         xValueMapper: (AssetData data, _) => data.date,
         yValueMapper: (AssetData data, _) => data.amount,
-        dataLabelMapper: (AssetData data, _) =>
-            "${data.date.month}/${data.date.year} ${data.amount}",
+        dataLabelMapper: (AssetData data, _) => "${data.amount}",
         dataLabelSettings: const DataLabelSettings(
           margin: EdgeInsets.zero,
           isVisible: true,
@@ -40,7 +45,7 @@ class SplineGraphWidget extends StatelessWidget {
           connectorLineSettings:
               ConnectorLineSettings(type: ConnectorType.curve, length: '20%'),
           labelIntersectAction: LabelIntersectAction.shift,
-          textStyle: TextStyle(color: Colors.black), // Example color
+          textStyle: TextStyle(color: Colors.white),
         ),
       );
     }).toList();
