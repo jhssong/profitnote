@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/style/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class AssetData {
@@ -9,23 +10,32 @@ class AssetData {
   final String asset;
 }
 
-class SplineGraphWidget extends StatelessWidget {
-  const SplineGraphWidget({super.key, required this.data});
+class StackGraphWidget extends StatelessWidget {
+  const StackGraphWidget(
+      {super.key, required this.data, required this.selectedAsset});
 
   final List<AssetData> data;
+  final String? selectedAsset;
 
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
+      plotAreaBorderWidth: 0,
       legend: const Legend(
         isVisible: true,
         position: LegendPosition.bottom,
         toggleSeriesVisibility: false,
       ),
-      primaryXAxis: const DateTimeAxis(
-        majorGridLines: MajorGridLines(width: 0),
+      primaryXAxis: DateTimeAxis(
+        majorGridLines: const MajorGridLines(width: 0),
+        labelStyle: TextStyle(color: ColorTheme.cardLabelText),
+      ),
+      primaryYAxis: NumericAxis(
+        labelStyle: TextStyle(color: ColorTheme.cardLabelText),
       ),
       series: _getSeries(),
+      tooltipBehavior:
+          TooltipBehavior(enable: true, header: '', canShowMarker: false),
     );
   }
 
@@ -34,20 +44,10 @@ class SplineGraphWidget extends StatelessWidget {
     return assets.map((asset) {
       final assetData = data.where((d) => d.asset == asset).toList();
       return StackedAreaSeries<AssetData, DateTime>(
-        dataSource: assetData,
-        xValueMapper: (AssetData data, _) => data.date,
-        yValueMapper: (AssetData data, _) => data.amount,
-        dataLabelMapper: (AssetData data, _) => "${data.amount}",
-        dataLabelSettings: const DataLabelSettings(
-          margin: EdgeInsets.zero,
-          isVisible: true,
-          labelPosition: ChartDataLabelPosition.outside,
-          connectorLineSettings:
-              ConnectorLineSettings(type: ConnectorType.curve, length: '20%'),
-          labelIntersectAction: LabelIntersectAction.shift,
-          textStyle: TextStyle(color: Colors.white),
-        ),
-      );
+          dataSource: assetData,
+          xValueMapper: (AssetData data, _) => data.date,
+          yValueMapper: (AssetData data, _) => data.amount,
+          opacity: (selectedAsset == null || selectedAsset == asset) ? 0.3 : 1);
     }).toList();
   }
 }
