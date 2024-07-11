@@ -168,12 +168,12 @@ class _SearchScreenState extends State<SearchScreen> {
       return ListView.builder(
           itemCount: filteredList.length,
           itemBuilder: (context, index) {
-            return PayHistoryWidget(
+            return const PayHistoryWidget(
               date: "2024.03.27",
               body: Column(
                 children: [
-                  TransactionItemWidget(onPressed: () {}),
-                  TransactionItemWidget(onPressed: () {}),
+                  TransactionItemWidget(),
+                  TransactionItemWidget(),
                 ],
               ),
             );

@@ -14,9 +14,9 @@ class _TypeSelectionBtnState extends State<TypeSelectionBtn> {
   int _currentIndex = 1;
   final List<String> _typeList = ["수입", "지출", "이체"];
   final List<Color> _colorList = [
-    const Color(0xff4169E1),
-    const Color(0xffCD5C5C),
-    const Color(0xff5DBB63),
+    ColorTheme.incomeColor,
+    ColorTheme.expenseColor,
+    ColorTheme.transferColor,
   ];
 
   void _updateSelection(int index) {

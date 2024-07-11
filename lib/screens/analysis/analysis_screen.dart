@@ -9,7 +9,7 @@ class AnalysisScreen extends StatefulWidget {
   const AnalysisScreen({super.key});
 
   @override
-  _AnalysisScreenState createState() => _AnalysisScreenState();
+  State<AnalysisScreen> createState() => _AnalysisScreenState();
 }
 
 class _AnalysisScreenState extends State<AnalysisScreen>
@@ -57,16 +57,18 @@ class _AnalysisScreenState extends State<AnalysisScreen>
     setState(() {
       _pressedString = leftString;
     });
-    print('Index: $index, Left String: $leftString');
   }
 
   void _handleToggle(int index) {
     _typeNotifier.value = index;
-    print('Index: $index');
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> tabs = [
+      const Tab(text: "수입"),
+      const Tab(text: "지출"),
+    ];
     final data = [
       SalesData('주식', 10000, "10%"),
       SalesData('생활', 10000, "10%"),
@@ -80,7 +82,7 @@ class _AnalysisScreenState extends State<AnalysisScreen>
         children: [
           _buildMonthRow(),
           GraphWidget(data: data),
-          _buildToggleRow(),
+          _buildToggleRow(tabs),
           _buildCategoryItems(),
         ],
       ),
@@ -125,7 +127,7 @@ class _AnalysisScreenState extends State<AnalysisScreen>
     );
   }
 
-  Widget _buildToggleRow() {
+  Widget _buildToggleRow(List<Widget> tabs) {
     return ValueListenableBuilder<int>(
       valueListenable: _pressedIndexNotifier,
       builder: (context, pressedIndex, child) {
@@ -135,31 +137,27 @@ class _AnalysisScreenState extends State<AnalysisScreen>
             builder: (context, typeIndex, child) {
               return Container(
                 color: ColorTheme.cardBackground,
-                height: 42,
-                child: TabBar(
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        "수입",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        "지출",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                  ],
-                  controller: _tabController,
-                  indicator: UnderlineTabIndicator(
-                    borderSide: BorderSide(
-                      color: ColorTheme.expenseColor,
-                    ),
+                // height: 42,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                            color: ColorTheme.cardLabelText, width: 2)),
                   ),
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  labelColor: ColorTheme.cardText,
-                  unselectedLabelColor: ColorTheme.cardLabelText,
+                  child: TabBar(
+                    tabs: tabs,
+                    labelStyle: Theme.of(context).textTheme.titleMedium,
+                    controller: _tabController,
+                    indicator: UnderlineTabIndicator(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: ColorTheme.expenseColor,
+                      ),
+                    ),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    labelColor: ColorTheme.cardText,
+                    unselectedLabelColor: ColorTheme.cardLabelText,
+                  ),
                 ),
               );
             },
@@ -170,38 +168,28 @@ class _AnalysisScreenState extends State<AnalysisScreen>
               _pressedIndexNotifier.value = -1;
             },
             child: Container(
-              color: ColorTheme.cardBackground,
+              // height: 48,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 11,
+              ),
+              decoration: BoxDecoration(
+                color: ColorTheme.cardBackground,
+                border: Border(
+                    bottom:
+                        BorderSide(color: ColorTheme.cardLabelText, width: 2)),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.chevron_left),
-                            TextButton(
-                              onPressed: () {
-                                _pressedIndexNotifier.value = -1;
-                              },
-                              style: TextButton.styleFrom(
-                                backgroundColor: ColorTheme.cardBackground,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.zero,
-                                ),
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              ),
-                              child: Text(
-                                _pressedString,
-                                textAlign: TextAlign.left,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                            ),
-                          ],
+                  const Icon(Icons.chevron_left),
+                  const SizedBox(width: 8),
+                  Text(
+                    _pressedString,
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: ColorTheme.cardLabelText,
                         ),
-                        Container(height: 1, color: ColorTheme.cardLabelText),
-                      ],
-                    ),
                   ),
                 ],
               ),
@@ -221,29 +209,37 @@ class _AnalysisScreenState extends State<AnalysisScreen>
             valueListenable: _typeNotifier,
             builder: (context, type, _) {
               return Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    CategoryItemsWidget(
-                      key: const ValueKey<int>(0),
-                      items: incomeList,
-                      onPressed: _handlePressed,
-                    ),
-                    CategoryItemsWidget(
-                      key: const ValueKey<int>(1),
-                      items: expenseList,
-                      onPressed: _handlePressed,
-                    ),
-                  ],
+                child: Container(
+                  padding: const EdgeInsets.only(top: 8),
+                  color: ColorTheme.cardBackground,
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      CategoryItemsWidget(
+                        key: const ValueKey<int>(0),
+                        items: incomeList,
+                        onPressed: _handlePressed,
+                      ),
+                      CategoryItemsWidget(
+                        key: const ValueKey<int>(1),
+                        items: expenseList,
+                        onPressed: _handlePressed,
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
           );
         } else {
           return Expanded(
-            child: CategoryItemsWidget(
-              items: expenseList_1,
-              onPressed: (int index, String leftString) {},
+            child: Container(
+              padding: const EdgeInsets.only(top: 8),
+              color: ColorTheme.cardBackground,
+              child: CategoryItemsWidget(
+                items: expenseList_1,
+                onPressed: (int index, String leftString) {},
+              ),
             ),
           );
         }

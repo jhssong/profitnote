@@ -8,16 +8,18 @@ class ColorTheme {
   static var pointColor = const Color(0xff484376);
   static var pointText = const Color(0xffFFFFFF);
   static var cardLabelText = const Color(0xff9DA5B6);
-  static var selected = const Color(0xffC9CEDC);
-  static var unselected = const Color(0xff242529);
+  static var selected = cardText;
+  static var unselected = const Color(0xff757575);
   static var backgroundOfBackground = const Color(0xff2B2E2F);
   static var expenseColor = const Color(0xffCD5C5C);
+  static var incomeColor = const Color(0xff4169E1);
+  static var transferColor = const Color(0xff5DBB63);
 }
 
 ThemeData theme = ThemeData(
   // Cursor Style
   textSelectionTheme: TextSelectionThemeData(
-    cursorColor: ColorTheme.cardText, // Set cursor color to white
+    cursorColor: ColorTheme.cardText,
   ),
 
   canvasColor: Colors.transparent,
@@ -32,16 +34,15 @@ ThemeData theme = ThemeData(
       color: ColorTheme.cardLabelText,
     ),
     foregroundColor: ColorTheme.cardLabelText,
+    centerTitle: false,
   ),
 
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
     backgroundColor: ColorTheme.cardBackground,
     enableFeedback: false,
-    // selectedItemColor: const Color.fromRGBO(160, 165, 182, 1),  // #a0a5b6
-    // unselectedItemColor: const Color.fromRGBO(160, 165, 182, .7),
-    selectedItemColor: ColorTheme.cardText,
-    unselectedItemColor: ColorTheme.cardLabelText,
+    selectedItemColor: ColorTheme.selected,
+    unselectedItemColor: ColorTheme.unselected,
   ),
 
   // Scaffold Style
