@@ -17,6 +17,7 @@ class _AssetAddModalState extends State<AssetAddModal> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("자산 추가"),
+        titleSpacing: 0,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -30,17 +31,7 @@ class _AssetAddModalState extends State<AssetAddModal> {
               dialogBodyList: const ["현금", "카드"],
             ),
             InputWidget(
-              inputLabel: "내용",
-              callback: (value) {},
-              isHorizontal: true,
-            ),
-            InputWidget(
               inputLabel: "이름",
-              callback: (value) {},
-              isHorizontal: true,
-            ),
-            InputWidget(
-              inputLabel: "단위",
               callback: (value) {},
               isHorizontal: true,
             ),

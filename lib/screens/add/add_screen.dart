@@ -4,7 +4,7 @@ import 'package:profitnote/utils/show_date_picker_dialog.dart';
 import 'package:profitnote/utils/show_time_picker_dialog.dart';
 import 'package:profitnote/widgets/control_btn.dart';
 import 'package:profitnote/widgets/input_widget.dart';
-import 'package:profitnote/widgets/type_selection_btn.dart';
+import 'package:profitnote/screens/add/widgets/type_selection_btn.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});

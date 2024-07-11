@@ -8,7 +8,6 @@ class PayHistoryWidget extends StatelessWidget {
     required this.body,
   });
 
-  /// If widget doesn't need detail button, then keep this as null
   final Widget body;
   final String date;
 
