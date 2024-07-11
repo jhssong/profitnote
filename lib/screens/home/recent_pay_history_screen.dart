@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/screens/home/pay_detail_screen.dart';
 import 'package:profitnote/widgets/pay_history_widget.dart';
 import 'package:profitnote/widgets/transaction_item_widget.dart';
 
@@ -25,24 +24,12 @@ class _RecentPayHistoryScreenState extends State<RecentPayHistoryScreen> {
     return ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return PayHistoryWidget(
+          return const PayHistoryWidget(
             date: "2024.03.27",
             body: Column(
               children: [
-                TransactionItemWidget(onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const PayDetailScreen(),
-                    ),
-                  );
-                }),
-                TransactionItemWidget(onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const PayDetailScreen(),
-                    ),
-                  );
-                }),
+                TransactionItemWidget(),
+                TransactionItemWidget(),
               ],
             ),
           );
