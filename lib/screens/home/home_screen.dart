@@ -75,11 +75,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              body: Column(
+              body: const Column(
                 children: [
-                  TransactionItemWidget(onPressed: () {}),
-                  TransactionItemWidget(onPressed: () {}),
-                  TransactionItemWidget(onPressed: () {}),
+                  TransactionItemWidget(),
+                  TransactionItemWidget(),
+                  TransactionItemWidget(),
                 ],
               ),
             ),
