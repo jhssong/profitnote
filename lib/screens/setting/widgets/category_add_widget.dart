@@ -5,8 +5,6 @@ import 'package:profitnote/widgets/input_widget.dart';
 class CategoryAddWidget extends StatefulWidget {
   const CategoryAddWidget({super.key});
 
-  // TODO Asset Model 완성 후, EditMode로 접근 시 inital value로 초기화하는 코드 추가
-
   @override
   State<CategoryAddWidget> createState() => _CategoryAddWidgetState();
 }

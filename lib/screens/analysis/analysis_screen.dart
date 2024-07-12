@@ -137,7 +137,6 @@ class _AnalysisScreenState extends State<AnalysisScreen>
             builder: (context, typeIndex, child) {
               return Container(
                 color: ColorTheme.cardBackground,
-                // height: 42,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border(
