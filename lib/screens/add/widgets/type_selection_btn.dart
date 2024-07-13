@@ -46,11 +46,14 @@ class _TypeSelectionBtnState extends State<TypeSelectionBtn> {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 foregroundColor: ColorTheme.pointText,
-                textStyle: Theme.of(context).textTheme.bodyMedium,
               ),
               child: Text(
                 _typeList[index],
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: index == _currentIndex
+                          ? _colorList[index]
+                          : ColorTheme.cardLabelText,
+                    ),
               ),
             )),
             if (index != _typeList.length - 1) const SizedBox(width: 8),
