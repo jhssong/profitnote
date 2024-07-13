@@ -31,7 +31,13 @@ class CardWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(color: ColorTheme.cardLabelText),
+              ),
               if (onPressed != null) DetailBtn(onPressed: onPressed!),
             ],
           ),
