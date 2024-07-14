@@ -33,6 +33,7 @@ void showTimePickerDialog({
     confirmText: "확인",
   );
   if (res != null) {
-    dialogCallback("${res.hour}:${res.minute}");
+    dialogCallback(
+        "${res.hour.toString().padLeft(2, '0')}:${res.minute.toString().padLeft(2, '0')}");
   }
 }

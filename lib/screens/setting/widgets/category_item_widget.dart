@@ -36,12 +36,12 @@ class CategoryItemsWidget extends StatelessWidget {
             children: [
               Text(
                 data.description,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(width: 32),
               Text(
                 data.amount,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
           ),

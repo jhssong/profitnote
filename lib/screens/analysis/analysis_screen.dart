@@ -91,9 +91,9 @@ class _AnalysisScreenState extends State<AnalysisScreen>
 
   Widget _buildMonthRow() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextButton(
+        IconButton(
           onPressed: () {
             DateTime nextMonth = getPreviousMonthDate(_selectedDateTime);
             setState(() {
@@ -101,7 +101,7 @@ class _AnalysisScreenState extends State<AnalysisScreen>
               _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
             });
           },
-          child: Icon(
+          icon: Icon(
             Icons.chevron_left,
             color: ColorTheme.cardLabelText,
           ),
@@ -110,7 +110,7 @@ class _AnalysisScreenState extends State<AnalysisScreen>
           _selectedMonth,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        TextButton(
+        IconButton(
           onPressed: () {
             DateTime nextMonth = getNextMonthDate(_selectedDateTime);
             setState(() {
@@ -118,7 +118,7 @@ class _AnalysisScreenState extends State<AnalysisScreen>
               _selectedMonth = DateFormat('yyyy-MM').format(_selectedDateTime);
             });
           },
-          child: Icon(
+          icon: Icon(
             Icons.chevron_right,
             color: ColorTheme.cardLabelText,
           ),
@@ -137,7 +137,6 @@ class _AnalysisScreenState extends State<AnalysisScreen>
             builder: (context, typeIndex, child) {
               return Container(
                 color: ColorTheme.cardBackground,
-                // height: 42,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border(
@@ -168,7 +167,6 @@ class _AnalysisScreenState extends State<AnalysisScreen>
               _pressedIndexNotifier.value = -1;
             },
             child: Container(
-              // height: 48,
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 11,
@@ -209,24 +207,20 @@ class _AnalysisScreenState extends State<AnalysisScreen>
             valueListenable: _typeNotifier,
             builder: (context, type, _) {
               return Expanded(
-                child: Container(
-                  padding: const EdgeInsets.only(top: 8),
-                  color: ColorTheme.cardBackground,
-                  child: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      CategoryItemsWidget(
-                        key: const ValueKey<int>(0),
-                        items: incomeList,
-                        onPressed: _handlePressed,
-                      ),
-                      CategoryItemsWidget(
-                        key: const ValueKey<int>(1),
-                        items: expenseList,
-                        onPressed: _handlePressed,
-                      ),
-                    ],
-                  ),
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    CategoryItemsWidget(
+                      key: const ValueKey<int>(0),
+                      items: incomeList,
+                      onPressed: _handlePressed,
+                    ),
+                    CategoryItemsWidget(
+                      key: const ValueKey<int>(1),
+                      items: expenseList,
+                      onPressed: _handlePressed,
+                    ),
+                  ],
                 ),
               );
             },
