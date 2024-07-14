@@ -42,41 +42,51 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: theme,
       home: SafeArea(
-        child: Scaffold(
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(color: ColorTheme.stroke, width: 2),
+        child: PopScope(
+          canPop: false,
+          onPopInvoked: (bool didPop) {
+            if (_currentBottomNavIndex != 0) {
+              setState(() => _currentBottomNavIndex = 0);
+            } else {
+              SystemNavigator.pop();
+            }
+          },
+          child: Scaffold(
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: ColorTheme.stroke, width: 2),
+                ),
+              ),
+              child: BottomNavigationBar(
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: '홈',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.search),
+                    label: '검색',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.credit_card),
+                    label: '자산',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.bar_chart),
+                    label: '통계',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.menu_rounded),
+                    label: '메뉴',
+                  ),
+                ],
+                currentIndex: _currentBottomNavIndex,
+                onTap: _onBottomNavTapped,
               ),
             ),
-            child: BottomNavigationBar(
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: '홈',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.search),
-                  label: '검색',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.credit_card),
-                  label: '자산',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart),
-                  label: '통계',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.menu_rounded),
-                  label: '메뉴',
-                ),
-              ],
-              currentIndex: _currentBottomNavIndex,
-              onTap: _onBottomNavTapped,
-            ),
+            body: _screenList.elementAt(_currentBottomNavIndex),
           ),
-          body: _screenList.elementAt(_currentBottomNavIndex),
         ),
       ),
     );
