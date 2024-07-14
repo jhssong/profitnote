@@ -39,7 +39,10 @@ class _CategorySettingScreenState extends State<CategorySettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Profit Note")),
+      appBar: AppBar(
+        titleSpacing: 0,
+        title: const Text("Profit Note"),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         foregroundColor: ColorTheme.cardLabelText,

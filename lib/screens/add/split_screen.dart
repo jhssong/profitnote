@@ -15,6 +15,7 @@ class _SplitScreenState extends State<SplitScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: const Text("정산"),
       ),
       body: SingleChildScrollView(
