@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/control_btn.dart';
-import 'package:profitnote/widgets/control_btn_group.dart';
 
 class CategoryAddWidget extends StatefulWidget {
   const CategoryAddWidget({super.key});
@@ -11,6 +10,9 @@ class CategoryAddWidget extends StatefulWidget {
 }
 
 class _CategoryAddWidgetState extends State<CategoryAddWidget> {
+  var titleList = ['수입', '지출'];
+  var selectedColors = [ColorTheme.incomeColor, ColorTheme.expenseColor];
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,21 +23,46 @@ class _CategoryAddWidgetState extends State<CategoryAddWidget> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ControlBtnGroup(
-              titleList: const ['수입', '지출'],
-              callbackList: [() {}, () {}],
+            Container(
+              margin: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: ColorTheme.cardBackground,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  for (int index = 0; index < titleList.length; index++) ...[
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            selectedIndex = index;
+                          });
+                        },
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.all(0),
+                          foregroundColor: selectedIndex == index
+                              ? selectedColors[index]
+                              : ColorTheme.pointText,
+                          textStyle: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        child: Text(titleList[index]),
+                      ),
+                    ),
+                    if (index < titleList.length - 1)
+                      Container(width: 2, height: 32, color: ColorTheme.stroke),
+                  ],
+                ],
+              ),
             ),
-            CustomDropdownWidget(
+            _buildDropdownWidget(
               labelText: '대분류',
               items: const ["야", "호"],
-              onChanged: (String? val) {},
-              onPressedAdd: (String? val) {},
             ),
-            CustomDropdownWidget(
+            _buildDropdownWidget(
               labelText: '소분류',
               items: const ["야", "호"],
-              onChanged: (String? val) {},
-              onPressedAdd: (String? val) {},
             ),
             ControlBtn(onPressed: () {}),
           ],
@@ -43,22 +70,10 @@ class _CategoryAddWidgetState extends State<CategoryAddWidget> {
       ),
     );
   }
-}
 
-class CustomDropdownWidget extends StatelessWidget {
-  const CustomDropdownWidget(
-      {super.key,
-      required this.labelText,
-      required this.items,
-      required this.onChanged,
-      required this.onPressedAdd});
-  final String labelText;
-  final List<String> items;
-  final Function(String?) onChanged;
-  final Function(String?) onPressedAdd;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildDropdownWidget(
+      {required String labelText, required List<String> items}) {
+    String? selectedItem;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -80,6 +95,7 @@ class CustomDropdownWidget extends StatelessWidget {
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
+                  value: selectedItem,
                   icon: Icon(Icons.arrow_drop_down,
                       color: Theme.of(context).iconTheme.color),
                   items: items.map((String item) {
@@ -93,7 +109,11 @@ class CustomDropdownWidget extends StatelessWidget {
                       ),
                     );
                   }).toList(),
-                  onChanged: onChanged,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedItem = newValue!;
+                    });
+                  },
                   style: TextStyle(
                     color: ColorTheme.pointText,
                     fontSize: 16,
