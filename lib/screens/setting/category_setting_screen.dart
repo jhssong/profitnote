@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/screens/setting/widgets/category_add_widget.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/screens/setting/widgets/category_item_widget.dart';
+import 'package:profitnote/screens/setting/widgets/category_add_widget.dart';
 
 class CategorySettingScreen extends StatefulWidget {
   const CategorySettingScreen({super.key});
@@ -12,7 +11,7 @@ class CategorySettingScreen extends StatefulWidget {
 
 class _CategorySettingScreenState extends State<CategorySettingScreen>
     with SingleTickerProviderStateMixin {
-  final List<ExpenseCategory> expenseCategories = [
+  final List<ExpenseCategory> _expenseCategories = [
     ExpenseCategory(
       category: '식비',
       items: [
@@ -39,39 +38,34 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
 
   void _reorderCategories(int oldIndex, int newIndex) {
     setState(() {
-      if (newIndex > oldIndex) {
-        newIndex -= 1;
-      }
-      final ExpenseCategory movedCategory =
-          expenseCategories.removeAt(oldIndex);
-      expenseCategories.insert(newIndex, movedCategory);
+      if (newIndex > oldIndex) newIndex -= 1;
+      final movedCategory = _expenseCategories.removeAt(oldIndex);
+      _expenseCategories.insert(newIndex, movedCategory);
     });
   }
 
   void _reorderItems(int categoryIndex, int oldIndex, int newIndex) {
     setState(() {
-      if (newIndex > oldIndex) {
-        newIndex -= 1;
-      }
-      final CategoryItem movedItem =
-          expenseCategories[categoryIndex].items.removeAt(oldIndex);
-      expenseCategories[categoryIndex].items.insert(newIndex, movedItem);
+      if (newIndex > oldIndex) newIndex -= 1;
+      final movedItem =
+          _expenseCategories[categoryIndex].items.removeAt(oldIndex);
+      _expenseCategories[categoryIndex].items.insert(newIndex, movedItem);
     });
   }
 
   void _deleteCategory(int index) {
     setState(() {
-      expenseCategories.removeAt(index);
+      _expenseCategories.removeAt(index);
     });
   }
 
   void _deleteItem(int categoryIndex, int itemIndex) {
     setState(() {
-      expenseCategories[categoryIndex].items.removeAt(itemIndex);
+      _expenseCategories[categoryIndex].items.removeAt(itemIndex);
     });
   }
 
-  final List<Widget> tabs = [
+  final List<Widget> _tabs = [
     const Tab(text: "수입"),
     const Tab(text: "지출"),
   ];
@@ -80,7 +74,6 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
   @override
   void initState() {
     super.initState();
-
     _tabController = TabController(length: 2, vsync: this);
   }
 
@@ -113,7 +106,7 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
                 ),
               ),
               child: TabBar(
-                tabs: tabs,
+                tabs: _tabs,
                 labelStyle: Theme.of(context).textTheme.titleMedium,
                 controller: _tabController,
                 indicator: UnderlineTabIndicator(
@@ -133,14 +126,16 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
               controller: _tabController,
               children: [
                 CategoryListWidget(
-                  categories: expenseCategories,
+                  categories: _expenseCategories,
                   onReorderCategories: _reorderCategories,
+                  onReorderItems: _reorderItems,
                   deleteCategory: _deleteCategory,
                   deleteItem: _deleteItem,
                 ),
                 CategoryListWidget(
-                  categories: expenseCategories,
+                  categories: _expenseCategories,
                   onReorderCategories: _reorderCategories,
+                  onReorderItems: _reorderItems,
                   deleteCategory: _deleteCategory,
                   deleteItem: _deleteItem,
                 ),
@@ -160,9 +155,17 @@ class ExpenseCategory {
   ExpenseCategory({required this.category, required this.items});
 }
 
+class CategoryItem {
+  final String description;
+  final String amount;
+
+  CategoryItem({required this.description, required this.amount});
+}
+
 class CategoryListWidget extends StatelessWidget {
   final List<ExpenseCategory> categories;
   final Function(int oldIndex, int newIndex) onReorderCategories;
+  final Function(int categoryIndex, int oldIndex, int newIndex) onReorderItems;
   final Function(int categoryIndex) deleteCategory;
   final Function(int categoryIndex, int itemIndex) deleteItem;
 
@@ -170,113 +173,140 @@ class CategoryListWidget extends StatelessWidget {
     super.key,
     required this.categories,
     required this.onReorderCategories,
+    required this.onReorderItems,
     required this.deleteCategory,
     required this.deleteItem,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ReorderableListView(
+      onReorder: onReorderCategories,
       children: [
-        Expanded(
-          child: ReorderableListView(
-            onReorder: onReorderCategories,
-            children: [
-              for (int categoryIndex = 0;
-                  categoryIndex < categories.length;
-                  categoryIndex++)
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  key: Key('category_$categoryIndex'),
-                  decoration: BoxDecoration(
-                    color: ColorTheme.cardBackground,
-                    border: Border(
-                      bottom: BorderSide(
-                        width: 1.5,
-                        color: Theme.of(context).dividerColor,
-                      ),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                controller: TextEditingController(
-                                  text: categories[categoryIndex].category,
-                                ),
-                                style: Theme.of(context).textTheme.titleMedium,
-                                textAlign: TextAlign.left,
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  contentPadding: EdgeInsets.zero,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete, size: 20),
-                          onPressed: () {
-                            if (categories[categoryIndex].items.isEmpty) {
-                              deleteCategory(categoryIndex);
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  duration: Duration(milliseconds: 1000),
-                                  content:
-                                      Text('Cannot delete category with items'),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                      ReorderableListView(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: [
-                          for (int itemIndex = 0;
-                              itemIndex <
-                                  categories[categoryIndex].items.length;
-                              itemIndex++)
-                            ListTile(
-                              key: Key('item_${categoryIndex}_$itemIndex'),
-                              title: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                child: TextField(
-                                  controller: TextEditingController(
-                                    text: categories[categoryIndex]
-                                        .items[itemIndex]
-                                        .description,
-                                  ),
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                  textAlign: TextAlign.left,
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    contentPadding: EdgeInsets.zero,
-                                  ),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.delete, size: 20),
-                                onPressed: () {
-                                  deleteItem(categoryIndex, itemIndex);
-                                },
-                              ),
-                            ),
-                        ],
-                        onReorder: (int oldIndex, int newIndex) {},
-                      ),
-                    ],
-                  ),
+        for (int categoryIndex = 0;
+            categoryIndex < categories.length;
+            categoryIndex++)
+          Container(
+            key: Key('category_$categoryIndex'),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: ColorTheme.cardBackground,
+              border: Border(
+                bottom: BorderSide(
+                  width: 1.5,
+                  color: Theme.of(context).dividerColor,
                 ),
-            ],
+              ),
+            ),
+            child: Column(
+              children: [
+                CategoryCard(
+                  category: categories[categoryIndex].category,
+                  deleteCategory: () {
+                    if (categories[categoryIndex].items.isEmpty) {
+                      deleteCategory(categoryIndex);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          duration: Duration(milliseconds: 1000),
+                          content: Text('Cannot delete category with items'),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                ReorderableListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  onReorder: (int oldIndex, int newIndex) {
+                    onReorderItems(categoryIndex, oldIndex, newIndex);
+                  },
+                  children: [
+                    for (int itemIndex = 0;
+                        itemIndex < categories[categoryIndex].items.length;
+                        itemIndex++)
+                      CategoryItemCard(
+                        key: Key('item_${categoryIndex}_$itemIndex'),
+                        description: categories[categoryIndex]
+                            .items[itemIndex]
+                            .description,
+                        amount:
+                            categories[categoryIndex].items[itemIndex].amount,
+                        deleteItem: () => deleteItem(categoryIndex, itemIndex),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  final String category;
+  final VoidCallback deleteCategory;
+
+  const CategoryCard({
+    super.key,
+    required this.category,
+    required this.deleteCategory,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Row(
+        children: [
+          Text(
+            category,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: ColorTheme.cardLabelText),
+          ),
+        ],
+      ),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete, size: 20),
+        onPressed: deleteCategory,
+      ),
+    );
+  }
+}
+
+class CategoryItemCard extends StatelessWidget {
+  final String description;
+  final String amount;
+  final VoidCallback deleteItem;
+
+  const CategoryItemCard({
+    super.key,
+    required this.description,
+    required this.amount,
+    required this.deleteItem,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Padding(
+        padding: const EdgeInsets.all(0),
+        child: TextField(
+          controller: TextEditingController(text: description),
+          style: Theme.of(context).textTheme.bodyMedium,
+          textAlign: TextAlign.left,
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.zero,
           ),
         ),
-      ],
+      ),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete, size: 20),
+        onPressed: deleteItem,
+      ),
     );
   }
 }
