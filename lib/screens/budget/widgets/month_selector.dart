@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:profitnote/style/theme.dart';
@@ -41,14 +40,13 @@ class _MonthSelectorState extends State<MonthSelector> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               SizedBox(
-                width: 25,
+                width: 24,
                 height: 24,
                 child: IconButton(
                   padding: const EdgeInsets.all(0),
                   icon: const Icon(Icons.chevron_left_rounded, size: 16),
                   color: ColorTheme.cardText,
                   onPressed: () {
-                    // move to previous month
                     _previousMonth();
                   },
                 ),
@@ -56,14 +54,13 @@ class _MonthSelectorState extends State<MonthSelector> {
               Text(formattedDate,
                   style: Theme.of(context).textTheme.labelMedium),
               SizedBox(
-                width: 25,
+                width: 24,
                 height: 24,
                 child: IconButton(
                     padding: const EdgeInsets.all(0),
                     icon: const Icon(Icons.chevron_right_rounded, size: 16),
                     color: ColorTheme.cardText,
                     onPressed: () {
-                      // move to next month
                       _nextMonth();
                     }),
               ),

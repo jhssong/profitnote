@@ -11,20 +11,15 @@ class GeneralSettingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      padding: const EdgeInsets.fromLTRB(8, 8, 16, 0),
       decoration: BoxDecoration(
         color: ColorTheme.cardBackground,
       ),
       child: Column(
         children: [
-          Row(
-            children: [
-              const Padding(padding: EdgeInsets.symmetric(vertical: 16)),
-              Text(title, style: Theme.of(context).textTheme.titleMedium),
-            ],
-          ),
           ListView(
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             children: items
                 .map((e) => ListTile(
                       minTileHeight: 0,
