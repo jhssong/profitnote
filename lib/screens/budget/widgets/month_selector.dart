@@ -28,8 +28,6 @@ class _MonthSelectorState extends State<MonthSelector> {
   Widget build(BuildContext context) {
     String formattedDate = DateFormat('yyyy.MM').format(_selectedDate);
     return Container(
-      // width: 140,
-      // height: 50,
       decoration: BoxDecoration(
         color: ColorTheme.backgroundOfBackground,
         borderRadius: BorderRadius.circular(20),

@@ -29,7 +29,7 @@ class GeneralSettingWidget extends StatelessWidget {
                       ),
                       title: Text(
                         e,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       onTap: () {
                         if (onTapped != null) {
