@@ -36,21 +36,23 @@ class _MyAppState extends State<MyApp> {
     setState(() => _currentBottomNavIndex = index);
   }
 
+  Future<bool> _onWillPop() async {
+    if (_currentBottomNavIndex != 0) {
+      setState(() => _currentBottomNavIndex = 0);
+      return Future.value(false); // Prevent default back action
+    } else {
+      return Future.value(true); // Allow default back action (exit app)
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
       home: SafeArea(
-        child: PopScope(
-          canPop: false,
-          onPopInvoked: (bool didPop) {
-            if (_currentBottomNavIndex != 0) {
-              setState(() => _currentBottomNavIndex = 0);
-            } else {
-              SystemNavigator.pop();
-            }
-          },
+        child: WillPopScope(
+          onWillPop: _onWillPop,
           child: Scaffold(
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
