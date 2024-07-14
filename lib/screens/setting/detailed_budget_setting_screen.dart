@@ -95,14 +95,6 @@ class _DetailedBudgetSettingScreenState
             Navigator.pop(context, sum);
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              // TODO: Add new CategoryTile
-            },
-          ),
-        ],
       ),
       body: Column(
         children: [
