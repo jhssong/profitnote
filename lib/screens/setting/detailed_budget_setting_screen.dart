@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/utils/show_selection_dialog.dart';
 import 'package:profitnote/widgets/category_tile.dart';
 
 class DetailedBudgetSettingScreen extends StatefulWidget {
@@ -18,20 +17,16 @@ class _DetailedBudgetSettingScreenState
   final _controller = TextEditingController();
   var f = NumberFormat('###,###,###,###');
   final Map<String, int> _detailedBudgets = {
-    "주식": 200000,
-    "생활": 150000,
-    "고정": 50000,
+    "소분류1": 200000,
+    "소분류2": 150000,
+    "소분류3": 50000,
+    "소분류4": 200000,
+    "소분류5": 150000,
+    "소분류6": 50000,
+    "소분류7": 200000,
+    "소분류8": 150000,
+    "소분류9": 50000,
   };
-
-  void _onLongTap(
-      String title, List<String> bodyList, Function dialogCallback) {
-    showSelectionDialog(
-      context,
-      title: title,
-      bodyList: bodyList,
-      dialogCallback: dialogCallback,
-    );
-  }
 
   @override
   void dispose() {
@@ -114,55 +109,165 @@ class _DetailedBudgetSettingScreenState
           Expanded(
               child: ListView(
             children: <Widget>[
-              CategoryTile(
-                  icon: Icons.holiday_village,
-                  label: "주식",
-                  spent: '${f.format(_detailedBudgets["주식"]!)}원',
-                  onTapped: () {
-                    _moneyInput("주식", (value) {
-                      setState(() {
-                        _detailedBudgets["주식"] = int.parse(value);
-                      });
-                    });
-                  },
-                  onLongPressed: () {
-                    _onLongTap("주식", ["삭제"], (value) {
-                      setState(() => _controller.text = value);
-                    });
-                  }),
-              CategoryTile(
-                  icon: Icons.home,
-                  label: "생활",
-                  spent: '${f.format(_detailedBudgets["생활"]!)}원',
-                  onTapped: () {
-                    _moneyInput("생활", (value) {
-                      setState(() {
-                        _detailedBudgets["생활"] = int.parse(value);
-                      });
-                    });
-                  },
-                  onLongPressed: () {
-                    _onLongTap("생활", ["삭제"], (value) {
-                      setState(() => _controller.text = value);
-                    });
-                  }),
-              CategoryTile(
-                icon: Icons.home,
-                label: "고정",
-                spent: '${f.format(_detailedBudgets["고정"]!)}원',
-                onTapped: () {
-                  _moneyInput("고정", (value) {
-                    setState(() {
-                      _detailedBudgets["고정"] = int.parse(value);
-                    });
-                  });
-                },
-                onLongPressed: () {
-                  _onLongTap("고정", ["삭제"], (value) {
-                    setState(() => _controller.text = value);
-                  });
-                },
-              ),
+              ExpansionTile(
+                  controlAffinity: ListTileControlAffinity.leading,
+                  leading: const Icon(Icons.money_rounded),
+                  iconColor: ColorTheme.cardText,
+                  collapsedIconColor: ColorTheme.cardLabelText,
+                  backgroundColor: ColorTheme.backgroundOfBackground,
+                  collapsedBackgroundColor: ColorTheme.cardBackground,
+                  title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("대분류1",
+                            style: Theme.of(context).textTheme.bodyLarge),
+                        Text("0원",
+                            style: Theme.of(context).textTheme.bodyLarge),
+                      ]),
+                  children: <Widget>[
+                    CategoryTile(
+                      icon: Icons.holiday_village,
+                      label: "소분류1",
+                      spent: '${f.format(_detailedBudgets["소분류1"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류1", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류1"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                    CategoryTile(
+                      icon: Icons.home,
+                      label: "소분류2",
+                      spent: '${f.format(_detailedBudgets["소분류2"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류2", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류2"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                    CategoryTile(
+                      icon: Icons.home,
+                      label: "소분류3",
+                      spent: '${f.format(_detailedBudgets["소분류3"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류3", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류3"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                  ]),
+              ExpansionTile(
+                  controlAffinity: ListTileControlAffinity.leading,
+                  leading: const Icon(Icons.money_rounded),
+                  iconColor: ColorTheme.cardText,
+                  collapsedIconColor: ColorTheme.cardLabelText,
+                  backgroundColor: ColorTheme.backgroundOfBackground,
+                  collapsedBackgroundColor: ColorTheme.cardBackground,
+                  title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("대분류2",
+                            style: Theme.of(context).textTheme.bodyLarge),
+                        Text("0원",
+                            style: Theme.of(context).textTheme.bodyLarge),
+                      ]),
+                  children: <Widget>[
+                    CategoryTile(
+                      icon: Icons.holiday_village,
+                      label: "소분류4",
+                      spent: '${f.format(_detailedBudgets["소분류4"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류4", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류4"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                    CategoryTile(
+                      icon: Icons.home,
+                      label: "소분류5",
+                      spent: '${f.format(_detailedBudgets["소분류5"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류5", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류5"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                    CategoryTile(
+                      icon: Icons.home,
+                      label: "소분류6",
+                      spent: '${f.format(_detailedBudgets["소분류6"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류6", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류6"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                  ]),
+              ExpansionTile(
+                  controlAffinity: ListTileControlAffinity.leading,
+                  leading: const Icon(Icons.money_rounded),
+                  iconColor: ColorTheme.cardText,
+                  collapsedIconColor: ColorTheme.cardLabelText,
+                  backgroundColor: ColorTheme.backgroundOfBackground,
+                  collapsedBackgroundColor: ColorTheme.cardBackground,
+                  title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("대분류3",
+                            style: Theme.of(context).textTheme.bodyLarge),
+                        Text("0원",
+                            style: Theme.of(context).textTheme.bodyLarge),
+                      ]),
+                  children: <Widget>[
+                    CategoryTile(
+                      icon: Icons.holiday_village,
+                      label: "소분류7",
+                      spent: '${f.format(_detailedBudgets["소분류7"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류7", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류7"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                    CategoryTile(
+                      icon: Icons.home,
+                      label: "소분류8",
+                      spent: '${f.format(_detailedBudgets["소분류8"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류8", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류8"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                    CategoryTile(
+                      icon: Icons.home,
+                      label: "소분류9",
+                      spent: '${f.format(_detailedBudgets["소분류9"]!)}원',
+                      onTapped: () {
+                        _moneyInput("소분류9", (value) {
+                          setState(() {
+                            _detailedBudgets["소분류9"] = int.parse(value);
+                          });
+                        });
+                      },
+                    ),
+                  ]),
             ],
           ))
         ],
