@@ -256,22 +256,52 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Row(
-        children: [
-          Text(
-            category,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: ColorTheme.cardLabelText),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: ColorTheme.cardBackground,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 0,
+                vertical: 8,
+              ),
+              alignment: Alignment.centerLeft,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            onPressed: () {},
+            child: Text(
+              category,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: ColorTheme.cardLabelText),
+            ),
           ),
-        ],
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete, size: 20),
-        onPressed: deleteCategory,
-      ),
+        ),
+        Row(
+          children: [
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: IconButton(
+                icon: const Icon(Icons.delete, size: 20),
+                onPressed: () {},
+              ),
+            ),
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: IconButton(
+                icon: const Icon(Icons.drag_indicator, size: 20),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
@@ -290,20 +320,49 @@ class CategoryItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: TextField(
-        controller: TextEditingController(text: description),
-        style: Theme.of(context).textTheme.bodyMedium,
-        textAlign: TextAlign.left,
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.zero,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: ColorTheme.cardBackground,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 0,
+                vertical: 8,
+              ),
+              alignment: Alignment.centerLeft,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            onPressed: () {},
+            child: Text(
+              description,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
         ),
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete, size: 20),
-        onPressed: deleteItem,
-      ),
+        Row(
+          children: [
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: IconButton(
+                icon: const Icon(Icons.delete, size: 20),
+                onPressed: () {},
+              ),
+            ),
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: IconButton(
+                icon: const Icon(Icons.drag_indicator, size: 20),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

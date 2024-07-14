@@ -15,7 +15,8 @@ class _CategoryAddWidgetState extends State<CategoryAddWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("자산 추가"),
+        title: const Text("카테고리 추가"),
+        titleSpacing: 0,
       ),
       body: SingleChildScrollView(
         child: Column(
