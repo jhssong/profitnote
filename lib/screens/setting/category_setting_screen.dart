@@ -291,16 +291,13 @@ class CategoryItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Padding(
-        padding: const EdgeInsets.all(0),
-        child: TextField(
-          controller: TextEditingController(text: description),
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.left,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.zero,
-          ),
+      title: TextField(
+        controller: TextEditingController(text: description),
+        style: Theme.of(context).textTheme.bodyMedium,
+        textAlign: TextAlign.left,
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.zero,
         ),
       ),
       trailing: IconButton(
