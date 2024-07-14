@@ -6,15 +6,14 @@ class CategoryTile extends StatelessWidget {
   final String label;
   final String spent;
   final Function()? onTapped;
-  final Function()? onLongPressed;
 
-  const CategoryTile(
-      {super.key,
-      required this.icon,
-      required this.label,
-      required this.spent,
-      required this.onTapped,
-      required this.onLongPressed});
+  const CategoryTile({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.spent,
+    required this.onTapped,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +22,6 @@ class CategoryTile extends StatelessWidget {
       onTap: () {
         if (onTapped != null) {
           onTapped!();
-        }
-      },
-      onLongPress: () {
-        if (onLongPressed != null) {
-          onLongPressed!();
         }
       },
       leading: Icon(icon, size: 24, color: ColorTheme.cardText),
