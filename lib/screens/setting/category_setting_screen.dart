@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/provider/category_provider.dart';
+import 'package:profitnote/providers/category_provider.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/screens/setting/widgets/category_add_widget.dart';
 import 'package:provider/provider.dart';
@@ -59,9 +59,9 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
   }
 
   Future<void> _readCategories() async {
-    final provider = Provider.of<CategoryProvider>(context, listen: false);
-    provider.initializeCategories();
-    _expenseCategories = await provider.readCategories();
+    final provider = Provider.of<MainCategoryProvider>(context, listen: false);
+    await provider.initializeCategories();
+    _expenseCategories = provider.items;
     setState(() {
       _expenseCategories = _expenseCategories;
     });
