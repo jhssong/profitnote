@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/provider/category_provider.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/screens/setting/widgets/category_add_widget.dart';
+import 'package:provider/provider.dart';
 
 class CategorySettingScreen extends StatefulWidget {
   const CategorySettingScreen({super.key});
@@ -11,31 +13,7 @@ class CategorySettingScreen extends StatefulWidget {
 
 class _CategorySettingScreenState extends State<CategorySettingScreen>
     with SingleTickerProviderStateMixin {
-  final List<ExpenseCategory> _expenseCategories = [
-    ExpenseCategory(
-      category: '식비',
-      items: [
-        CategoryItem(description: '프랭크버거', amount: '10000원'),
-        CategoryItem(description: '푸행쿠버거', amount: '10000원'),
-        CategoryItem(description: '마마터치', amount: '10000원'),
-      ],
-    ),
-    ExpenseCategory(
-      category: '생활',
-      items: [
-        CategoryItem(description: '샴푸', amount: '5000원'),
-        CategoryItem(description: '세제', amount: '3000원'),
-      ],
-    ),
-    ExpenseCategory(
-      category: '고정',
-      items: [
-        CategoryItem(description: '월세', amount: '500000원'),
-        CategoryItem(description: '인터넷', amount: '30000원'),
-      ],
-    ),
-  ];
-
+  List<MainCategory> _expenseCategories = [];
   void _reorderCategories(int oldIndex, int newIndex) {
     setState(() {
       if (newIndex > oldIndex) newIndex -= 1;
@@ -48,8 +26,10 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
     setState(() {
       if (newIndex > oldIndex) newIndex -= 1;
       final movedItem =
-          _expenseCategories[categoryIndex].items.removeAt(oldIndex);
-      _expenseCategories[categoryIndex].items.insert(newIndex, movedItem);
+          _expenseCategories[categoryIndex].subCategories.removeAt(oldIndex);
+      _expenseCategories[categoryIndex]
+          .subCategories
+          .insert(newIndex, movedItem);
     });
   }
 
@@ -61,7 +41,7 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
 
   void _deleteItem(int categoryIndex, int itemIndex) {
     setState(() {
-      _expenseCategories[categoryIndex].items.removeAt(itemIndex);
+      _expenseCategories[categoryIndex].subCategories.removeAt(itemIndex);
     });
   }
 
@@ -74,7 +54,17 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
   @override
   void initState() {
     super.initState();
+    _readCategories();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  Future<void> _readCategories() async {
+    final provider = Provider.of<CategoryProvider>(context, listen: false);
+    provider.initializeCategories();
+    _expenseCategories = await provider.readCategories();
+    setState(() {
+      _expenseCategories = _expenseCategories;
+    });
   }
 
   @override
@@ -163,7 +153,7 @@ class CategoryItem {
 }
 
 class CategoryListWidget extends StatelessWidget {
-  final List<ExpenseCategory> categories;
+  final List<MainCategory> categories;
   final Function(int oldIndex, int newIndex) onReorderCategories;
   final Function(int categoryIndex, int oldIndex, int newIndex) onReorderItems;
   final Function(int categoryIndex) deleteCategory;
@@ -201,9 +191,9 @@ class CategoryListWidget extends StatelessWidget {
             child: Column(
               children: [
                 CategoryCard(
-                  category: categories[categoryIndex].category,
+                  category: categories[categoryIndex].name,
                   deleteCategory: () {
-                    if (categories[categoryIndex].items.isEmpty) {
+                    if (categories[categoryIndex].name.isEmpty) {
                       deleteCategory(categoryIndex);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -215,27 +205,27 @@ class CategoryListWidget extends StatelessWidget {
                     }
                   },
                 ),
-                ReorderableListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  onReorder: (int oldIndex, int newIndex) {
-                    onReorderItems(categoryIndex, oldIndex, newIndex);
-                  },
-                  children: [
-                    for (int itemIndex = 0;
-                        itemIndex < categories[categoryIndex].items.length;
-                        itemIndex++)
-                      CategoryItemCard(
-                        key: Key('item_${categoryIndex}_$itemIndex'),
-                        description: categories[categoryIndex]
-                            .items[itemIndex]
-                            .description,
-                        amount:
-                            categories[categoryIndex].items[itemIndex].amount,
-                        deleteItem: () => deleteItem(categoryIndex, itemIndex),
-                      ),
-                  ],
-                ),
+                // ReorderableListView(
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   onReorder: (int oldIndex, int newIndex) {
+                //     onReorderItems(categoryIndex, oldIndex, newIndex);
+                //   },
+                //   children: [
+                //     for (int itemIndex = 0;
+                //         itemIndex <
+                //             categories[categoryIndex].subCategories.length;
+                //         itemIndex++)
+                //       CategoryItemCard(
+                //         key: Key('item_${categoryIndex}_$itemIndex'),
+                //         description: categories[categoryIndex].subCategories,
+                //         amount: categories[categoryIndex]
+                //             .subCategories[itemIndex]
+                //             .amount,
+                //         deleteItem: () => deleteItem(categoryIndex, itemIndex),
+                //       ),
+                //   ],
+                // ),
               ],
             ),
           ),

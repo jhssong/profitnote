@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:profitnote/provider/category_provider.dart';
 import 'package:profitnote/screens/asset/asset_screen.dart';
 import 'package:profitnote/screens/analysis/analysis_screen.dart';
 import 'package:profitnote/screens/home/home_screen.dart';
 import 'package:profitnote/screens/search/search_screen.dart';
 import 'package:profitnote/screens/setting/setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: ColorTheme.background,
   ));
-  runApp(const MyApp());
+
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (_) => CategoryProvider(),
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
