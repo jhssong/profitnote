@@ -10,6 +10,10 @@ class SubCategoryProvider extends DefaultProvider<SubCategoryModel> {
     saveItems(Keys.subCategoryKey, categories);
   }
 
+  Future<void> saveItems(String key, List<SubCategoryModel> newItems) async {
+    service.saveItems(key, newItems);
+  }
+
   @override
   SubCategoryModel fromMap(Map<String, dynamic> map) {
     return SubCategoryModel.fromMap(map);

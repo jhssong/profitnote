@@ -16,6 +16,10 @@ class MainCategoryProvider extends DefaultProvider<MainCategoryModel> {
     saveItems(Keys.incomeCategoryKey, incomeCategories);
   }
 
+  Future<void> saveItems(String key, List<MainCategoryModel> newItems) async {
+    service.saveItems(key, newItems);
+  }
+
   @override
   MainCategoryModel fromMap(Map<String, dynamic> map) {
     return MainCategoryModel.fromMap(map);
