@@ -36,12 +36,15 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             const GeneralSettingWidget(
               title: "일반",
-              items: ["홈 화면", "알림", "보안"],
+              items: ["홈 화면 설정", "알림 설정", "보안"],
               //onTapped: (index) {}  // index마다 다른 기능을 수행하도록 설정
+            ),
+            const SizedBox(
+              height: 16,
             ),
             GeneralSettingWidget(
                 title: "예산 및 자산 관리",
-                items: const ["예산 설정", "자산 설정", "카테고리 설정"],
+                items: const ["예산 설정", "자산 설정", "분류 설정"],
                 onTapped: (index) {
                   if (index == 0) {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -54,15 +57,6 @@ class _SettingScreenState extends State<SettingScreen> {
                         builder: (context) => const CategorySettingScreen()));
                   }
                 }),
-            GeneralSettingWidget(
-              title: "분류 관리",
-              items: const ["분류 설정"],
-              onTapped: (index) {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const CategorySettingScreen(),
-                ));
-              },
-            ),
           ],
         ),
       ),
