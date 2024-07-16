@@ -3,7 +3,7 @@ import 'package:profitnote/models/default_model.dart';
 class Asset implements DefaultModel {
   int id;
   String name;
-  String group;
+  int group;
   double initialValue;
   String linkedApp;
   String memo;
