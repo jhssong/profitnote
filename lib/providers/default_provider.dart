@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/models/default_model.dart';
-import 'package:profitnote/services/default_services.dart';
+import 'package:profitnote/services/default_service.dart';
 
 abstract class DefaultProvider<T extends DefaultModel> with ChangeNotifier {
-  late DefaultServices<T> service;
+  late DefaultService<T> service;
+
+  defaultProvider() {
+    service = createService();
+  }
+
+  DefaultService<T> createService();
 
   Future<List<T>> read(String key) async {
     List<T> res = await service.read(key);
@@ -25,6 +31,4 @@ abstract class DefaultProvider<T extends DefaultModel> with ChangeNotifier {
     await service.update(key, oldItem, newItem);
     notifyListeners();
   }
-
-  T fromMap(Map<String, dynamic> map);
 }

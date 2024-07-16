@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:profitnote/models/default_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class DefaultServices<T extends DefaultModel> {
+abstract class DefaultService<T extends DefaultModel> {
   Future<List<T>> read(String key) async {
     final prefs = await SharedPreferences.getInstance();
     final itemsJson = prefs.getStringList(key) ?? [];
