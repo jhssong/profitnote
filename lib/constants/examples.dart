@@ -11,9 +11,9 @@
 //     memo: "친구들과 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "홍길동", amount: 25000.0, received: true),
+//           id: 1, asset: 0, name: "홍길동", amount: 25000.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "김철수", amount: 25000.0, received: true),
+//           id: 2, asset: 0, name: "김철수", amount: 25000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -28,7 +28,7 @@
 //     memo: "6월 급여",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "이영희", amount: 1000000.0, received: true),
+//           id: 1, asset: 1, name: "이영희", amount: 1000000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -43,7 +43,7 @@
 //     memo: "저축용",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "박민수", amount: 200000.0, received: true),
+//           id: 1, asset: 1, name: "박민수", amount: 200000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -58,9 +58,9 @@
 //     memo: "가족과 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "최지우", amount: 15000.0, received: true),
+//           id: 1, asset: 0, name: "최지우", amount: 15000.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "강호동", amount: 15000.0, received: true),
+//           id: 2, asset: 0, name: "강호동", amount: 15000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -75,7 +75,7 @@
 //     memo: "성과급",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "유재석", amount: 500000.0, received: true),
+//           id: 1, asset: 1, name: "유재석", amount: 500000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -90,7 +90,7 @@
 //     memo: "비상금 마련",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "신동엽", amount: 150000.0, received: true),
+//           id: 1, asset: 1, name: "신동엽", amount: 150000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -105,9 +105,9 @@
 //     memo: "친구와 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "정준하", amount: 35000.0, received: true),
+//           id: 1, asset: 0, name: "정준하", amount: 35000.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "박나래", amount: 35000.0, received: true),
+//           id: 2, asset: 0, name: "박나래", amount: 35000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -122,7 +122,7 @@
 //     memo: "주식 투자",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "홍길동", amount: 2000000.0, received: true),
+//           id: 1, asset: 1, name: "홍길동", amount: 2000000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -137,14 +137,14 @@
 //     memo: "생활비",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "김철수", amount: 100000.0, received: true),
+//           id: 1, asset: 1, name: "김철수", amount: 100000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 10,
 //     type: TransactionType.expense,
 //     datetime: DateTime.parse("2023-06-29 17:00:00"),
-//     asset: 10,
+//     asset: 1,
 //     price: 40000.0,
 //     title: "카페",
 //     mainCategory: 1,
@@ -152,16 +152,16 @@
 //     memo: "친구와 대화",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "이영희", amount: 20000.0, received: true),
+//           id: 1, asset: 0, name: "이영희", amount: 20000.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "박민수", amount: 20000.0, received: true),
+//           id: 2, asset: 0, name: "박민수", amount: 20000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 11,
 //     type: TransactionType.expense,
 //     datetime: DateTime.parse("2023-06-28 12:30:00"),
-//     asset: 11,
+//     asset: 1,
 //     price: 60000.0,
 //     title: "점심 식사",
 //     mainCategory: 1,
@@ -169,18 +169,18 @@
 //     memo: "동료들과 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "최지우", amount: 20000.0, received: true),
+//           id: 1, asset: 0, name: "최지우", amount: 20000.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "강호동", amount: 20000.0, received: true),
+//           id: 2, asset: 0, name: "강호동", amount: 20000.0, received: true),
 //       SplitModel(
-//           id: 3, asset: "현금", name: "유재석", amount: 20000.0, received: true),
+//           id: 3, asset: 0, name: "유재석", amount: 20000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 12,
 //     type: TransactionType.income,
 //     datetime: DateTime.parse("2023-06-27 09:00:00"),
-//     asset: 12,
+//     asset: 1,
 //     price: 1100000.0,
 //     title: "월급",
 //     mainCategory: 4,
@@ -188,14 +188,14 @@
 //     memo: "7월 급여",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "신동엽", amount: 1100000.0, received: true),
+//           id: 1, asset: 1, name: "신동엽", amount: 1100000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 13,
 //     type: TransactionType.transfer,
 //     datetime: DateTime.parse("2023-06-26 14:00:00"),
-//     asset: 13,
+//     asset: 1,
 //     price: 250000.0,
 //     title: "계좌 이체",
 //     mainCategory: 2,
@@ -203,14 +203,14 @@
 //     memo: "적금용",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "정준하", amount: 250000.0, received: true),
+//           id: 1, asset: 1, name: "정준하", amount: 250000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 14,
 //     type: TransactionType.expense,
 //     datetime: DateTime.parse("2023-06-25 18:00:00"),
-//     asset: 14,
+//     asset: 1,
 //     price: 35000.0,
 //     title: "저녁 식사",
 //     mainCategory: 1,
@@ -218,16 +218,16 @@
 //     memo: "가족과 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "박나래", amount: 17500.0, received: true),
+//           id: 1, asset: 0, name: "박나래", amount: 17500.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "유재석", amount: 17500.0, received: true),
+//           id: 2, asset: 0, name: "유재석", amount: 17500.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 15,
 //     type: TransactionType.income,
 //     datetime: DateTime.parse("2023-06-24 11:00:00"),
-//     asset: 15,
+//     asset: 1,
 //     price: 550000.0,
 //     title: "보너스",
 //     mainCategory: 5,
@@ -235,14 +235,14 @@
 //     memo: "성과급",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "홍길동", amount: 550000.0, received: true),
+//           id: 1, asset: 1, name: "홍길동", amount: 550000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 16,
 //     type: TransactionType.transfer,
 //     datetime: DateTime.parse("2023-06-23 16:00:00"),
-//     asset: 16,
+//     asset: 1,
 //     price: 170000.0,
 //     title: "계좌 이체",
 //     mainCategory: 2,
@@ -250,14 +250,14 @@
 //     memo: "비상금 마련",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "김철수", amount: 170000.0, received: true),
+//           id: 1, asset: 1, name: "김철수", amount: 170000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 17,
 //     type: TransactionType.expense,
 //     datetime: DateTime.parse("2023-06-22 10:00:00"),
-//     asset: 17,
+//     asset: 1,
 //     price: 75000.0,
 //     title: "영화 관람",
 //     mainCategory: 6,
@@ -265,16 +265,16 @@
 //     memo: "친구와 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "이영희", amount: 37500.0, received: true),
+//           id: 1, asset: 0, name: "이영희", amount: 37500.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "박민수", amount: 37500.0, received: true),
+//           id: 2, asset: 0, name: "박민수", amount: 37500.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 18,
 //     type: TransactionType.income,
 //     datetime: DateTime.parse("2023-06-21 15:00:00"),
-//     asset: 18,
+//     asset: 1,
 //     price: 2100000.0,
 //     title: "투자 수익",
 //     mainCategory: 5,
@@ -282,14 +282,14 @@
 //     memo: "주식 투자",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "최지우", amount: 2100000.0, received: true),
+//           id: 1, asset: 1, name: "최지우", amount: 2100000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 19,
 //     type: TransactionType.transfer,
 //     datetime: DateTime.parse("2023-06-20 13:00:00"),
-//     asset: 19,
+//     asset: 1,
 //     price: 120000.0,
 //     title: "계좌 이체",
 //     mainCategory: 2,
@@ -297,7 +297,7 @@
 //     memo: "생활비",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "강호동", amount: 120000.0, received: true),
+//           id: 1, asset: 1, name: "강호동", amount: 120000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -312,9 +312,9 @@
 //     memo: "친구와 대화",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "유재석", amount: 22500.0, received: true),
+//           id: 1, asset: 0, name: "유재석", amount: 22500.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "신동엽", amount: 22500.0, received: true),
+//           id: 2, asset: 0, name: "신동엽", amount: 22500.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -329,9 +329,9 @@
 //     memo: "동료들과 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "정준하", amount: 26000.0, received: true),
+//           id: 1, asset: 0, name: "정준하", amount: 26000.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "박나래", amount: 26000.0, received: true),
+//           id: 2, asset: 0, name: "박나래", amount: 26000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -346,7 +346,7 @@
 //     memo: "8월 급여",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "홍길동", amount: 1050000.0, received: true),
+//           id: 1, asset: 1, name: "홍길동", amount: 1050000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -361,7 +361,7 @@
 //     memo: "적금용",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "김철수", amount: 260000.0, received: true),
+//           id: 1, asset: 1, name: "김철수", amount: 260000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -376,9 +376,9 @@
 //     memo: "가족과 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "이영희", amount: 18500.0, received: true),
+//           id: 1, asset: 0, name: "이영희", amount: 18500.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "박민수", amount: 18500.0, received: true),
+//           id: 2, asset: 0, name: "박민수", amount: 18500.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -393,7 +393,7 @@
 //     memo: "성과급",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "최지우", amount: 520000.0, received: true),
+//           id: 1, asset: 1, name: "최지우", amount: 520000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -408,7 +408,7 @@
 //     memo: "비상금 마련",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "강호동", amount: 180000.0, received: true),
+//           id: 1, asset: 1, name: "강호동", amount: 180000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -423,9 +423,9 @@
 //     memo: "친구와 함께",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "유재석", amount: 40000.0, received: true),
+//           id: 1, asset: 0, name: "유재석", amount: 40000.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "신동엽", amount: 40000.0, received: true),
+//           id: 2, asset: 0, name: "신동엽", amount: 40000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -440,7 +440,7 @@
 //     memo: "주식 투자",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "정준하", amount: 2200000.0, received: true),
+//           id: 1, asset: 1, name: "정준하", amount: 2200000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
@@ -455,14 +455,14 @@
 //     memo: "생활비",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "계좌", name: "박나래", amount: 130000.0, received: true),
+//           id: 1, asset: 1, name: "박나래", amount: 130000.0, received: true),
 //     ],
 //   ),
 //   TransactionModel(
 //     id: 30,
 //     type: TransactionType.expense,
 //     datetime: DateTime.parse("2023-06-09 17:00:00"),
-//     asset: 10,
+//     asset: 1,
 //     price: 50000.0,
 //     title: "카페",
 //     mainCategory: 1,
@@ -470,18 +470,24 @@
 //     memo: "친구와 대화",
 //     split: [
 //       SplitModel(
-//           id: 1, asset: "현금", name: "홍길동", amount: 25000.0, received: true),
+//           id: 1, asset: 0, name: "홍길동", amount: 25000.0, received: true),
 //       SplitModel(
-//           id: 2, asset: "현금", name: "김철수", amount: 25000.0, received: true),
+//           id: 2, asset: 0, name: "김철수", amount: 25000.0, received: true),
 //     ],
 //   ),
 // ];
+
+List<String> assetGroupExamples = [
+  "현금",
+  "계좌",
+  "카드",
+];
 
 List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 1,
     "name": "국민은행",
-    "group": "은행",
+    "group": 1,
     "initialValue": 1000000.0,
     "linkedApp": "",
     "memo": "",
@@ -491,7 +497,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 2,
     "name": "서울카드",
-    "group": "카드",
+    "group": 2,
     "initialValue": 500000000.0,
     "linkedApp": "",
     "memo": "",
@@ -501,7 +507,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 3,
     "name": "현대카드",
-    "group": "카드",
+    "group": 2,
     "initialValue": 30000000.0,
     "linkedApp": "",
     "memo": "출퇴근용",
@@ -511,7 +517,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 4,
     "name": "국민은행 예금",
-    "group": "은행",
+    "group": 1,
     "initialValue": 10000000.0,
     "linkedApp": "",
     "memo": "비상금",
@@ -531,7 +537,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 6,
     "name": "비상금",
-    "group": "현금",
+    "group": 0,
     "initialValue": 500000.0,
     "linkedApp": "",
     "memo": "비상금",
@@ -561,7 +567,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 9,
     "name": "뉴욕 은행",
-    "group": "은행",
+    "group": 1,
     "initialValue": 800000000.0,
     "linkedApp": "",
     "memo": "상가 임대",
@@ -571,7 +577,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 10,
     "name": "현금",
-    "group": "현금",
+    "group": 0,
     "initialValue": 40000000.0,
     "linkedApp": "",
     "memo": "",
@@ -676,69 +682,56 @@ List<Map<String, dynamic>> subCategoryExamples = [
   {"id": 20, "name": "기타", "isVisible": true}
 ];
 
-List<Map<String, dynamic>> splitModelExamples = [
+List<Map<String, dynamic>> expenseMainCategories = [
   {
     "id": 1,
-    "asset": "국민은행",
-    "name": "홍길동",
-    "amount": 100000.0,
-    "received": true
+    "name": "식비",
+    "type": 0,
+    "subCategories": [1, 2],
+    "isVisible": true
   },
   {
     "id": 2,
-    "asset": "국민은행",
-    "name": "김철수",
-    "amount": 250000.0,
-    "received": false
+    "name": "저축",
+    "type": 0,
+    "subCategories": [3, 4],
+    "isVisible": true
+  },
+];
+
+List<Map<String, dynamic>> incomeMainCategories = [
+  {
+    "id": 1,
+    "name": "월급",
+    "type": 1,
+    "subCategories": [1, 2],
+    "isVisible": true
   },
   {
-    "id": 3,
-    "asset": "국민은행",
-    "name": "이영희",
-    "amount": 30000.0,
-    "received": true
+    "id": 2,
+    "name": "기타",
+    "type": 1,
+    "subCategories": [3, 4],
+    "isVisible": true
   },
-  {
-    "id": 4,
-    "asset": "국민은행",
-    "name": "박민수",
-    "amount": 150000.0,
-    "received": true
-  },
-  {
-    "id": 5,
-    "asset": "국민은행",
-    "name": "최지우",
-    "amount": 50000.0,
-    "received": false
-  },
-  {"id": 6, "asset": "현금", "name": "강호동", "amount": 70000.0, "received": true},
-  {
-    "id": 7,
-    "asset": "뉴욕 은행",
-    "name": "유재석",
-    "amount": 80000.0,
-    "received": false
-  },
-  {
-    "id": 8,
-    "asset": "뉴욕 은행",
-    "name": "신동엽",
-    "amount": 120000.0,
-    "received": true
-  },
-  {
-    "id": 9,
-    "asset": "뉴욕 은행",
-    "name": "정준하",
-    "amount": 900000.0,
-    "received": false
-  },
-  {
-    "id": 10,
-    "asset": "뉴욕 은행",
-    "name": "박나래",
-    "amount": 45000.0,
-    "received": true
-  }
+];
+
+List<Map<String, dynamic>> subCategories = [
+  {"id": 1, "name": "외식", "amount": 0, "isVisible": true},
+  {"id": 2, "name": "식료품", "amount": 0, "isVisible": true},
+  {"id": 3, "name": "정기 적금", "amount": 0, "isVisible": true},
+  {"id": 4, "name": "비상금", "amount": 0, "isVisible": true},
+];
+
+List<Map<String, dynamic>> splitModelExamples = [
+  {"id": 1, "asset": 1, "name": "홍길동", "amount": 100000.0, "received": true},
+  {"id": 2, "asset": 1, "name": "김철수", "amount": 250000.0, "received": false},
+  {"id": 3, "asset": 1, "name": "이영희", "amount": 30000.0, "received": true},
+  {"id": 4, "asset": 1, "name": "박민수", "amount": 150000.0, "received": true},
+  {"id": 5, "asset": 1, "name": "최지우", "amount": 50000.0, "received": false},
+  {"id": 6, "asset": 0, "name": "강호동", "amount": 70000.0, "received": true},
+  {"id": 7, "asset": 9, "name": "유재석", "amount": 80000.0, "received": false},
+  {"id": 8, "asset": 9, "name": "신동엽", "amount": 120000.0, "received": true},
+  {"id": 9, "asset": 9, "name": "정준하", "amount": 900000.0, "received": false},
+  {"id": 10, "asset": 9, "name": "박나래", "amount": 45000.0, "received": true}
 ];

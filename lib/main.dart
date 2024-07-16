@@ -16,12 +16,8 @@ void main() {
   ));
 
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (_) => MainCategoryProvider(),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => SubCategoryProvider(),
-    ),
+    ChangeNotifierProvider(create: (_) => MainCategoryProvider()),
+    ChangeNotifierProvider(create: (_) => SubCategoryProvider()),
   ], child: const MyApp()));
 }
 
