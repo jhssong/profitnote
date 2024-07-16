@@ -5,7 +5,7 @@ import 'package:profitnote/services/default_service.dart';
 abstract class DefaultProvider<T extends DefaultModel> with ChangeNotifier {
   late DefaultService<T> service;
 
-  defaultProvider() {
+  DefaultProvider() {
     service = createService();
   }
 
