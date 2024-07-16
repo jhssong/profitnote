@@ -3,15 +3,15 @@ import 'package:profitnote/constants/examples.dart';
 import 'package:profitnote/models/sub_category_model.dart';
 import 'package:profitnote/providers/default_provider.dart';
 
-class SubCategoryProvider extends DefaultProvider<SubCategory> {
+class SubCategoryProvider extends DefaultProvider<SubCategoryModel> {
   Future<void> initializeCategories() async {
-    List<SubCategory> categories =
-        subCategories.map((map) => SubCategory.fromMap(map)).toList();
+    List<SubCategoryModel> categories =
+        subCategories.map((map) => SubCategoryModel.fromMap(map)).toList();
     saveItems(Keys.subCategoryKey, categories);
   }
 
   @override
-  SubCategory fromMap(Map<String, dynamic> map) {
-    return SubCategory.fromMap(map);
+  SubCategoryModel fromMap(Map<String, dynamic> map) {
+    return SubCategoryModel.fromMap(map);
   }
 }
