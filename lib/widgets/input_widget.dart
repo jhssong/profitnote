@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
+import 'package:profitnote/widgets/calculator.dart';
 
 class InputWidget extends StatefulWidget {
   const InputWidget({
@@ -7,7 +8,9 @@ class InputWidget extends StatefulWidget {
     required this.inputLabel,
     required this.callback,
     this.initialValue,
+    this.isUseWidget = false,
     this.isUseDialog = false,
+    this.showCustomWidget,
     this.showCustomDialog,
     this.dialogTitle,
     this.dialogBodyList,
@@ -21,8 +24,14 @@ class InputWidget extends StatefulWidget {
 
   final String? initialValue;
 
+  /// If this is true, when user tap the widget navigate to custom widget.
+  final bool isUseWidget;
+
   /// If TextField is controlled by custom dialog, this should be true.
   final bool isUseDialog;
+
+  /// When use custom widget, set this parameter
+  final Function? showCustomWidget;
 
   /// When use custom dialog, set this parameter
   final Function? showCustomDialog;
@@ -40,6 +49,7 @@ class InputWidget extends StatefulWidget {
 
 class _InputWidgetState extends State<InputWidget> {
   final _controller = TextEditingController();
+  late final bool _isUseWidget = widget.isUseWidget;
   late final bool _isUseDialog = widget.isUseDialog;
   late final bool _isHorizontal = widget.isHorizontal;
 
@@ -64,6 +74,20 @@ class _InputWidgetState extends State<InputWidget> {
           dialogCallback: _dialogCallback,
         );
       }
+    }
+    if (_isUseWidget == true) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CalculatorScreen(),
+        ),
+      ).then((value) {
+        if (value != null) {
+          setState(() {
+            _controller.text = value;
+          });
+        }
+      });
     }
   }
 
@@ -127,7 +151,7 @@ class _InputWidgetState extends State<InputWidget> {
   Widget build(BuildContext context) {
     var textField = TextField(
       controller: _controller,
-      readOnly: _isUseDialog,
+      readOnly: _isUseDialog || _isUseWidget,
       onTap: _onTap,
       onChanged: (value) => widget.callback(value),
       decoration: InputDecoration(

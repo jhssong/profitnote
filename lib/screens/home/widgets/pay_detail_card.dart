@@ -31,11 +31,14 @@ class PayDetailCard extends StatelessWidget {
               children: [
                 Text(
                   labelList[i],
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(color: ColorTheme.cardLabelText),
                 ),
                 Text(
                   titleList[i],
-                  style: Theme.of(context).textTheme.titleSmall,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),
