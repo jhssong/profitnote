@@ -682,6 +682,47 @@ List<Map<String, dynamic>> subCategoryExamples = [
   {"id": 20, "name": "기타", "isVisible": true}
 ];
 
+List<Map<String, dynamic>> expenseMainCategories = [
+  {
+    "id": 1,
+    "name": "식비",
+    "type": 0,
+    "subCategories": [1, 2],
+    "isVisible": true
+  },
+  {
+    "id": 2,
+    "name": "저축",
+    "type": 0,
+    "subCategories": [3, 4],
+    "isVisible": true
+  },
+];
+
+List<Map<String, dynamic>> incomeMainCategories = [
+  {
+    "id": 1,
+    "name": "월급",
+    "type": 1,
+    "subCategories": [1, 2],
+    "isVisible": true
+  },
+  {
+    "id": 2,
+    "name": "기타",
+    "type": 1,
+    "subCategories": [3, 4],
+    "isVisible": true
+  },
+];
+
+List<Map<String, dynamic>> subCategories = [
+  {"id": 1, "name": "외식", "amount": 0, "isVisible": true},
+  {"id": 2, "name": "식료품", "amount": 0, "isVisible": true},
+  {"id": 3, "name": "정기 적금", "amount": 0, "isVisible": true},
+  {"id": 4, "name": "비상금", "amount": 0, "isVisible": true},
+];
+
 List<Map<String, dynamic>> splitModelExamples = [
   {"id": 1, "asset": 1, "name": "홍길동", "amount": 100000.0, "received": true},
   {"id": 2, "asset": 1, "name": "김철수", "amount": 250000.0, "received": false},
