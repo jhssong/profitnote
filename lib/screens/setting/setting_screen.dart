@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/screens/setting/asset_setting_screen.dart';
 import 'package:profitnote/screens/setting/budget_setting_screen.dart';
+import 'package:profitnote/screens/setting/category_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/control_btn_group.dart';
-import 'package:profitnote/screens/setting/widgets/general_setting_widget.dart';
+import 'package:profitnote/screens/setting/widgets/setting_widget.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -40,7 +41,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             GeneralSettingWidget(
                 title: "예산 및 자산 관리",
-                items: const ["예산 설정", "자산 설정"],
+                items: const ["예산 설정", "자산 설정", "카테고리 설정"],
                 onTapped: (index) {
                   if (index == 0) {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -48,8 +49,20 @@ class _SettingScreenState extends State<SettingScreen> {
                   } else if (index == 1) {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const AssetSettingScreen()));
+                  } else if (index == 2) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const CategorySettingScreen()));
                   }
                 }),
+            GeneralSettingWidget(
+              title: "분류 관리",
+              items: const ["분류 설정"],
+              onTapped: (index) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CategorySettingScreen(),
+                ));
+              },
+            ),
           ],
         ),
       ),

@@ -37,7 +37,7 @@ void showDatePickerDialog({
     confirmText: "확인",
   );
   if (res != null) {
-    String formattedDate = DateFormat('yyyy-MM-dd').format(res);
+    String formattedDate = DateFormat('yyyy.MM.dd').format(res);
     dialogCallback(formattedDate);
   }
 }

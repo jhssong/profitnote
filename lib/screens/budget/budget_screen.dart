@@ -88,14 +88,12 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류1',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons.living,
                           label: '소분류2',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons
@@ -103,7 +101,6 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류3',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                       ]),
                   ExpansionTile(
@@ -127,14 +124,12 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류1',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons.living,
                           label: '소분류2',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons
@@ -142,7 +137,6 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류3',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                       ]),
                   ExpansionTile(
@@ -166,14 +160,12 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류1',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons.living,
                           label: '소분류2',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons
@@ -181,7 +173,6 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류3',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                       ]),
                 ]),
@@ -207,14 +198,12 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류1',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons.living,
                           label: '소분류2',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons
@@ -222,7 +211,6 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류3',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                       ]),
                   ExpansionTile(
@@ -246,14 +234,12 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류1',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons.living,
                           label: '소분류2',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons
@@ -261,7 +247,6 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류3',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                       ]),
                   ExpansionTile(
@@ -285,14 +270,12 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류1',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons.living,
                           label: '소분류2',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                         CategoryTile(
                           icon: Icons
@@ -300,7 +283,6 @@ class _BudgetScreenState extends State<BudgetScreen>
                           label: '소분류3',
                           spent: '0원',
                           onTapped: () {},
-                          onLongPressed: null,
                         ),
                       ]),
                 ]),
