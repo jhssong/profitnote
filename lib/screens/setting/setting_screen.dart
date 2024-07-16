@@ -54,6 +54,15 @@ class _SettingScreenState extends State<SettingScreen> {
                         builder: (context) => const CategorySettingScreen()));
                   }
                 }),
+            GeneralSettingWidget(
+              title: "분류 관리",
+              items: const ["분류 설정"],
+              onTapped: (index) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CategorySettingScreen(),
+                ));
+              },
+            ),
           ],
         ),
       ),

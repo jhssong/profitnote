@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:profitnote/screens/setting/detailed_budget_setting_screen.dart';
 import 'package:profitnote/style/theme.dart';
-import 'package:profitnote/utils/show_selection_dialog.dart';
 import 'package:profitnote/widgets/category_tile.dart';
 
 class BudgetSettingScreen extends StatefulWidget {
@@ -21,16 +20,6 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
     "2024.05": 0,
   };
 
-  void _onLongTap(
-      String title, List<String> bodyList, Function dialogCallback) {
-    showSelectionDialog(
-      context,
-      title: title,
-      bodyList: bodyList,
-      dialogCallback: dialogCallback,
-    );
-  }
-
   @override
   void dispose() {
     _controller.dispose();
@@ -46,14 +35,6 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
           color: ColorTheme.cardLabelText,
         ),
         titleSpacing: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              // TODO: Add new CategoryTile
-            },
-          ),
-        ],
       ),
       body: Column(
         children: [
@@ -75,11 +56,6 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
                       });
                     });
                   },
-                  onLongPressed: () {
-                    _onLongTap("2024.03", ["삭제"], (value) {
-                      setState(() => _controller.text = value);
-                    });
-                  },
                 ),
                 CategoryTile(
                   icon: Icons.money_rounded,
@@ -96,11 +72,6 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
                       });
                     });
                   },
-                  onLongPressed: () {
-                    _onLongTap("2024.04", ["삭제"], (value) {
-                      setState(() => _controller.text = value);
-                    });
-                  },
                 ),
                 CategoryTile(
                   icon: Icons.money_rounded,
@@ -115,11 +86,6 @@ class _BudgetSettingScreenState extends State<BudgetSettingScreen> {
                       setState(() {
                         _budgets["2024.05"] = value;
                       });
-                    });
-                  },
-                  onLongPressed: () {
-                    _onLongTap("2024.05", ["삭제"], (value) {
-                      setState(() => _controller.text = value);
                     });
                   },
                 ),
