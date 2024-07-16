@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/style/theme.dart';
 
-class GeneralSettingWidget extends StatelessWidget {
-  const GeneralSettingWidget(
+class SettingWidget extends StatelessWidget {
+  const SettingWidget(
       {super.key, required this.title, required this.items, this.onTapped});
   final String title;
   final List<String> items;

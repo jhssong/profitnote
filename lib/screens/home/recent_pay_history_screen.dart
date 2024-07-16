@@ -14,6 +14,7 @@ class _RecentPayHistoryScreenState extends State<RecentPayHistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: const Text("최근 결제 내역"),
       ),
       body: _buildRecentHistory(),

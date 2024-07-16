@@ -91,6 +91,7 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: const Text("분류 수정"),
         actions: [
           IconButton(

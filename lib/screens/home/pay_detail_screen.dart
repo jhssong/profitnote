@@ -9,6 +9,7 @@ class PayDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: const Text("상세 내역"),
       ),
       body: SingleChildScrollView(

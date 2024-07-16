@@ -34,7 +34,7 @@ class _SettingScreenState extends State<SettingScreen> {
               titleList: const ['로그인/회원가입', '프리미엄 가입'],
               callbackList: [_pop, _pop],
             ),
-            const GeneralSettingWidget(
+            const SettingWidget(
               title: "일반",
               items: ["홈 화면 설정", "알림 설정", "보안"],
               //onTapped: (index) {}  // index마다 다른 기능을 수행하도록 설정
@@ -42,7 +42,7 @@ class _SettingScreenState extends State<SettingScreen> {
             const SizedBox(
               height: 16,
             ),
-            GeneralSettingWidget(
+            SettingWidget(
                 title: "예산 및 자산 관리",
                 items: const ["예산 설정", "자산 설정", "분류 설정"],
                 onTapped: (index) {

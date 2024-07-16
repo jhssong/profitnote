@@ -34,6 +34,7 @@ class _BudgetScreenState extends State<BudgetScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: const Text("예산"),
       ),
       body: Column(
