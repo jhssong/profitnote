@@ -1,8 +1,8 @@
 import 'package:profitnote/providers/default_provider.dart';
 
 class MainCategoryProvider extends DefaultProvider<MainCategory> {
-  MainCategoryProvider() : super('expenseCategory');
-  final List<Map<String, dynamic>> mainCategories = [
+  MainCategoryProvider();
+  final List<Map<String, dynamic>> expenseMainCategories = [
     {
       "id": 1,
       "name": "식비",
@@ -18,47 +18,37 @@ class MainCategoryProvider extends DefaultProvider<MainCategory> {
       "isVisible": true
     },
   ];
+
+  final List<Map<String, dynamic>> incomeMainCategories = [
+    {
+      "id": 1,
+      "name": "월급",
+      "type": 0,
+      "subCategories": [1, 2],
+      "isVisible": true
+    },
+    {
+      "id": 2,
+      "name": "기타",
+      "type": 0,
+      "subCategories": [3, 4],
+      "isVisible": true
+    },
+  ];
+
   Future<void> initializeCategories() async {
-    List<MainCategory> categories =
-        mainCategories.map((map) => MainCategory.fromMap(map)).toList();
-    saveItems(categories);
+    List<MainCategory> expenseCategories =
+        expenseMainCategories.map((map) => MainCategory.fromMap(map)).toList();
+    saveItems('expenseCategory', expenseCategories);
+
+    List<MainCategory> incomeCategories =
+        incomeMainCategories.map((map) => MainCategory.fromMap(map)).toList();
+    saveItems('incomeCategory', incomeCategories);
   }
 
   @override
   MainCategory fromMap(Map<String, dynamic> map) {
     return MainCategory.fromMap(map);
-  }
-}
-
-class SubCategory {
-  final int id;
-  final String name;
-  final int amount;
-  final bool isVisible;
-
-  SubCategory({
-    required this.id,
-    required this.name,
-    required this.amount,
-    required this.isVisible,
-  });
-
-  factory SubCategory.fromMap(Map<String, dynamic> map) {
-    return SubCategory(
-      id: map['id'],
-      name: map['name'],
-      amount: map['amount'],
-      isVisible: map['isVisible'],
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'amount': amount,
-      'isVisible': isVisible,
-    };
   }
 }
 
@@ -77,7 +67,6 @@ class MainCategory implements DefaultModel {
     required this.isVisible,
   });
 
-  @override
   factory MainCategory.fromMap(Map<String, dynamic> map) {
     return MainCategory(
       id: map['id'],

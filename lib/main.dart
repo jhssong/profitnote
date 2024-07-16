@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:profitnote/providers/category_provider.dart';
+import 'package:profitnote/providers/main_category_provider.dart';
+import 'package:profitnote/providers/sub_category_provider.dart';
 import 'package:profitnote/screens/asset/asset_screen.dart';
 import 'package:profitnote/screens/analysis/analysis_screen.dart';
 import 'package:profitnote/screens/home/home_screen.dart';
@@ -17,6 +18,9 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (_) => MainCategoryProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => SubCategoryProvider(),
     ),
   ], child: const MyApp()));
 }

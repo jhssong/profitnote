@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:profitnote/providers/category_provider.dart';
+import 'package:profitnote/providers/main_category_provider.dart';
+import 'package:profitnote/providers/sub_category_provider.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/screens/setting/widgets/category_add_widget.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,8 @@ class CategorySettingScreen extends StatefulWidget {
 class _CategorySettingScreenState extends State<CategorySettingScreen>
     with SingleTickerProviderStateMixin {
   List<MainCategory> _expenseCategories = [];
+  List<MainCategory> _incomeCategories = [];
+  List<SubCategory> _subCategories = [];
   void _reorderCategories(int oldIndex, int newIndex) {
     setState(() {
       if (newIndex > oldIndex) newIndex -= 1;
@@ -49,21 +52,36 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
     const Tab(text: "수입"),
     const Tab(text: "지출"),
   ];
+
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _readCategories();
+    _readMainCategories();
+    _readSubCategories();
     _tabController = TabController(length: 2, vsync: this);
   }
 
-  Future<void> _readCategories() async {
+  Future<void> _readMainCategories() async {
     final provider = Provider.of<MainCategoryProvider>(context, listen: false);
     await provider.initializeCategories();
-    _expenseCategories = provider.items;
+    _expenseCategories = await provider.read('expenseCategory');
+    _incomeCategories = await provider.read('incomeCategory');
+
     setState(() {
       _expenseCategories = _expenseCategories;
+      _incomeCategories = _incomeCategories;
+    });
+  }
+
+  Future<void> _readSubCategories() async {
+    final provider = Provider.of<SubCategoryProvider>(context, listen: false);
+    await provider.initializeCategories();
+    _subCategories = await provider.read('subCategory');
+
+    setState(() {
+      _subCategories = _subCategories;
     });
   }
 
@@ -117,13 +135,15 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
               children: [
                 CategoryListWidget(
                   categories: _expenseCategories,
+                  subCategories: _subCategories,
                   onReorderCategories: _reorderCategories,
                   onReorderItems: _reorderItems,
                   deleteCategory: _deleteCategory,
                   deleteItem: _deleteItem,
                 ),
                 CategoryListWidget(
-                  categories: _expenseCategories,
+                  categories: _incomeCategories,
+                  subCategories: _subCategories,
                   onReorderCategories: _reorderCategories,
                   onReorderItems: _reorderItems,
                   deleteCategory: _deleteCategory,
@@ -154,6 +174,7 @@ class CategoryItem {
 
 class CategoryListWidget extends StatelessWidget {
   final List<MainCategory> categories;
+  final List<SubCategory> subCategories;
   final Function(int oldIndex, int newIndex) onReorderCategories;
   final Function(int categoryIndex, int oldIndex, int newIndex) onReorderItems;
   final Function(int categoryIndex) deleteCategory;
@@ -162,6 +183,7 @@ class CategoryListWidget extends StatelessWidget {
   const CategoryListWidget({
     super.key,
     required this.categories,
+    required this.subCategories,
     required this.onReorderCategories,
     required this.onReorderItems,
     required this.deleteCategory,
@@ -205,32 +227,33 @@ class CategoryListWidget extends StatelessWidget {
                     }
                   },
                 ),
-                // ReorderableListView(
-                //   shrinkWrap: true,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   onReorder: (int oldIndex, int newIndex) {
-                //     onReorderItems(categoryIndex, oldIndex, newIndex);
-                //   },
-                //   children: [
-                //     for (int itemIndex = 0;
-                //         itemIndex <
-                //             categories[categoryIndex].subCategories.length;
-                //         itemIndex++)
-                //       CategoryItemCard(
-                //         key: Key('item_${categoryIndex}_$itemIndex'),
-                //         description: categories[categoryIndex].subCategories,
-                //         amount: categories[categoryIndex]
-                //             .subCategories[itemIndex]
-                //             .amount,
-                //         deleteItem: () => deleteItem(categoryIndex, itemIndex),
-                //       ),
-                //   ],
-                // ),
+                ReorderableListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  onReorder: (int oldIndex, int newIndex) {
+                    onReorderItems(categoryIndex, oldIndex, newIndex);
+                  },
+                  children: [
+                    for (int itemIndex
+                        in categories[categoryIndex].subCategories)
+                      CategoryItemCard(
+                        key: Key('item_${categoryIndex}_$itemIndex'),
+                        description: _getSubCategoryById(itemIndex).name,
+                        amount:
+                            _getSubCategoryById(itemIndex).amount.toString(),
+                        deleteItem: () => deleteItem(categoryIndex, itemIndex),
+                      ),
+                  ],
+                ),
               ],
             ),
           ),
       ],
     );
+  }
+
+  SubCategory _getSubCategoryById(int id) {
+    return subCategories.firstWhere((subCategory) => subCategory.id == id);
   }
 }
 
