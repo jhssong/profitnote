@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/models/main_category_model.dart';
+import 'package:profitnote/models/sub_category_model.dart';
 import 'package:profitnote/providers/main_category_provider.dart';
 import 'package:profitnote/providers/sub_category_provider.dart';
 import 'package:profitnote/style/theme.dart';
