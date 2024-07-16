@@ -3,7 +3,7 @@ import 'package:profitnote/models/split_model.dart';
 
 enum TransactionType { expense, income, transfer }
 
-class Transaction implements DefaultModel {
+class TransactionModel implements DefaultModel {
   int id;
   TransactionType type;
   DateTime datetime;
@@ -13,9 +13,9 @@ class Transaction implements DefaultModel {
   int mainCategory;
   int subCategory;
   String memo;
-  List<Split> split;
+  List<SplitModel> split;
 
-  Transaction({
+  TransactionModel({
     required this.id,
     required this.type,
     required this.datetime,
@@ -29,8 +29,8 @@ class Transaction implements DefaultModel {
   });
 
   // Convert a Map into a Transaction object
-  factory Transaction.fromMap(Map<String, dynamic> map) {
-    return Transaction(
+  factory TransactionModel.fromMap(Map<String, dynamic> map) {
+    return TransactionModel(
       id: map['id'],
       type: TransactionType.values[map['type']],
       datetime: DateTime.parse(map['datetime']),
@@ -40,7 +40,9 @@ class Transaction implements DefaultModel {
       mainCategory: map['mainCategory'],
       subCategory: map['subCategory'],
       memo: map['memo'],
-      split: (map['split'] as List).map((item) => Split.fromMap(item)).toList(),
+      split: (map['split'] as List)
+          .map((item) => SplitModel.fromMap(item))
+          .toList(),
     );
   }
 

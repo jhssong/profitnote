@@ -1,20 +1,20 @@
 import 'package:profitnote/models/default_model.dart';
 
-class SubCategory implements DefaultModel {
+class SubCategoryModel implements DefaultModel {
   final int id;
   final String name;
   final int amount;
   final bool isVisible;
 
-  SubCategory({
+  SubCategoryModel({
     required this.id,
     required this.name,
     required this.amount,
     required this.isVisible,
   });
 
-  factory SubCategory.fromMap(Map<String, dynamic> map) {
-    return SubCategory(
+  factory SubCategoryModel.fromMap(Map<String, dynamic> map) {
+    return SubCategoryModel(
       id: map['id'],
       name: map['name'],
       amount: map['amount'],

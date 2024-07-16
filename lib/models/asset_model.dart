@@ -1,6 +1,6 @@
 import 'package:profitnote/models/default_model.dart';
 
-class Asset implements DefaultModel {
+class AssetModel implements DefaultModel {
   int id;
   String name;
   int group;
@@ -10,7 +10,7 @@ class Asset implements DefaultModel {
   double currentValue;
   bool isVisible;
 
-  Asset({
+  AssetModel({
     required this.id,
     required this.name,
     required this.group,
@@ -21,8 +21,8 @@ class Asset implements DefaultModel {
     required this.isVisible,
   });
 
-  factory Asset.fromMap(Map<String, dynamic> map) {
-    return Asset(
+  factory AssetModel.fromMap(Map<String, dynamic> map) {
+    return AssetModel(
       id: map['id'],
       name: map['name'],
       group: map['group'],

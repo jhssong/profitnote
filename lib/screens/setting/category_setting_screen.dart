@@ -16,9 +16,9 @@ class CategorySettingScreen extends StatefulWidget {
 
 class _CategorySettingScreenState extends State<CategorySettingScreen>
     with SingleTickerProviderStateMixin {
-  List<MainCategory> _expenseCategories = [];
-  List<MainCategory> _incomeCategories = [];
-  List<SubCategory> _subCategories = [];
+  List<MainCategoryModel> _expenseCategories = [];
+  List<MainCategoryModel> _incomeCategories = [];
+  List<SubCategoryModel> _subCategories = [];
   void _reorderCategories(int oldIndex, int newIndex) {
     setState(() {
       if (newIndex > oldIndex) newIndex -= 1;
@@ -176,8 +176,8 @@ class CategoryItem {
 }
 
 class CategoryListWidget extends StatelessWidget {
-  final List<MainCategory> categories;
-  final List<SubCategory> subCategories;
+  final List<MainCategoryModel> categories;
+  final List<SubCategoryModel> subCategories;
   final Function(int oldIndex, int newIndex) onReorderCategories;
   final Function(int categoryIndex, int oldIndex, int newIndex) onReorderItems;
   final Function(int categoryIndex) deleteCategory;
@@ -255,7 +255,7 @@ class CategoryListWidget extends StatelessWidget {
     );
   }
 
-  SubCategory _getSubCategoryById(int id) {
+  SubCategoryModel _getSubCategoryById(int id) {
     return subCategories.firstWhere((subCategory) => subCategory.id == id);
   }
 }
