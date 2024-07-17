@@ -16,75 +16,14 @@ class CategorySettingScreen extends StatefulWidget {
 
 class _CategorySettingScreenState extends State<CategorySettingScreen>
     with SingleTickerProviderStateMixin {
-  List<MainCategoryModel> _expenseCategories = [];
-  List<MainCategoryModel> _incomeCategories = [];
-  List<SubCategoryModel> _subCategories = [];
-  void _reorderCategories(int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) newIndex -= 1;
-      final movedCategory = _expenseCategories.removeAt(oldIndex);
-      _expenseCategories.insert(newIndex, movedCategory);
-    });
-  }
-
-  void _reorderItems(int categoryIndex, int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) newIndex -= 1;
-      final movedItem =
-          _expenseCategories[categoryIndex].subCategories.removeAt(oldIndex);
-      _expenseCategories[categoryIndex]
-          .subCategories
-          .insert(newIndex, movedItem);
-    });
-  }
-
-  void _deleteCategory(int index) {
-    setState(() {
-      _expenseCategories.removeAt(index);
-    });
-  }
-
-  void _deleteItem(int categoryIndex, int itemIndex) {
-    setState(() {
-      _expenseCategories[categoryIndex].subCategories.removeAt(itemIndex);
-    });
-  }
-
-  final List<Widget> _tabs = [
-    const Tab(text: "수입"),
-    const Tab(text: "지출"),
-  ];
+  final List<Widget> _tabs = [const Tab(text: "수입"), const Tab(text: "지출")];
 
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _readMainCategories();
-    _readSubCategories();
     _tabController = TabController(length: 2, vsync: this);
-  }
-
-  Future<void> _readMainCategories() async {
-    final provider = Provider.of<MainCategoryProvider>(context, listen: false);
-    await provider.initializeCategories();
-    _expenseCategories = await provider.read('expenseCategory');
-    _incomeCategories = await provider.read('incomeCategory');
-
-    setState(() {
-      _expenseCategories = _expenseCategories;
-      _incomeCategories = _incomeCategories;
-    });
-  }
-
-  Future<void> _readSubCategories() async {
-    final provider = Provider.of<SubCategoryProvider>(context, listen: false);
-    await provider.initializeCategories();
-    _subCategories = await provider.read('subCategory');
-
-    setState(() {
-      _subCategories = _subCategories;
-    });
   }
 
   @override
@@ -133,26 +72,30 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
             ),
           ),
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                CategoryListWidget(
-                  categories: _expenseCategories,
-                  subCategories: _subCategories,
-                  onReorderCategories: _reorderCategories,
-                  onReorderItems: _reorderItems,
-                  deleteCategory: _deleteCategory,
-                  deleteItem: _deleteItem,
-                ),
-                CategoryListWidget(
-                  categories: _incomeCategories,
-                  subCategories: _subCategories,
-                  onReorderCategories: _reorderCategories,
-                  onReorderItems: _reorderItems,
-                  deleteCategory: _deleteCategory,
-                  deleteItem: _deleteItem,
-                ),
-              ],
+            child: Consumer2<MainCategoryProvider, SubCategoryProvider>(
+              builder: (context, main, sub, child) {
+                return TabBarView(
+                  controller: _tabController,
+                  children: [
+                    CategoryListWidget(
+                      categories: main.expenseCategories,
+                      subCategories: sub.subCategories,
+                      onReorderCategories: main.reorderCategories,
+                      onReorderItems: main.reorderItems,
+                      deleteCategory: main.deleteCategory,
+                      deleteItem: main.deleteItem,
+                    ),
+                    CategoryListWidget(
+                      categories: main.incomeCategories,
+                      subCategories: sub.subCategories,
+                      onReorderCategories: main.reorderCategories,
+                      onReorderItems: main.reorderItems,
+                      deleteCategory: main.deleteCategory,
+                      deleteItem: main.deleteItem,
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ],
