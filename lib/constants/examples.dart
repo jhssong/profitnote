@@ -586,7 +586,103 @@ List<Map<String, dynamic>> assetModelExamples = [
   }
 ];
 
-List<Map<String, dynamic>> mainCategoryExamples = [
+// List<Map<String, dynamic>> mainCategoryExamples = [
+//   {
+//     "id": 1,
+//     "name": "식비",
+//     "type": 0,
+//     "subCategories": [1, 2],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 2,
+//     "name": "저축",
+//     "type": 0,
+//     "subCategories": [3, 4],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 3,
+//     "name": "주거",
+//     "type": 0,
+//     "subCategories": [5, 6],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 4,
+//     "name": "주수입",
+//     "type": 1,
+//     "subCategories": [7, 8],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 5,
+//     "name": "부수입",
+//     "type": 1,
+//     "subCategories": [9, 10],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 6,
+//     "name": "오락",
+//     "type": 0,
+//     "subCategories": [11, 12],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 7,
+//     "name": "교통",
+//     "type": 0,
+//     "subCategories": [13, 14],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 8,
+//     "name": "의료",
+//     "type": 0,
+//     "subCategories": [15, 16],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 9,
+//     "name": "교육",
+//     "type": 0,
+//     "subCategories": [17, 18],
+//     "isVisible": true
+//   },
+//   {
+//     "id": 10,
+//     "name": "기타",
+//     "type": 0,
+//     "subCategories": [19, 20],
+//     "isVisible": true
+//   }
+// ];
+
+// List<Map<String, dynamic>> subCategoryExamples = [
+//   {"id": 1, "name": "외식", "isVisible": true},
+//   {"id": 2, "name": "식료품", "isVisible": true},
+//   {"id": 3, "name": "정기 적금", "isVisible": true},
+//   {"id": 4, "name": "비상금", "isVisible": true},
+//   {"id": 5, "name": "월세", "isVisible": true},
+//   {"id": 6, "name": "관리비", "isVisible": true},
+//   {"id": 7, "name": "월급", "isVisible": true},
+//   {"id": 8, "name": "보너스", "isVisible": true},
+//   {"id": 9, "name": "투자 수익", "isVisible": true},
+//   {"id": 10, "name": "임대 수익", "isVisible": true},
+//   {"id": 11, "name": "영화", "isVisible": true},
+//   {"id": 12, "name": "게임", "isVisible": true},
+//   {"id": 13, "name": "버스", "isVisible": true},
+//   {"id": 14, "name": "택시", "isVisible": true},
+//   {"id": 15, "name": "병원비", "isVisible": true},
+//   {"id": 16, "name": "약값", "isVisible": true},
+//   {"id": 17, "name": "학원비", "isVisible": true},
+//   {"id": 18, "name": "교재비", "isVisible": true},
+//   {"id": 19, "name": "기부", "isVisible": true},
+//   {"id": 20, "name": "기타", "isVisible": true}
+// ];
+
+List<Map<String, dynamic>> expenseMainCategoriesExample = [
   {
     "id": 1,
     "name": "식비",
@@ -601,105 +697,9 @@ List<Map<String, dynamic>> mainCategoryExamples = [
     "subCategories": [3, 4],
     "isVisible": true
   },
-  {
-    "id": 3,
-    "name": "주거",
-    "type": 0,
-    "subCategories": [5, 6],
-    "isVisible": true
-  },
-  {
-    "id": 4,
-    "name": "주수입",
-    "type": 1,
-    "subCategories": [7, 8],
-    "isVisible": true
-  },
-  {
-    "id": 5,
-    "name": "부수입",
-    "type": 1,
-    "subCategories": [9, 10],
-    "isVisible": true
-  },
-  {
-    "id": 6,
-    "name": "오락",
-    "type": 0,
-    "subCategories": [11, 12],
-    "isVisible": true
-  },
-  {
-    "id": 7,
-    "name": "교통",
-    "type": 0,
-    "subCategories": [13, 14],
-    "isVisible": true
-  },
-  {
-    "id": 8,
-    "name": "의료",
-    "type": 0,
-    "subCategories": [15, 16],
-    "isVisible": true
-  },
-  {
-    "id": 9,
-    "name": "교육",
-    "type": 0,
-    "subCategories": [17, 18],
-    "isVisible": true
-  },
-  {
-    "id": 10,
-    "name": "기타",
-    "type": 0,
-    "subCategories": [19, 20],
-    "isVisible": true
-  }
 ];
 
-List<Map<String, dynamic>> subCategoryExamples = [
-  {"id": 1, "name": "외식", "isVisible": true},
-  {"id": 2, "name": "식료품", "isVisible": true},
-  {"id": 3, "name": "정기 적금", "isVisible": true},
-  {"id": 4, "name": "비상금", "isVisible": true},
-  {"id": 5, "name": "월세", "isVisible": true},
-  {"id": 6, "name": "관리비", "isVisible": true},
-  {"id": 7, "name": "월급", "isVisible": true},
-  {"id": 8, "name": "보너스", "isVisible": true},
-  {"id": 9, "name": "투자 수익", "isVisible": true},
-  {"id": 10, "name": "임대 수익", "isVisible": true},
-  {"id": 11, "name": "영화", "isVisible": true},
-  {"id": 12, "name": "게임", "isVisible": true},
-  {"id": 13, "name": "버스", "isVisible": true},
-  {"id": 14, "name": "택시", "isVisible": true},
-  {"id": 15, "name": "병원비", "isVisible": true},
-  {"id": 16, "name": "약값", "isVisible": true},
-  {"id": 17, "name": "학원비", "isVisible": true},
-  {"id": 18, "name": "교재비", "isVisible": true},
-  {"id": 19, "name": "기부", "isVisible": true},
-  {"id": 20, "name": "기타", "isVisible": true}
-];
-
-List<Map<String, dynamic>> expenseMainCategories = [
-  {
-    "id": 1,
-    "name": "식비",
-    "type": 0,
-    "subCategories": [1, 2],
-    "isVisible": true
-  },
-  {
-    "id": 2,
-    "name": "저축",
-    "type": 0,
-    "subCategories": [3, 4],
-    "isVisible": true
-  },
-];
-
-List<Map<String, dynamic>> incomeMainCategories = [
+List<Map<String, dynamic>> incomeMainCategoriesExample = [
   {
     "id": 1,
     "name": "월급",
@@ -716,7 +716,7 @@ List<Map<String, dynamic>> incomeMainCategories = [
   },
 ];
 
-List<Map<String, dynamic>> subCategories = [
+List<Map<String, dynamic>> subCategoriesExample = [
   {"id": 1, "name": "외식", "amount": 0, "isVisible": true},
   {"id": 2, "name": "식료품", "amount": 0, "isVisible": true},
   {"id": 3, "name": "정기 적금", "amount": 0, "isVisible": true},

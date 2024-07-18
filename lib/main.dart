@@ -7,6 +7,8 @@ import 'package:profitnote/screens/analysis/analysis_screen.dart';
 import 'package:profitnote/screens/home/home_screen.dart';
 import 'package:profitnote/screens/search/search_screen.dart';
 import 'package:profitnote/screens/setting/setting_screen.dart';
+import 'package:profitnote/services/main_category_service.dart';
+import 'package:profitnote/services/sub_category_service.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +17,23 @@ void main() {
     statusBarColor: ColorTheme.background,
   ));
 
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => MainCategoryProvider()),
-    ChangeNotifierProvider(create: (_) => SubCategoryProvider()),
-  ], child: const MyApp()));
+  _initProviders();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MainCategoryProvider()),
+        ChangeNotifierProvider(create: (_) => SubCategoryProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+}
+
+void _initProviders() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MainCategoryService.initializeCategories();
+  await SubCategoryService.initializeCategories();
 }
 
 class MyApp extends StatefulWidget {
@@ -50,6 +65,19 @@ class _MyAppState extends State<MyApp> {
     } else {
       return Future.value(true); // Allow default back action (exit app)
     }
+  }
+
+  /// Initialize SharedPreference data in Providers
+  void initializeData() {
+    Provider.of<MainCategoryProvider>(context, listen: false)
+        .readCategoryData();
+    Provider.of<SubCategoryProvider>(context, listen: false).readCategoryData();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeData();
   }
 
   @override
