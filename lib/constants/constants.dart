@@ -3,10 +3,10 @@ class Constants {
   static const int lastDate = 2200;
 }
 
-typedef Key = String;
+typedef SharedPrefKey = String;
 
 class Keys {
-  static const Key expenseCategoryKey = "expense_category_key";
-  static const Key incomeCategoryKey = "income_category_key";
-  static const Key subCategoryKey = "sub_category_key";
+  static const SharedPrefKey expenseCategoryKey = "expense_category_key";
+  static const SharedPrefKey incomeCategoryKey = "income_category_key";
+  static const SharedPrefKey subCategoryKey = "sub_category_key";
 }
