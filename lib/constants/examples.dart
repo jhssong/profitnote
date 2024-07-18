@@ -477,10 +477,22 @@
 //   ),
 // ];
 
-List<String> assetGroupExamples = [
-  "현금",
-  "계좌",
-  "카드",
+List<Map<String, dynamic>> assetGroupExamples = [
+  {
+    "id": 0,
+    "name": "지폐",
+    "assetItems": [6, 10],
+  },
+  {
+    "id": 1,
+    "name": "계좌",
+    "assetItems": [1, 4, 5, 7, 8, 9],
+  },
+  {
+    "id": 2,
+    "name": "카드",
+    "assetItems": [2, 3],
+  },
 ];
 
 List<Map<String, dynamic>> assetModelExamples = [
@@ -527,7 +539,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 5,
     "name": "회사채 계좌",
-    "group": "투자",
+    "group": 1,
     "initialValue": 2000000.0,
     "linkedApp": "",
     "memo": "",
@@ -547,7 +559,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 7,
     "name": "골드바",
-    "group": "투자",
+    "group": 1,
     "initialValue": 3000000.0,
     "linkedApp": "",
     "memo": "안전 자산",
@@ -557,7 +569,7 @@ List<Map<String, dynamic>> assetModelExamples = [
   {
     "id": 8,
     "name": "Apple",
-    "group": "투자",
+    "group": 1,
     "initialValue": 1500000.0,
     "linkedApp": "",
     "memo": "장기 투자",

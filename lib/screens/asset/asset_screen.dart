@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/providers/asset_group_provider.dart';
+import 'package:profitnote/providers/asset_provider.dart';
 import 'package:profitnote/screens/asset/widgets/asset_card.dart';
+import 'package:provider/provider.dart';
 
 class AssetScreen extends StatelessWidget {
   const AssetScreen({super.key});
@@ -12,25 +15,28 @@ class AssetScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("자산"),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            AssetCard(
-              title: "현금",
-              assetListInGroup: [
-                {},
-                {},
-              ],
-            ),
-            AssetCard(
-              title: "카드",
-              assetListInGroup: [
-                {},
-                {},
-              ],
-            ),
-          ],
-        ),
+      body: SingleChildScrollView(
+        child: Consumer2<AssetGroupProvider, AssetProvider>(
+            builder: (context, group, item, child) {
+          return Column(
+            children: [
+              for (int groupIndex = 0;
+                  groupIndex < group.assetGroups.length;
+                  groupIndex++)
+                AssetCard(
+                  title: group.assetGroups[groupIndex].name,
+                  assetListInGroup: [
+                    for (int itemIndex = 0;
+                        itemIndex <
+                            group.assetGroups[groupIndex].assetItems.length;
+                        itemIndex++)
+                      item.getItemById(
+                          group.assetGroups[groupIndex].assetItems[itemIndex])
+                  ],
+                ),
+            ],
+          );
+        }),
       ),
     );
   }

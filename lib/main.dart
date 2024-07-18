@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:profitnote/providers/asset_group_provider.dart';
+import 'package:profitnote/providers/asset_provider.dart';
 import 'package:profitnote/providers/main_category_provider.dart';
 import 'package:profitnote/providers/sub_category_provider.dart';
 import 'package:profitnote/screens/asset/asset_screen.dart';
@@ -7,6 +9,8 @@ import 'package:profitnote/screens/analysis/analysis_screen.dart';
 import 'package:profitnote/screens/home/home_screen.dart';
 import 'package:profitnote/screens/search/search_screen.dart';
 import 'package:profitnote/screens/setting/setting_screen.dart';
+import 'package:profitnote/services/asset_group_service.dart';
+import 'package:profitnote/services/asset_service.dart';
 import 'package:profitnote/services/main_category_service.dart';
 import 'package:profitnote/services/sub_category_service.dart';
 import 'package:profitnote/style/theme.dart';
@@ -17,23 +21,27 @@ void main() {
     statusBarColor: ColorTheme.background,
   ));
 
-  _initProviders();
+  _initExamples();
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MainCategoryProvider()),
         ChangeNotifierProvider(create: (_) => SubCategoryProvider()),
+        ChangeNotifierProvider(create: (_) => AssetProvider()),
+        ChangeNotifierProvider(create: (_) => AssetGroupProvider()),
       ],
       child: const MyApp(),
     ),
   );
 }
 
-void _initProviders() async {
+void _initExamples() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MainCategoryService.initializeCategories();
   await SubCategoryService.initializeCategories();
+  await AssetService.initialzeAssets();
+  await AssetGroupService.initializeAssetGroups();
 }
 
 class MyApp extends StatefulWidget {
@@ -68,16 +76,19 @@ class _MyAppState extends State<MyApp> {
   }
 
   /// Initialize SharedPreference data in Providers
-  void initializeData() {
+  void initializeProviders() {
     Provider.of<MainCategoryProvider>(context, listen: false)
         .readCategoryData();
     Provider.of<SubCategoryProvider>(context, listen: false).readCategoryData();
+    Provider.of<AssetProvider>(context, listen: false).readAssetData();
+    Provider.of<AssetGroupProvider>(context, listen: false)
+        .readAssetGroupData();
   }
 
   @override
   void initState() {
     super.initState();
-    initializeData();
+    initializeProviders();
   }
 
   @override

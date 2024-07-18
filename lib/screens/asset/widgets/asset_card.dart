@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/models/asset_model.dart';
 import 'package:profitnote/style/theme.dart';
+import 'package:profitnote/utils/price_formatter.dart';
 
 class AssetCard extends StatelessWidget {
   const AssetCard({
@@ -10,7 +12,7 @@ class AssetCard extends StatelessWidget {
   });
 
   final String title;
-  final List<Map<String, double>> assetListInGroup;
+  final List<AssetModel> assetListInGroup;
   final bool isEditMode;
 
   @override
@@ -49,8 +51,14 @@ class AssetCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("KRW", style: Theme.of(context).textTheme.bodyLarge),
-                  Text("10,000원", style: Theme.of(context).textTheme.bodyLarge),
+                  Text(
+                    assetListInGroup[index].name,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  Text(
+                    getFormattedPrice(assetListInGroup[index].currentValue),
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                 ],
               ),
             ),

@@ -9,4 +9,6 @@ class Keys {
   static const SharedPrefKey expenseCategoryKey = "expense_category_key";
   static const SharedPrefKey incomeCategoryKey = "income_category_key";
   static const SharedPrefKey subCategoryKey = "sub_category_key";
+  static const SharedPrefKey assetKey = "asset_key";
+  static const SharedPrefKey assetGroupKey = "asset_group_key";
 }

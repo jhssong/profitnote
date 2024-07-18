@@ -16,14 +16,6 @@ class _AssetSettingScreenState extends State<AssetSettingScreen> {
     "카드": List<String>.generate(2, (int index) => 'Item $index'),
   };
 
-  void _deleteGroup(int groupIndex) {
-    setState(() {
-      String group = _groups[groupIndex];
-      _groups.removeAt(groupIndex);
-      _items.remove(group);
-    });
-  }
-
   void _deleteItem(String group, int itemIndex) {
     setState(() {
       _items[group]?.removeAt(itemIndex);
