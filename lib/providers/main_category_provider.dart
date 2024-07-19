@@ -42,8 +42,9 @@ class MainCategoryProvider extends DefaultProvider<MainCategoryModel> {
 
   void deleteItem(SharedPrefKey key, int categoryIndex, int itemIndex) async {
     final categories = await read(key);
-    categories[categoryIndex].subCategories.removeAt(itemIndex);
+    categories[categoryIndex].subCategories.remove(itemIndex);
     await saveItems(key, categories);
+    readCategoryData();
   }
 
   void updateCategory(

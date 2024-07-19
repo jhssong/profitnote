@@ -142,7 +142,7 @@ class CategoryListWidget extends StatelessWidget {
                   category: categories[categoryIndex],
                   updateCategory: main.updateCategory,
                   deleteCategory: () {
-                    if (categories[categoryIndex].name.isEmpty) {
+                    if (categories[categoryIndex].subCategories.isEmpty) {
                       main.deleteCategory(sharedPrefKey, categoryIndex);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -172,6 +172,8 @@ class CategoryListWidget extends StatelessWidget {
                         itemIndex: itemIndex,
                         updateItem: sub.updateItem,
                         deleteItem: () {
+                          main.deleteItem(
+                              sharedPrefKey, categoryIndex, itemIndex);
                           sub.deleteItem(itemIndex);
                         },
                       ),
@@ -283,7 +285,7 @@ class CategoryCard extends StatelessWidget {
               height: 40,
               child: IconButton(
                 icon: const Icon(Icons.delete, size: 20),
-                onPressed: () {},
+                onPressed: deleteCategory,
               ),
             ),
             SizedBox(

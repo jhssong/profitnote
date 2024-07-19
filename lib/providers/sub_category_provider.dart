@@ -25,14 +25,14 @@ class SubCategoryProvider extends DefaultProvider<SubCategoryModel> {
     }
   }
 
-  // void deleteItem(int index) async {
-  //   final categories = await read(Keys.subCategoryKey);
-  //   final index =
-  //       categories.indexWhere((category) => category.id == categoryId);
-  //   if (index != -1) {
-  //     categories[index].isVisible = false;
-  //   }
-  // }
+  void deleteItem(int categoryId) async {
+    final categories = await read(Keys.subCategoryKey);
+    final index =
+        categories.indexWhere((category) => category.id == categoryId);
+    if (index != -1) {
+      categories[index].changeVisibility();
+    }
+  }
 
   SubCategoryModel getSubCategoryById(int id) {
     return subCategories.firstWhere((subCategory) => subCategory.id == id);

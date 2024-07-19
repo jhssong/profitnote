@@ -3,13 +3,17 @@ import 'package:profitnote/models/default_model.dart';
 class SubCategoryModel implements DefaultModel {
   final int id;
   final String name;
-  final bool isVisible;
+  bool isVisible;
 
   SubCategoryModel({
     required this.id,
     required this.name,
     required this.isVisible,
   });
+
+  void changeVisibility() {
+    isVisible = !isVisible;
+  }
 
   factory SubCategoryModel.fromMap(Map<String, dynamic> map) {
     return SubCategoryModel(
