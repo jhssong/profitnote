@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:profitnote/screens/home/widgets/asset_item_widget.dart';
 import 'package:profitnote/screens/home/widgets/stack_graph_widget.dart';
 import 'package:profitnote/style/theme.dart';
@@ -31,6 +30,7 @@ class _AssetAnalysisScreenState extends State<AssetAnalysisScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         title: const Text("자산 분석"),
         actions: const [],
       ),

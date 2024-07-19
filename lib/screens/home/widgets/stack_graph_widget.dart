@@ -3,7 +3,11 @@ import 'package:profitnote/style/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class AssetData {
-  AssetData(this.date, this.amount, this.asset);
+  AssetData(
+    this.date,
+    this.amount,
+    this.asset,
+  );
 
   final DateTime date;
   final double amount;

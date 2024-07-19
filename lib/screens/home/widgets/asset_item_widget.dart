@@ -4,7 +4,10 @@ import 'package:profitnote/style/theme.dart';
 
 class AssetItemWidget extends StatelessWidget {
   final List<AssetData> items;
-  final Function(int index, String description) onPressed;
+  final Function(
+    int index,
+    String description,
+  ) onPressed;
 
   const AssetItemWidget(
       {super.key, required this.items, required this.onPressed});
