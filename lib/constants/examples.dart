@@ -711,16 +711,16 @@ List<Map<String, dynamic>> incomeMainCategoriesExample = [
     "id": 2,
     "name": "기타",
     "type": 1,
-    "subCategories": [3, 4],
+    "subCategories": [2, 3, 4],
     "isVisible": true
   },
 ];
 
 List<Map<String, dynamic>> subCategoriesExample = [
-  {"id": 1, "name": "외식", "amount": 0, "isVisible": true},
-  {"id": 2, "name": "식료품", "amount": 0, "isVisible": true},
-  {"id": 3, "name": "정기 적금", "amount": 0, "isVisible": true},
-  {"id": 4, "name": "비상금", "amount": 0, "isVisible": true},
+  {"id": 1, "name": "외식", "isVisible": true},
+  {"id": 2, "name": "식료품", "isVisible": true},
+  {"id": 3, "name": "정기 적금", "isVisible": true},
+  {"id": 4, "name": "비상금", "isVisible": true},
 ];
 
 List<Map<String, dynamic>> splitModelExamples = [

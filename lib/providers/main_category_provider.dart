@@ -14,25 +14,44 @@ class MainCategoryProvider extends DefaultProvider<MainCategoryModel> {
     _incomeCategories = await read(Keys.incomeCategoryKey);
   }
 
-  void reorderCategories(int oldIndex, int newIndex) {
+  void reorderCategories(SharedPrefKey key, int oldIndex, int newIndex) async {
+    final categories = await read(key);
     if (newIndex > oldIndex) newIndex -= 1;
-    final movedCategory = _expenseCategories.removeAt(oldIndex);
-    _expenseCategories.insert(newIndex, movedCategory);
+    final movedCategory = categories.removeAt(oldIndex);
+    categories.insert(newIndex, movedCategory);
+    readCategoryData();
   }
 
-  void reorderItems(int categoryIndex, int oldIndex, int newIndex) {
+  void reorderItems(
+      SharedPrefKey key, int categoryIndex, int oldIndex, int newIndex) async {
+    final categories = await read(key);
     if (newIndex > oldIndex) newIndex -= 1;
     final movedItem =
-        _expenseCategories[categoryIndex].subCategories.removeAt(oldIndex);
-    _expenseCategories[categoryIndex].subCategories.insert(newIndex, movedItem);
+        categories[categoryIndex].subCategories.removeAt(oldIndex);
+    categories[categoryIndex].subCategories.insert(newIndex, movedItem);
+    await saveItems(key, categories);
+    readCategoryData();
   }
 
-  void deleteCategory(int index) {
-    _expenseCategories.removeAt(index);
+  void deleteCategory(SharedPrefKey key, int index) async {
+    final categories = await read(key);
+    categories.removeAt(index);
+    await saveItems(key, categories);
+    readCategoryData();
   }
 
-  void deleteItem(int categoryIndex, int itemIndex) {
-    _expenseCategories[categoryIndex].subCategories.removeAt(itemIndex);
+  void deleteItem(SharedPrefKey key, int categoryIndex, int itemIndex) async {
+    final categories = await read(key);
+    categories[categoryIndex].subCategories.removeAt(itemIndex);
+    await saveItems(key, categories);
+  }
+
+  void updateCategory(
+      SharedPrefKey key, int index, MainCategoryModel newCategory) async {
+    final categories = await read(key);
+    categories[index] = newCategory;
+    await saveItems(key, categories);
+    readCategoryData();
   }
 
   @override

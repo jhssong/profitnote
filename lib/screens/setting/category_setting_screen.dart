@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profitnote/constants/constants.dart';
 import 'package:profitnote/models/main_category_model.dart';
 import 'package:profitnote/models/sub_category_model.dart';
 import 'package:profitnote/providers/main_category_provider.dart';
@@ -78,20 +79,16 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
                   controller: _tabController,
                   children: [
                     CategoryListWidget(
+                      main: main,
+                      sub: sub,
                       categories: main.expenseCategories,
-                      subCategories: sub.subCategories,
-                      onReorderCategories: main.reorderCategories,
-                      onReorderItems: main.reorderItems,
-                      deleteCategory: main.deleteCategory,
-                      deleteItem: main.deleteItem,
+                      sharedPrefKey: Keys.expenseCategoryKey,
                     ),
                     CategoryListWidget(
+                      main: main,
+                      sub: sub,
                       categories: main.incomeCategories,
-                      subCategories: sub.subCategories,
-                      onReorderCategories: main.reorderCategories,
-                      onReorderItems: main.reorderItems,
-                      deleteCategory: main.deleteCategory,
-                      deleteItem: main.deleteItem,
+                      sharedPrefKey: Keys.incomeCategoryKey,
                     ),
                   ],
                 );
@@ -104,42 +101,25 @@ class _CategorySettingScreenState extends State<CategorySettingScreen>
   }
 }
 
-class ExpenseCategory {
-  final String category;
-  final List<CategoryItem> items;
-
-  ExpenseCategory({required this.category, required this.items});
-}
-
-class CategoryItem {
-  final String description;
-  final String amount;
-
-  CategoryItem({required this.description, required this.amount});
-}
-
 class CategoryListWidget extends StatelessWidget {
+  final MainCategoryProvider main;
+  final SubCategoryProvider sub;
   final List<MainCategoryModel> categories;
-  final List<SubCategoryModel> subCategories;
-  final Function(int oldIndex, int newIndex) onReorderCategories;
-  final Function(int categoryIndex, int oldIndex, int newIndex) onReorderItems;
-  final Function(int categoryIndex) deleteCategory;
-  final Function(int categoryIndex, int itemIndex) deleteItem;
+  final SharedPrefKey sharedPrefKey;
 
-  const CategoryListWidget({
-    super.key,
-    required this.categories,
-    required this.subCategories,
-    required this.onReorderCategories,
-    required this.onReorderItems,
-    required this.deleteCategory,
-    required this.deleteItem,
-  });
+  const CategoryListWidget(
+      {super.key,
+      required this.main,
+      required this.sub,
+      required this.categories,
+      required this.sharedPrefKey});
 
   @override
   Widget build(BuildContext context) {
     return ReorderableListView(
-      onReorder: onReorderCategories,
+      onReorder: (oldIndex, newIndex) {
+        main.reorderCategories(sharedPrefKey, oldIndex, newIndex);
+      },
       children: [
         for (int categoryIndex = 0;
             categoryIndex < categories.length;
@@ -159,10 +139,11 @@ class CategoryListWidget extends StatelessWidget {
             child: Column(
               children: [
                 CategoryCard(
-                  category: categories[categoryIndex].name,
+                  category: categories[categoryIndex],
+                  updateCategory: main.updateCategory,
                   deleteCategory: () {
                     if (categories[categoryIndex].name.isEmpty) {
-                      deleteCategory(categoryIndex);
+                      main.deleteCategory(sharedPrefKey, categoryIndex);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -172,22 +153,27 @@ class CategoryListWidget extends StatelessWidget {
                       );
                     }
                   },
+                  sharedPrefKey: sharedPrefKey,
+                  categoryIndex: categoryIndex,
                 ),
                 ReorderableListView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   onReorder: (int oldIndex, int newIndex) {
-                    onReorderItems(categoryIndex, oldIndex, newIndex);
+                    main.reorderItems(
+                        sharedPrefKey, categoryIndex, oldIndex, newIndex);
                   },
                   children: [
                     for (int itemIndex
                         in categories[categoryIndex].subCategories)
                       CategoryItemCard(
                         key: Key('item_${categoryIndex}_$itemIndex'),
-                        description: _getSubCategoryById(itemIndex).name,
-                        amount:
-                            _getSubCategoryById(itemIndex).amount.toString(),
-                        deleteItem: () => deleteItem(categoryIndex, itemIndex),
+                        category: sub.getSubCategoryById(itemIndex),
+                        itemIndex: itemIndex,
+                        updateItem: sub.updateItem,
+                        deleteItem: () {
+                          sub.deleteItem(itemIndex);
+                        },
                       ),
                   ],
                 ),
@@ -197,19 +183,23 @@ class CategoryListWidget extends StatelessWidget {
       ],
     );
   }
-
-  SubCategoryModel _getSubCategoryById(int id) {
-    return subCategories.firstWhere((subCategory) => subCategory.id == id);
-  }
 }
 
 class CategoryCard extends StatelessWidget {
-  final String category;
+  final MainCategoryModel category;
+  final Function(
+          SharedPrefKey key, int categoryIndex, MainCategoryModel category)
+      updateCategory;
+  final SharedPrefKey sharedPrefKey;
+  final int categoryIndex;
   final VoidCallback deleteCategory;
 
   const CategoryCard({
     super.key,
     required this.category,
+    required this.sharedPrefKey,
+    required this.categoryIndex,
+    required this.updateCategory,
     required this.deleteCategory,
   });
 
@@ -230,9 +220,55 @@ class CategoryCard extends StatelessWidget {
               alignment: Alignment.centerLeft,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  String newName = category.name;
+                  return AlertDialog(
+                    title: Text('분류 수정',
+                        style: Theme.of(context).textTheme.titleMedium),
+                    backgroundColor: ColorTheme.cardBackground,
+                    content: TextField(
+                      autofocus: true,
+                      decoration: InputDecoration(
+                          hintText: '분류 이름을 입력하세요',
+                          hintStyle: Theme.of(context).textTheme.labelMedium),
+                      onChanged: (value) {
+                        newName = value;
+                      },
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text('취소',
+                            style: Theme.of(context).textTheme.titleMedium),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: Text('저장',
+                            style: Theme.of(context).textTheme.titleMedium),
+                        onPressed: () {
+                          MainCategoryModel updatedCategory = MainCategoryModel(
+                            id: category.id,
+                            name: newName,
+                            type: category.type,
+                            subCategories: category.subCategories,
+                            isVisible: category.isVisible,
+                          );
+                          updateCategory(
+                              sharedPrefKey, categoryIndex, updatedCategory);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
             child: Text(
-              category,
+              category.name,
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
@@ -266,15 +302,17 @@ class CategoryCard extends StatelessWidget {
 }
 
 class CategoryItemCard extends StatelessWidget {
-  final String description;
-  final String amount;
+  final SubCategoryModel category;
+  final int itemIndex;
   final VoidCallback deleteItem;
+  final Function(int index, SubCategoryModel newItem) updateItem;
 
   const CategoryItemCard({
     super.key,
-    required this.description,
-    required this.amount,
+    required this.category,
+    required this.itemIndex,
     required this.deleteItem,
+    required this.updateItem,
   });
 
   @override
@@ -294,9 +332,52 @@ class CategoryItemCard extends StatelessWidget {
               alignment: Alignment.centerLeft,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  String newName = category.name;
+                  return AlertDialog(
+                    title: Text('분류 수정',
+                        style: Theme.of(context).textTheme.titleMedium),
+                    backgroundColor: ColorTheme.cardBackground,
+                    content: TextField(
+                      autofocus: true,
+                      decoration: InputDecoration(
+                          hintText: '분류 이름을 입력하세요',
+                          hintStyle: Theme.of(context).textTheme.labelMedium),
+                      onChanged: (value) {
+                        newName = value;
+                      },
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text('취소',
+                            style: Theme.of(context).textTheme.titleMedium),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: Text('저장',
+                            style: Theme.of(context).textTheme.titleMedium),
+                        onPressed: () {
+                          SubCategoryModel updatedCategory = SubCategoryModel(
+                            id: category.id,
+                            name: newName,
+                            isVisible: category.isVisible,
+                          );
+                          updateItem(itemIndex, updatedCategory);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
             child: Text(
-              description,
+              category.name,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
@@ -308,7 +389,7 @@ class CategoryItemCard extends StatelessWidget {
               height: 40,
               child: IconButton(
                 icon: const Icon(Icons.delete, size: 20),
-                onPressed: () {},
+                onPressed: deleteItem,
               ),
             ),
             SizedBox(
