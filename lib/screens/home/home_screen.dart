@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:profitnote/screens/add/add_screen.dart';
 import 'package:profitnote/screens/budget/budget_screen.dart';
+import 'package:profitnote/screens/home/asset_analysis_screen.dart';
 import 'package:profitnote/screens/home/recent_pay_history_screen.dart';
 import 'package:profitnote/style/theme.dart';
 import 'package:profitnote/widgets/card_widget.dart';
@@ -38,7 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 8),
             CardWidget(
               title: "총 자산",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AssetAnalysisScreen(),
+                  ),
+                );
+              },
               body: Row(
                 children: [
                   Text("3,849,752원",
